@@ -50,11 +50,29 @@ efforts on TAG based architectures over the past decade and 20 published efforts
 %  - Benchmarks and test performaned  
 	
 \subsection{ARM MTE}
-\dots and some more \dots 
+The ARMv8.5-Memory Tagging Extension (MTE) aims to increase the memory safety written for 
+unsafe languages without requiring source code changes and in certain cases without 
+recompilation. It generally foicuses on the bounds checking use case, Though it 
+provides limited tags which means it can only provide probablilistic overflow detection. 
+It is one of the latest commercial incarnations of memory-safety-focused tagged architectures.   
 
 \subsection{D-RI5CY}
+It provides a design a design and implementation of a hardware dynamic information flow 
+tracking (DIFT) architecture for RISC-V processor cores. The paper presents a low 
+overhead implementation of DIFT that is specialized for low-end embedded systems
+for IOT applications. The following are high level contributions:
+\begin{itemize}
+  \item Design f D-RI5CY, A DIFT-protected implementation of the RI5CY processor core. 
+        The paper implements the modification of the DIFT TAG propogation and TAG checking
+        mechanism in a way that is transparent to the execution of the regular instructions. 
+  \item Concept introducted called stack interleaving that allows efficient and dynamic memory management.
+  \item Lightweight shared memory between enclaves.
+  \item Efficient shared MPU (i.e Memory Protection Unit) design.
+\end{itemize}
+
 
 \subsection{TMDFI}
+
 
 \subsection{HyperFlow} 
 

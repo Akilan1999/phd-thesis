@@ -20,16 +20,42 @@ answer the research questions stated (TODO: Add reference to research question s
 
 \section[TAG based architecture survey]{TAG based architecture survey}   
 The following was a survey conducted on exisisting TAG based implementations and the 
-recent survey based on TAG based architectures (//TODO add survey reference) published
+recent survey based on TAG based architectures \cite{acmTAGSurvey} published
 in 2022 was a good staring point to understand about various implementations of TAG
 based archtectures with the high level metrits and limitations. The following section 
 provides our own version of the Survey to help decide the best implementations 
-to answer the research questions (//TODO reference research questions chapter). 
+to answer the research questions (//TODO reference research questions chapter).
+
+Before deep diving into TAG based architecture implementations it is important to 
+answer what is a TAG based architecture ? and the high level of various 
+categories of various TAG based architectures.
+
+Tagged architectures are a prominent class of hardware security primitives that augment data and code words
+with tags. The tags, which function as the security metadata
+about memory, are created before the program is loaded. 
+Then, at runtime, the hardware enforces security policies on the tags to provide safety guarantees. 
+The advantage being tags automate the secure and efficient management of security metadata. 
+
+Tags policies as designed to address mostly:
+\begin{itemize}
+  \item Type and memory corruption
+  \item Integer overflows
+  \item Thread safety
+  \item Buffer overflows
+\end{itemize}
+
+TAG policies can be categorised into 5 main categories which is:
+\begin{itemize}
+  \item Information-low control (IFC) policies
+  \item Dynamic information-low tracking (DIFT) policies
+  \item Capability models
+  \item Programmable architectures
+\end{itemize}
  
-According to the TAG based architecture survey (//TODO add survey reference) there are 37 published
+According to the TAG based architecture survey \cite{acmTAGSurvey} there are 37 published
 efforts on TAG based architectures over the past decade and 20 published efforts preceding that. 
 
-\subsection{Timder V}
+\subsection{Timder V \cite{weiser_timber-v_2019}}
  It is a tagged memory architecture for flexible and efficient isolation of code and data on 
  small embedded systems. The TAG isolation is augmented with a memory protection unit to isolate 
  induvidual processes. Timber V is compatible with exsisting code. The contributions of the paper 
@@ -49,14 +75,14 @@ efforts on TAG based architectures over the past decade and 20 published efforts
 %  - Start paragraph 
 %  - Benchmarks and test performaned  
 	
-\subsection{ARM MTE}
+\subsection{ARM MTE \cite{ARMMTE}}
 The ARMv8.5-Memory Tagging Extension (MTE) aims to increase the memory safety written for 
 unsafe languages without requiring source code changes and in certain cases without 
 recompilation. It generally foicuses on the bounds checking use case, Though it 
 provides limited tags which means it can only provide probablilistic overflow detection. 
 It is one of the latest commercial incarnations of memory-safety-focused tagged architectures.   
 
-\subsection{D-RI5CY}
+\subsection{D-RI5CY \cite{D-RISCY}}
 It provides a design a design and implementation of a hardware dynamic information flow 
 tracking (DIFT) architecture for RISC-V processor cores. The paper presents a low 
 overhead implementation of DIFT that is specialized for low-end embedded systems
@@ -71,10 +97,10 @@ for IOT applications. The following are high level contributions:
 \end{itemize}
 
 
-\subsection{TMDFI}
+%\subsection{TMDFI}
 
 
-\subsection{HyperFlow} 
+\subsection{HyperFlow \cite{HyperFlow}} 
 It is a design and security implementation that offers security assurance because it is implemented 
 using a security-typed hardware description language. It allows complex information flow policies to 
 be configured at run time. The paper introduces ChiselFlow, a new secure hardware description language. 
@@ -89,10 +115,10 @@ Hyperlow implements a nonmalleable IFC policy using tags.
 To eliminate timing side channels, the processor tracks the tag of the currently executing code and lushes caches,
 TLB, branch predictor, and other microarchitectural state on changes in the conidentiality or integrity tag of the
 running code. The modifications to avoid timing side channels seem more extensive than those to add tags. The
-authors report overheads in cycles per instruction of between 1% and 69%, largely due to padding the multiply
+authors report overheads in cycles per instruction of between 1\% and 69\%, largely due to padding the multiply
 operation to the worst-case number of cycles.
 
-\subsection{SDMP}
+\subsection{SDMP \cite{Sdmp}}
 This paper focuses on designing metadata tag based stack-protection security policies for general purpose tagged
 architecture. The policies specifically
 exploit the natural locality of dynamic program call graphs to
@@ -102,20 +128,20 @@ overhead of 1.2\% but just protects return addresses.
 The two richer policies present, Static Authorities and Depth Isola-
 tion, provide object-level protection for all stack objects. When
 enforcing memory safety, The Static Authorities policy has a
-performance overhead of 5.7\% and our Depth Isolation policy
+performance overhead of 5.7\% and the Depth Isolation policy
 has a performance overhead of 4.5\%.
 The contribution of the paper includes:
 \begin{itemize}
   \item The formulation of a range of stack protection policies
 within the SDMP model.
-  \item Three optimizations for our stack policies: Lazy Tagging,
+  \item Three optimizations for the stack policies: Lazy Tagging,
 Lazy Clearing and Cache Line Tagging.
-  \item The performance modeling results of our policies on
-a standard benchmark set, including the impact of our
+  \item The performance modeling results of the policies on
+a standard benchmark set, including the impact of the
 proposed optimizations.
 \end{itemize}  
 
-\subsection{Typed Architecture}
+\subsection{Typed Architecture \cite{TypedArchitecture}}
 This paper introduces Typed
 Architectures, a high-efficiency, low-cost execution sub-
 strate for dynamic scripting languages, where each data
@@ -128,7 +154,7 @@ and insertion, capturing common data layout patterns of tag-
 value pairs. The evaluation using a fully synthesizable RISC-
 V RTL design on FPGA shows that Typed Architectures
 achieve mean speedups of 11.2\% and 9.9\% with
-imum speedups of 32.6\% and 43.5\% for two production-
+minimum speedups of 32.6\% and 43.5\% for two production-
 grade scripting engines for JavaScript and Lua. 
 The contribution of the paper includes:
 \begin{itemize}
@@ -146,82 +172,109 @@ and provide a more accurate estimate of area and power
 using a TSMC 40nm standard cell library.
 \end{itemize}
 
-\subsection{Dover}
+\subsection{Dover \cite{Dover}}
+It is a secure processor that extends the conventional CPU with
+a Policy EXecution co-processor (PEX). PEX maintains metadata 
+of every word assesible by the application processor. PEX 
+enforces software-defined policies
+at the granularity of each instruction executed by the AP(i.e application process)
+CPU. Hardware interlocks enforce strict separation between code and data 
+for user-land and policy-related. The Dover system has 
+a dover specialized kernel and modifications to the GCC toolchain 
+which can implement a wide range security and safety policies on 
+top exsisting C based applications. 
+%// TODO ADD DIAGRAM. 
 
+%\subsection{Shakti-T}
 
-\subsection{Shakti-T}
+%\subsection{HDFI}
 
-\subsection{HDFI}
+%\subsection{lowRISC}
 
-\subsection{lowRISC}
+%\subsection{Taxi}
 
-\subsection{Taxi}
+%\subsection{Pump}
 
-\subsection{Pump}
+\subsection{CHERI \cite{CHERI}}
+CHERI (Capability Hardware Enhanced RISC Instructions) extends conventional processor
+Instruction-Set Architectures (ISAs) with architectural capabilities to enable fine-grained
+memory protection and highly scalable software compartmentalization. CHERI is a hybrid 
+capability architecture that can combine capabilities with conventional MMU(i.e Memory Management
+ Unit) based systems. The contribution of the following project include: 
+\begin{itemize}
+  \item ISA changes to introduce architecture capabilities.
+  \item New microarchitecture proving that capabilities can be implemented efficiently 
+        in hardware. Support for efficient tagged memory to protect capabilities and
+        compress capabilities to reduce memory overhead.   
+  \item Newly designed software construction model for that uses capability to provide
+        fine grain memory protection and scalable software compartmentalization.  
+  \item Langauge and Compiler extension to use capabilities for C and C++.
+  \item OS extensions to use (and support application use of) fine-grained memory protection
+        (spatial, referential, and (non-stack) temporal memory safety) and abstraction extensions
+        to support scalable software compartmentalization. 
+\end{itemize}
+	
+%\subsection{SPARC M7/M8 SSM}
 
-\subsection{CHERI}
+%\subsection{Low-Fat Pointers}
 
-\subsection{SPARC M7/M8 SSM}
+%\subsection{SAFE}
 
-\subsection{Low-Fat Pointers}
+%\subsection{DataSafe}
 
-\subsection{SAFE}
+%\subsection{Harmoni}
 
-\subsection{DataSafe}
+%\subsection{Shioya, et al.}
 
-\subsection{Harmoni}
+%\subsection{SIFT}
 
-\subsection{Shioya, et al.}
+%\subsection{FlexCore}
 
-\subsection{SIFT}
+%\subsection{Execution Leases}
 
-\subsection{FlexCore}
+%\subsection{GLIFT}
 
-\subsection{Execution Leases}
+%\subsection{TIARA}
 
-\subsection{GLIFT}
+%\subsection{DIFT Coprocessor}
 
-\subsection{TIARA}
+%\subsection{HardBound}
 
-\subsection{DIFT Coprocessor}
+%\subsection{Loki}
 
-\subsection{HardBound}
+%\subsection{FLexiTaint}
 
-\subsection{Loki}
+%\subsection{SECTAG}
 
-\subsection{FLexiTaint}
+%\subsection{Raksha}
 
-\subsection{SECTAG}
+%\subsection{SecureBit}
 
-\subsection{Raksha}
+%\subsection{Minos}
 
-\subsection{SecureBit}
+%\subsection{DIFT}
 
-\subsection{Minos}
+%\subsection{RIFLE}
 
-\subsection{DIFT}
+%\subsection{AEGIS}
 
-\subsection{RIFLE}
+%\subsection{Mondriaan}
 
-\subsection{AEGIS}
+%\subsection{Aries}
 
-\subsection{Mondriaan}
+%\subsection{XOM}
 
-\subsection{Aries}
+%\subsection{M-Machine}
 
-\subsection{XOM}
+%\subsection{KCM}
 
-\subsection{M-Machine}
+%\subsection{SPUR}
 
-\subsection{KCM}
+%\subsection{Lisp Machine}
 
-\subsection{SPUR}
+%\subsection{HEP}
 
-\subsection{Lisp Machine}
-
-\subsection{HEP}
-
-\subsection{Burroughs}
+%\subsection{Burroughs}
 
 
 

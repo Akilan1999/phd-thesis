@@ -4,6 +4,17 @@
 
 
 % ---------------------------- TAG Based Architecture --------------------------
+
+%===== TAG Survey =======
+% TODO: regenerate using Zotero
+@misc{acmTAGSurvey,
+	title = {{T}{A}{G}: {T}agged {A}rchitecture {G}uide | {A}{C}{M} {C}omputing {S}urveys --- dl.acm.org},
+	howpublished = {\url{https://dl.acm.org/doi/abs/10.1145/3533704}},
+	year = {2022},
+	note = {[Accessed 20-Oct-2022]},
+}
+%===================
+
 % Timber 
 @inproceedings{weiser_timber-v_2019,
 	address = {San Diego, CA},
@@ -23,13 +34,15 @@
 }
 
 % ARM MTE 
-@misc{noauthor_1_nodate,
+@misc{ARMMTE,
 	title = {1 {Armv8}.5-{A} {Memory} {Tagging} {Extension}},
-	url = {https://developer.arm.com/-/media/Arm%20Developer%20Community/ PDF/Arm_Memory_Tagging_Extension_Whitepaper.pdf?revision=ef3521b9-322c-4536-a800-5ee35a0e7665&la=en&hash= D510ED84099D3B8AA34723AC110D48E3A28FA8D6},
+	howpublished = {\url{https://developer.arm.com/-/media/Arm%20Developer%20Community/ PDF/Arm_Memory_Tagging_Extension_Whitepaper.pdf?revision=ef3521b9-322c-4536-a800-5ee35a0e7665&la=en&hash= D510ED84099D3B8AA34723AC110D48E3A28FA8D6}},
+	year = {2019},
+	note = {[Accessed 20-Oct-2022]},
 }
 
 % D-RISCY
-@inproceedings{palmiero_design_2018,
+@inproceedings{D-RISCY,
 	title = {Design and {Implementation} of a {Dynamic} {Information} {Flow} {Tracking} {Architecture} to {Secure} a {RISC}-{V} {Core} for {IoT} {Applications}},
 	doi = {10.1109/HPEC.2018.8547578},
 	abstract = {Security for Internet-of-Things devices is an increasingly critical aspect of computer architecture, with implications that spread across a wide range of domains. We present the design and implementation of a hardware dynamic information flow tracking (DIFT) architecture for RISC-V processor cores. Our approach exhibits the following features at the architecture level. First, it supports a robust and software-programmable policy that protects bare-metal applications against memory corruption attacks such as buffer overflows and format strings, without causing false alarms when running real-world benchmarks. Second, it is fast and transparent, having a small impact on applications performances and providing a fine-grain management of security tags. Third, it consists of a flexible design that can be easily extended for targeting new sets of attacks. We implemented our architecture on PULPino, an open-source platform that supports the design of different RISC-V cores targeting IoT applications. FPGA-based experimental results show that the overall overhead is low, with no impact on the processor performance and negligible storage increase.},
@@ -42,6 +55,106 @@
 	pages = {1--7},
 	file = {IEEE Xplore Abstract Record:files/9/8547578.html:text/html},
 }
+
+%HyperFlow
+@inproceedings{HyperFlow,
+author = {Ferraiuolo, Andrew and Zhao, Mark and Myers, Andrew C. and Suh, G. Edward},
+title = {HyperFlow: A Processor Architecture for Nonmalleable, Timing-Safe Information Flow Security},
+year = {2018},
+isbn = {9781450356930},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3243734.3243743},
+doi = {10.1145/3243734.3243743},
+abstract = {This paper presents HyperFlow, a processor that enforces secure information flow, including control over timing channels. The design and implementation of HyperFlow offer security assurance because it is implemented using a security-typed hardware description language that enforces secure information flow. Unlike prior processors that aim to enforce simple information-flow policies such as noninterference, HyperFlow allows complex information flow policies that can be configured at run time. Its fine-grained, decentralized information flow mechanisms allow controlled communication among mutually distrusting processes and system calls into different security domains. We address the significant challenges in designing such a processor architecture with contributions in both the hardware architecture and the security type system. The paper discusses the architecture decisions that make the processor secure and describes ChiselFlow, a new secure hardware description language supporting lightweight information-flow enforcement. The HyperFlow architecture is prototyped on a full-featured processor that offers a complete RISC-V instruction set, and is shown to add moderate overhead to area and performance.},
+booktitle = {Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security},
+pages = {1583–1600},
+numpages = {18},
+keywords = {information-flow security, hardware security, timing channels},
+location = {Toronto, Canada},
+series = {CCS '18}
+}
+
+%SDMP
+@INPROCEEDINGS{Sdmp,
+
+  author={Roessler, Nick and DeHon, André},
+
+  booktitle={2018 IEEE Symposium on Security and Privacy (SP)}, 
+
+  title={Protecting the Stack with Metadata Policies and Tagged Hardware}, 
+
+  year={2018},
+
+  volume={},
+
+  number={},
+
+  pages={478-495},
+
+  doi={10.1109/SP.2018.00066}}
+
+%TypedArchitecture
+@article{TypedArchitecture,
+author = {Kim, Channoh and Kim, Jaehyeok and Kim, Sungmin and Kim, Dooyoung and Kim, Namho and Na, Gitae and Oh, Young H. and Cho, Hyeon Gyu and Lee, Jae W.},
+title = {Typed Architectures: Architectural Support for Lightweight Scripting},
+year = {2017},
+issue_date = {March 2017},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {45},
+number = {1},
+issn = {0163-5964},
+url = {https://doi.org/10.1145/3093337.3037726},
+doi = {10.1145/3093337.3037726},
+abstract = {Dynamic scripting languages are becoming more and more widely adopted not only for fast prototyping but also for developing production-grade applications. They provide high-productivity programming environments featuring high levels of abstraction with powerful built-in functions, automatic memory management, object-oriented programming paradigm and dynamic typing. However, their flexible, dynamic type systems easily become the source of inefficiency in terms of instruction count, memory footprint, and energy consumption. This overhead makes it challenging to deploy these high-productivity programming technologies on emerging single-board computers for IoT applications. Addressing this challenge, this paper introduces Typed Architectures, a high-efficiency, low-cost execution substrate for dynamic scripting languages, where each data variable retains high-level type information at an ISA level. Typed Architectures calculate and check the dynamic type of each variable implicitly in hardware, rather than explicitly in software, hence significantly reducing instruction count for dynamic type checking. Besides, Typed Architectures introduce polymorphic instructions (e.g., xadd), which are bound to the correct native instruction at runtime within the pipeline (e.g., add or fadd) to efficiently implement polymorphic operators. Finally, Typed Architectures provide hardware support for flexible yet efficient type tag extraction and insertion, capturing common data layout patterns of tag-value pairs. Our evaluation using a fully synthesizable RISC-V RTL design on FPGA shows that Typed Architectures achieve geomean speedups of 11.2% and 9.9% with maximum speedups of 32.6% and 43.5% for two production-grade scripting engines for JavaScript and Lua, respectively. Moreover, Typed Architectures improve the energy-delay product (EDP) by 19.3% for JavaScript and 16.5% for Lua with an area overhead of 1.6% at a 40nm technology node.},
+journal = {SIGARCH Comput. Archit. News},
+month = {apr},
+pages = {77–90},
+numpages = {14},
+keywords = {type checking, microarchitecture, instruction set architecture, pipeline, javascript, scripting languages, lua, performance, internet of things (iot), interpreters}
+}
+
+%Dover
+@INPROCEEDINGS{Dover,
+
+  author={Sullivan, Gregory T. and DeHon, André and Milburn, Steven and Boling, Eli and Ciaffi, Marco and Rosenberg, Jothy and Sutherland, Andrew},
+
+  booktitle={2017 IEEE International Symposium on Technologies for Homeland Security (HST)}, 
+
+  title={The Dover inherently secure processor}, 
+
+  year={2017},
+
+  volume={},
+
+  number={},
+
+  pages={1-5},
+
+  doi={10.1109/THS.2017.7943502}}
+
+%CHERI
+@INPROCEEDINGS{CHERI,
+
+  author={Watson, Robert N.M. and Woodruff, Jonathan and Neumann, Peter G. and Moore, Simon W. and Anderson, Jonathan and Chisnall, David and Dave, Nirav and Davis, Brooks and Gudka, Khilan and Laurie, Ben and Murdoch, Steven J. and Norton, Robert and Roe, Michael and Son, Stacey and Vadera, Munraj},
+
+  booktitle={2015 IEEE Symposium on Security and Privacy}, 
+
+  title={CHERI: A Hybrid Capability-System Architecture for Scalable Software Compartmentalization}, 
+
+  year={2015},
+
+  volume={},
+
+  number={},
+
+  pages={20-37},
+
+  doi={10.1109/SP.2015.9}}
+
+
+
 % -----------------------------------------------------------------------------
 
 

@@ -18,6 +18,103 @@ for Unikernels and the 2nd section talks about papers surveyed for TAG based arc
 the third sections talks about the possible incentives of combining them both which helps 
 answer the research questions stated (TODO: Add reference to research question section). 
 
+\section[Unikernels]{Unikernels Survey}
+
+\subsection{Implementations}
+
+\subsubsection{Unikraft}
+Unikraft is a uni-kernel implementation that claims to be 
+a micro library OS. The major features of Unikraft is:
+\begin{itemize}
+  \item Single address space: Intended to target single applications.
+  \item Fully modular system: All drivers and platform libraries can be easily removed.
+  \item Single protection level: No kernel and user space seperation to avoid costly context switching.
+  \item Static linking: Compiler features such as dead code elimination and link time optmization supported. 
+  \item POSIX support: Support for legacy applications while still allowing for specialization. 
+  \item Platform abstraction: The ability to run on different Hypervisors/VMs. 
+\end{itemize}
+To reach for the principal of modularity. Unikraft consists of 2 major componenents: 
+\begin{itemize}
+  \item Micro libraries: Micro-libraries are software components 
+  which implement one of the core Unikraft APIs.
+  \item Build system: he build system
+  then compiles all of the micro-libraries, links them,
+  and produces one binary per selected platform.
+\end{itemize}
+In terms of performance the following was evaluated: 
+\begin{itemize}
+  \item Resource Efficiency (Smaller is Better): Overall, the total VM boot time is dominated by the VMM,
+  with Solo5 and Firecracker being the fastest (3ms), QEMU
+  microVM at around 10ms and QEMU the slowest at around
+  40ms.
+  \item Filesystem Performance: Unikraft
+  achieves lower read latency and lower write latency with
+  different block sizes and are considerably better than ones
+  from the Linux VM.
+  \item Application Throughput: Unikraft is around 30\%-80\% faster than running the same app
+  in a container, and 70\%-170\% faster than the same app running 
+  in a Linux VM. Surprisingly, Unikraft is also 10\%-60\%
+  faster than Native Linux in both cases.
+  \item Performance of Automatically Ported Apps: The results
+  show that the automatically ported app is only 1.5\% slower
+  than the manually ported version, and even slightly faster
+  than Linux baremetal.
+\end{itemize}
+
+\subsubsection{OSv}
+OSv is an unikernel that runs existing Linux cloud applications on various hypervisors 
+and machine architectures. OSv runs on 64-bit x86 and
+ARM architectures and supports KVM/Qemu, VMware, Xen and VirtualBox 
+hypervisors.OSv demonstrates up to 25\% increase in throughput and 47\% 
+decrease in latency. 
+By using non-POSIX network APIs,
+it can further improve performance and demonstrate a
+290\% increase in Memcached throughput.
+OSv is designed as a drop-in replacement for applications that use a
+supported subset of the Linux application binary interface (ABI).
+The following below is the design of OSv: 
+\begin{itemize}
+  \item Memory Management: OSv uses virtual memory like
+  general purpose OSs.OSv supports demand paging and memory mapping
+  via the mmap API.
+  \item No Spinlocks: The mutex implementation is based on a lock-free design 
+  by Gidenstam \& Papatriantafilou (add reference), which protects
+  the mutex’s internal data structures with atomic opera-
+  tions in a lock-free fashion.
+  \item Network Channels: OSv almost all packet processing is performed in an application thread. 
+  Upon packet receipt, a simple classifier associates it with a channel, which is a single producer/single
+  consumer queue for transferring packets to the application thread.
+\end{itemize}
+
+\subsubsection{HermitCore}
+HermitCore is an Unikernel implementation designed for HPC. The kernel extends the
+multi-kernel approach with the advantages of a unikernel.The focus of HermitCore is 
+the mapping of the hardware to
+the software structure rather than full support of the Linux
+API.In a HermitCore system, each NUMA node runs its own HermitCore instance managing all its resources.
+The aims for Hermit core are the following:
+\begin{itemize}
+  \item Reduction of OS noise.
+  \item Predictable runtimes.
+  \item Maintainability, extensibility, and flexibility.
+  \item Abstraction of hardware details.
+  \item Support for common HPC programming models (e. g.,
+  OpenMP, MPI).
+  \item Simple integration into existing software stacks of
+  compute centers.
+\end{itemize}
+Benchmarks conducted:
+\begin{itemize}
+  \item Operating System Micro-Benchmarks.
+  \item Hourglass Benchmark (For OS Noise).
+  \item Inter-kernel Communication Benchmark.
+  \item OpenMP Micro-Benchmarks.
+\end{itemize}
+
+
+
+
+
 \section[TAG based architecture survey]{TAG based architecture survey}   
 The following was a survey conducted on exisisting TAG based implementations and the 
 recent survey based on TAG based architectures \cite{acmTAGSurvey} published

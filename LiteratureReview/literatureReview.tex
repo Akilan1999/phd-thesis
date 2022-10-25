@@ -111,6 +111,109 @@ Benchmarks conducted:
   \item OpenMP Micro-Benchmarks.
 \end{itemize}
 
+\subsubsection{RKOS}
+RKOS is an unikernel implemented in Rust which
+offers safety guarantees comparable to implementations which depend on complex runtime
+libraries while being capable of providing predictable application performance demanded
+by real-time applications in a relatively simple implementation. 
+Design decisions for RKOS are as follows:
+\begin{itemize}
+  \item Mutual trust between components allows a shared, uniform address space.
+  \item Virtualized runtime environments have uniform hardware configuration.
+\end{itemize}
+Performance Evaluations conducted:
+\begin{itemize}
+  \item Run time memory footprint 
+  \item Binary size 
+\end{itemize}
+
+\subsubsection{ClickOS}
+ClickOS is an unikernel optimized for middleboxes that runs exclusively on
+the Xen hypervisor with small virtual machine memory footprint overhead
+(5 MB), fast boot times (under 30 milliseconds), and high performance
+networking capabilities.ClickOS adds only a 45 microsecond delay per
+packet. When compared to a general purpose Linux also running on Xen,
+ClickOS network throughput is up to 1.5x times higher for MTU-sized packets
+and as much as 13.6x times higher for minimum-sized packets. 
+
+\subsubsection{NanoOS}
+Nanos is a Unikernel implementation designed to run micro services on the 
+Cloud it runs on top a Qemu Hypervisor. It has it's own Orchestrator 
+written in Go called OPS. 
+Nanos employs various forms of security measures found in other general purpose operating systems including ASLR and respects page protections 
+that compilers produce.
+
+ASLR:
+
+\begin{itemize}
+  \item Stack Randomization
+  \item Heap Randomization
+  \item Library Randomization
+  \item Binary Randomization
+\end{itemize}
+
+Page Protections:
+
+\begin{itemize}
+  \item Stack Execution off by Default
+  \item Heap Execution off by Default
+  \item Null Page is Not Mapped
+  \item Rodata no execute
+  \item Text no write
+\end{itemize}
+
+\begin{itemize}
+  \item SMEP
+  \item UMIP
+\end{itemize}
+
+Performance Evaluations conducted:
+\begin{itemize}
+  \item Bootup Times.
+  \item Requests per second.
+\end{itemize}
+
+\subsubsection{IncludeOS}
+IncludeOS is a single tasking library operating system for 
+cloud services which is written from scratch in C++. Key features include:
+extremely small disk and memory footprint, efficient asynchronous I/O, 
+OS-library where only what your service needs gets included.
+In the test case the bootable disk image consisting
+of a simple DNS server with OS included is shown
+to require only 158 kb of disk space and to require
+5-20\% less CPU-time.
+The contribrutions of IncludeOS are:
+\begin{itemize}
+  \item Extreme resource efficiency and footprint.
+  \item Efficient deployment process.
+  \item Virtualization platform independence.
+\end{itemize}
+The proposed benefits of IncludeOS  in comparison to Linux Kernels are:
+\begin{itemize}
+  \item Extremely small disk and memory footprint.
+  \item No host or software dependencies, other than
+  virtual x86 hardware, and standard virtio for
+  networking
+  \item No system call overhead (The OS and the
+  services are in the same binary, and the system calls
+  are simple function calls(i.e without passing any
+  memory protection barriers)).
+  \item Reduced number of VM exits by keeping the
+  number of protected instructions very low.
+\end{itemize}
+
+Performance Evaluations conducted:
+\begin{itemize}
+  \item Bootup times 
+  \item Memory performance (i.e The Stream Benchmark)
+\end{itemize}
+
+
+
+
+
+
+
 
 
 

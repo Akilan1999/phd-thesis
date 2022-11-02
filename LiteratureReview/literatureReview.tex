@@ -111,11 +111,11 @@ a micro library OS. \emph{The major features of Unikraft is:}
 \begin{itemize}
   \item Micro libraries: Micro-libraries are software components 
   which implement one of the core Unikraft APIs.
-  \item Build system: he build system
+  \item Build system: The build system
   then compiles all of the micro-libraries, links them,
   and produces one binary per selected platform.
 \end{itemize}
-\emph{In terms of performance the following was evaluated:}
+\emph{In terms of performance the following was evaluated in Unikraft:}
 \begin{itemize}
   \item Resource Efficiency (Smaller is Better): Overall, the total VM boot time is dominated by the VMM,
   with Solo5 and Firecracker being the fastest (3ms), QEMU
@@ -162,8 +162,8 @@ supported subset of the Linux application binary interface (ABI).
   \item No Spinlocks: The mutex implementation is based on a lock-free design 
   by Gidenstam \& Papatriantafilou \cite{LockFree}, which protects
   the mutex's internal data structures with atomic operations in a lock-free fashion.
-  \item Network Channels: OSv almost all packet processing is performed in an application thread. 
-  Upon packet receipt, a simple classifier associates it with a channel, which is a single producer/single
+  \item Network Channels: In OSv almost all packet processing is performed in an application thread. 
+  Upon packet received, a simple classifier associates it with a channel, which is a single producer/single
   consumer queue for transferring packets to the application thread.
 \end{itemize}
 
@@ -269,10 +269,10 @@ and as much as 13.6x times higher for minimum-sized packets.
 
 \subsubsection{NanoOS \cite{NanoOS}}
 Nanos is a Unikernel implementation designed to run micro services on the 
-Cloud it runs on top a Qemu Hypervisor. It has it's own Orchestrator 
+Cloud, it runs on top of a Qemu Hypervisor and has it's own Orchestrator 
 written in Go called OPS. 
 Nanos employs various forms of security measures found in other general purpose operating systems including ASLR and respects page protections 
-that compilers produce.
+that the compilers produce.
 
 \emph{ASLR:}
 
@@ -329,7 +329,7 @@ to require only 158 kb of disk space and to require
   services are in the same binary, and the system calls
   are simple function calls(i.e without passing any
   memory protection barriers)).
-  \item Reduced number of VM exits by keeping the
+  \item Reduced number of VMs exits by keeping the
   number of protected instructions very low.
 \end{itemize}
 
@@ -341,7 +341,7 @@ to require only 158 kb of disk space and to require
 
 \subsubsection{Azelea \cite{Azelea}} 
 Azalea is a multi-kernel OS, which consists of Unikernels and a full kernel. Azelea Unikernel provides scalability and parallel performance. 
-The full kernel provides compatibility with POSIX APIs that Unikernel cannot handle. The Full kernel is combined with the Unikernel for 
+The full kernel provides compatibility with POSIX APIs that the Unikernel cannot handle. The Full kernel is combined with the Unikernel for 
 side by side partitioning. \emph{The Azelea Unikernel is a library OS which consists of the following:}
 \begin{itemize}
   \item Kernel Functions 

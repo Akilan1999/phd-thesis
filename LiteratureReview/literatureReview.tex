@@ -8,7 +8,7 @@
 \ifpdf
     \graphicspath{{LiteratureReview/Figs/Raster/}{LiteratureReview/Figs/PDF/}{LiteratureReview/Figs/}}
 \else
-    \graphicspath{{LiteratureReview/Figs/Vector/}{LiteratureReview/Figs/}}
+    \graphicspath{{LiteratureReview/Figs/}{LiteratureReview/Figs/}}
 \fi
 
 %********************************** %Introduction for literature review **************************************
@@ -19,7 +19,81 @@ the third sections talks about the possible incentives of combining them both wh
 answer the research questions stated (TODO: Add reference to research question section). 
 
 \section[Unikernels]{Unikernels Survey}
+The following section is the Uni-kernel Survey which starts 
+with the Introduction of Unikernels, Types of Uni-kernels, 
+Various Uni-kernels implementations and analysis 
+of the various Uni-kernel implementations. 
 
+\subsection{Introduction to Unikernels}
+Unikernel is a relatively new concept that was first introduced around 2013 by Anil Madhavapeddy in a 
+paper titled "Unikernels: Library Operating Systems for the Cloud" (todo reference). Unikernels 
+is defined as "Unikernels are specialized, single-address-space machine images constructed by using library 
+operating systems." (todo reference). Specialized indicates that an Unikernel holds a single application.
+Single address indicates that Unikernels does not have separation between the user and kernel address 
+space. 
+
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.2\textwidth]{unikernel_application_stack}
+  \caption[Unikernel]{Unikernel application stack}
+  \label{fig:unikernel_application_stack}
+  \end{figure}
+
+  \begin{figure}[htbp!] 
+    \centering    
+    \includegraphics[width=0.2\textwidth]{normal_application_stack}
+    \caption[Normal]{Normal application stack}
+    \label{fig:normal_application_stack}
+    \end{figure}
+
+\subsubsection{Library Operating Systems}
+Library operating system is an method of constructing an operating system where the kernel modules  
+required by an application is executed in the same address space as the application. The original goal 
+of Library operating systems was to improve performance by enabling applications to manage resources according to 
+their own needs, thereby allowing a high level of customizability. One of the major drawbacks for 
+Library OS was support for various device drivers written for specific hardware. 
+
+Nowadays, however, virtualization already provides an abstraction of the underlying hardware by exposing 
+virtualized hardware drivers. This allows library OS implementations to support the generic virtual driver 
+as opposed to attempting to support various hardware drivers.
+
+% Definition of Unikernels 
+% Primary Software Stacks the Unikernel is supported for 
+% Diagram of Unikernels 
+
+
+\subsection{Types of Unikernels}
+% Library OS 
+% Binary Compatible Uni-kernels 
+\subsubsection{Clean slate (Specialized and purpose-built unikernels)}
+Designed to utilize all the modern features of software and hardware, without worrying about backward
+compatibility. They are not POSIX-compliant. 
+\begin{itemize}
+  \item Halvm (TODO survey)
+  \item MirageOS (TODO survey)
+\end{itemize}
+
+\subsubsection{Legacy (Generalized "fat" unikernels)}
+Designed to run unmodified applications in an Unikernel, 
+which make them bulky in comparison to the clean slate approach. 
+Designed to be POSIX compliant. The following below 
+are the ones surveyed in the following paper: 
+\begin{itemize}
+  \item Unikraft
+  \item OSv 
+  \item HermitCore 
+  \item RKOS
+  \item Azelea
+  \item IncludeOS 
+  \item ClickOS
+  \item NanoOS
+\end{itemize}
+%
+% 4. Figures for all implementations 
+% 5. References for all implementations 
+% 6. Table analyses for all implementations 
+% 7. More on Hermit core (Phrase research questions based on Hermit core)
+%
 \subsection{Implementations}
 
 \subsubsection{Unikraft}
@@ -61,8 +135,16 @@ In terms of performance the following was evaluated:
   than Linux baremetal.
 \end{itemize}
 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{UnikraftStack}
+  \caption[Unikraft]{Unikraft application stack}
+  \label{fig:UnikraftStack}
+  \end{figure}
+  % source https://dl.acm.org/doi/pdf/10.1145/3447786.3456248
+
 \subsubsection{OSv}
-OSv is an unikernel that runs existing Linux cloud applications on various hypervisors 
+OSv is an Unikernel that runs existing Linux cloud applications on various hypervisors 
 and machine architectures. OSv runs on 64-bit x86 and
 ARM architectures and supports KVM/Qemu, VMware, Xen and VirtualBox 
 hypervisors.OSv demonstrates up to 25\% increase in throughput and 47\% 
@@ -86,9 +168,19 @@ The following below is the design of OSv:
   consumer queue for transferring packets to the application thread.
 \end{itemize}
 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.7\textwidth]{OSvStack}
+  \caption[OSv]{OSv application stack}
+  \label{fig:OSv}
+  \end{figure}
+  % source https://www.slideshare.net/ScyllaDB/osv-unikernel-optimizing-guest-os-to-run-stateless-and-serverless-apps-in-the-cloud
+
+
+
 \subsubsection{HermitCore}
 HermitCore is an Unikernel implementation designed for HPC. The kernel extends the
-multi-kernel approach with the advantages of a unikernel.The focus of HermitCore is 
+multi-kernel approach with the advantages of a Unikernel.The focus of HermitCore is 
 the mapping of the hardware to
 the software structure rather than full support of the Linux
 API.In a HermitCore system, each NUMA node runs its own HermitCore instance managing all its resources.
@@ -111,7 +203,26 @@ Benchmarks conducted:
   \item OpenMP Micro-Benchmarks.
 \end{itemize}
 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.5\textwidth]{HermitCoreStack}
+  \caption[HermitCore]{HermitCore Software stack}
+  \label{fig:HermitCoreStack}
+  \end{figure}
+  % source https://dl.acm.org/doi/pdf/10.1145/2931088.2931093
+
+  \begin{figure}[htbp!] 
+    \centering    
+    \includegraphics[width=0.8\textwidth]{NumaHermitCore}
+    \caption[HermitCore]{A NUMA system with one satellite kernel per NUMA node}
+    \label{fig:HermitCoreStack}
+    \end{figure}
+    % source https://dl.acm.org/doi/pdf/10.1145/2931088.2931093
+
+
+
 \subsubsection{RKOS}
+% source: https://media.taricorp.net/rkos.pdf
 RKOS is an unikernel implemented in Rust which
 offers safety guarantees comparable to implementations which depend on complex runtime
 libraries while being capable of providing predictable application performance demanded
@@ -135,6 +246,14 @@ networking capabilities.ClickOS adds only a 45 microsecond delay per
 packet. When compared to a general purpose Linux also running on Xen,
 ClickOS network throughput is up to 1.5x times higher for MTU-sized packets
 and as much as 13.6x times higher for minimum-sized packets. 
+
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{ClickOSStack}
+  \caption[ClickOS]{ClickOS architecture}
+  \label{fig:ClickOSStack}
+  \end{figure}
+  % source https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-martins.pdf
 
 \subsubsection{NanoOS}
 Nanos is a Unikernel implementation designed to run micro services on the 
@@ -182,7 +301,7 @@ In the test case the bootable disk image consisting
 of a simple DNS server with OS included is shown
 to require only 158 kb of disk space and to require
 5-20\% less CPU-time.
-The contribrutions of IncludeOS are:
+The contributions of IncludeOS are:
 \begin{itemize}
   \item Extreme resource efficiency and footprint.
   \item Efficient deployment process.
@@ -208,21 +327,64 @@ Performance Evaluations conducted:
   \item Memory performance (i.e The Stream Benchmark)
 \end{itemize}
 
+\subsubsection{Azelea} 
+Azalea is a multi-kernel OS, which consists of Unikernels and a full kernel. Azelea Unikernel provides scalability and parallel performance. 
+The full kernel provides compatibility with POSIX APIs that Unikernel cannot handle. The Full kernel is combined with the Unikernel for 
+side by side partitioning. The Azelea Unikernel is a library OS which consists of the following: 
+\begin{itemize}
+  \item Kernel Functions 
+  \item Run time libraries 
+  \item Application 
+\end{itemize}
+A server can run multiple Azelea-unikernels with the number of cores and memory allocated. The Linux install which is a part of 
+the server acts as a driver and that loads each Unikernel or supports communication between other nodes. 
+The contributions of Azelea Uni-kernels are:
+\begin{itemize}
+  \item Lightweight kernel.
+  \item Compatibility with legacy application (i.e Support for statically build Linux binaries).
+  \item I/O offloading (i.e FWK(Full weight kernel) handles all the I/O offloading so that applications can be executed without any interference). 
+\end{itemize}
 
+Performance Evaluations conducted:
+\begin{itemize}
+  \item OS Noise (FTQ(todo: reference), FWQ(todo: reference), Hour Glass(todo: reference))
+  \item IO offload acceleration 
+\end{itemize}
 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{AzeleaKNL}
+  \caption[Azelea]{Azelea-unikernel in a single KNL}
+  \label{fig:AzeleaKNL}
+  \end{figure}
+  % source https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8539634
 
+\subsection{Unikernel analysis}
+The following section consists of analysis of the Uni-kernels 
+implementations surveyed in the current literature: 
 
-
-
-
-
+\begin{table}[]
+  \resizebox{\columnwidth}{!}{%
+  \begin{tabular}{@{}|l|l|l|l|@{}}
+  \toprule
+  \textit{\textbf{Unikernel}} & \textit{\textbf{Languages supported}}                                                                   & \textit{\textbf{Targets}}                                                                            & \textbf{Performance evaluation}                                                                                                                                                                                                                   \\ \midrule
+  \textit{Unikraft}           & \textit{C, C++, Rust, Go, Python}                                                                       & \textit{\begin{tabular}[c]{@{}l@{}}KVM, Xen, Linux Userspace, Solo5, \\ VMware, HyperV\end{tabular}} & \begin{tabular}[c]{@{}l@{}}- Resource \\   Efficiency \\ - Filesystem \\   Performance \\ - Application \\   throughput. \\ - Performance of \\   Automatically ported \\   apps.\end{tabular}                                                    \\ \midrule
+  OSv                         & Java, C, C++, Node, Ruby, Go                                                                            & Virtual Box, EXSi, KVM and HyperV.                                                                   &                                                                                                                                                                                                                                                   \\ \midrule
+  NanoOS                      & \begin{tabular}[c]{@{}l@{}}C, C++, Go, Java, Node js, Python, \\ Rust, Rust, Ruby, and PHP\end{tabular} & \begin{tabular}[c]{@{}l@{}}KVM, XEN,ESXi and \\ Hyper V\end{tabular}                                 & \begin{tabular}[c]{@{}l@{}}- Boot Up \\    times \\ - Request \\   per second\end{tabular}                                                                                                                                                        \\ \midrule
+  HermitCore                  & Rust, C,C++, Go and Fortran                                                                             & uhyve, KVM and bare metal                                                                            & \begin{tabular}[c]{@{}l@{}}- Operating system \\   micro benchmark\\ - Hourglass benchmark \\ - Inter-kernel \\   communication benchmark \\ - OpenMP micro benchmark\end{tabular}                                                                \\ \midrule
+  RKOS                        & Rust                                                                                                    & Bare metal                                                                                           & \begin{tabular}[c]{@{}l@{}}- Run time \\   memory footprint \\ - Binary size\end{tabular}                                                                                                                                                         \\ \midrule
+  ClickOS                     & C++                                                                                                     & Xen                                                                                                  & \begin{tabular}[c]{@{}l@{}}- ClickOS Switch \\ - Memory Footprint \\ - Boot times \\ - Delay (When processing packets)\\ - Throughput (Amount of packets \\    ClickOS can handle)\\ - State Insertion \\ - Chaning \\ - Scaling out\end{tabular} \\ \midrule
+  IncludeOS                   & C++                                                                                                     & KVM, VirtualBox, ESXi, OpenStack                                                                     & \begin{tabular}[c]{@{}l@{}}- Bootup times \\ - Memory Performance\end{tabular}                                                                                                                                                                    \\ \bottomrule
+  \end{tabular}%
+  }
+  \end{table}
 
 
 \section[TAG based architecture survey]{TAG based architecture survey}   
-The following was a survey conducted on exisisting TAG based implementations and the 
+The following was a survey conducted on existing TAG based implementations and the 
 recent survey based on TAG based architectures \cite{acmTAGSurvey} published
 in 2022 was a good staring point to understand about various implementations of TAG
-based archtectures with the high level metrits and limitations. The following section 
+based architectures with the high level metrits and limitations. The following section 
 provides our own version of the Survey to help decide the best implementations 
 to answer the research questions (//TODO reference research questions chapter).
 
@@ -244,7 +406,7 @@ Tags policies as designed to address mostly:
   \item Buffer overflows
 \end{itemize}
 
-TAG policies can be categorised into 5 main categories which is:
+TAG policies can be categorized into 5 main categories which is:
 \begin{itemize}
   \item Information-low control (IFC) policies
   \item Dynamic information-low tracking (DIFT) policies
@@ -258,11 +420,11 @@ efforts on TAG based architectures over the past decade and 20 published efforts
 \subsection{Timder V \cite{weiser_timber-v_2019}}
  It is a tagged memory architecture for flexible and efficient isolation of code and data on 
  small embedded systems. The TAG isolation is augmented with a memory protection unit to isolate 
- induvidual processes. Timber V is compatible with exsisting code. The contributions of the paper 
+ induvidual processes. Timber V is compatible with existing code. The contributions of the paper 
  are: 
  \begin{itemize}
   \item Efficient tagged memory architecture for isolated execution on low-end processors. 
-  \item Concept introducted called stack interleaving that allows efficient and dynamic memory management. 
+  \item Concept introduced called stack interleaving that allows efficient and dynamic memory management. 
   \item Lightweight shared memory between enclaves. 
   \item Efficient shared MPU (i.e Memory Protection Unit) design. 
  \end{itemize}
@@ -278,8 +440,8 @@ efforts on TAG based architectures over the past decade and 20 published efforts
 \subsection{ARM MTE \cite{ARMMTE}}
 The ARMv8.5-Memory Tagging Extension (MTE) aims to increase the memory safety written for 
 unsafe languages without requiring source code changes and in certain cases without 
-recompilation. It generally foicuses on the bounds checking use case, Though it 
-provides limited tags which means it can only provide probablilistic overflow detection. 
+recompilation. It generally focuses on the bounds checking use case, Though it 
+provides limited tags which means it can only provide probabilistic overflow detection. 
 It is one of the latest commercial incarnations of memory-safety-focused tagged architectures.   
 
 \subsection{D-RI5CY \cite{D-RISCY}}
@@ -289,9 +451,9 @@ overhead implementation of DIFT that is specialized for low-end embedded systems
 for IOT applications. The following are high level contributions:
 \begin{itemize}
   \item Design f D-RI5CY, A DIFT-protected implementation of the RI5CY processor core. 
-        The paper implements the modification of the DIFT TAG propogation and TAG checking
+        The paper implements the modification of the DIFT TAG propagation and TAG checking
         mechanism in a way that is transparent to the execution of the regular instructions. 
-  \item Concept introducted called stack interleaving that allows efficient and dynamic memory management.
+  \item Concept introduced called stack interleaving that allows efficient and dynamic memory management.
   \item Lightweight shared memory between enclaves.
   \item Efficient shared MPU (i.e Memory Protection Unit) design.
 \end{itemize}
@@ -307,13 +469,13 @@ be configured at run time. The paper introduces ChiselFlow, a new secure hardwar
 The contribution of the paper includes: 
 \begin{itemize}
   \item Processor architecture and implementation designed for timing-safe information flow security. 
-  \item Complere RISC-V intruction set extended with intructions for information flow control. 
+  \item Complete RISC-V instruction set extended with instructions for information flow control. 
   \item Verified at design time with a hardware description language. 
   \item Novel representations of lattices that can be implemented in hardware efficiently. 
 \end{itemize}
-Hyperlow implements a nonmalleable IFC policy using tags.
+HyperFlow implements a nonmalleable IFC policy using tags.
 To eliminate timing side channels, the processor tracks the tag of the currently executing code and lushes caches,
-TLB, branch predictor, and other microarchitectural state on changes in the conidentiality or integrity tag of the
+TLB, branch predictor, and other micro-architectural state on changes in the conditionality or integrity tag of the
 running code. The modifications to avoid timing side channels seem more extensive than those to add tags. The
 authors report overheads in cycles per instruction of between 1\% and 69\%, largely due to padding the multiply
 operation to the worst-case number of cycles.
@@ -322,11 +484,11 @@ operation to the worst-case number of cycles.
 This paper focuses on designing metadata tag based stack-protection security policies for general purpose tagged
 architecture. The policies specifically
 exploit the natural locality of dynamic program call graphs to
-achieve cacheability of the metadata rules that they require.
+achieve cache-ability of the metadata rules that they require.
 The simple Return Address Protection policy has a performance
 overhead of 1.2\% but just protects return addresses.
-The two richer policies present, Static Authorities and Depth Isola-
-tion, provide object-level protection for all stack objects. When
+The two richer policies present, Static Authorities and Depth Isolation, 
+provide object-level protection for all stack objects. When
 enforcing memory safety, The Static Authorities policy has a
 performance overhead of 5.7\% and the Depth Isolation policy
 has a performance overhead of 4.5\%.
@@ -343,8 +505,8 @@ proposed optimizations.
 
 \subsection{Typed Architecture \cite{TypedArchitecture}}
 This paper introduces Typed
-Architectures, a high-efficiency, low-cost execution sub-
-strate for dynamic scripting languages, where each data
+Architectures, a high-efficiency, low-cost execution substrate 
+for dynamic scripting languages, where each data
 variable retains high-level type information at an ISA level.
 Typed Architectures calculate and check the dynamic type
 of each variable implicitly in hardware, rather than explicitly
@@ -375,14 +537,14 @@ using a TSMC 40nm standard cell library.
 \subsection{Dover \cite{Dover}}
 It is a secure processor that extends the conventional CPU with
 a Policy EXecution co-processor (PEX). PEX maintains metadata 
-of every word assesible by the application processor. PEX 
+of every word assessable by the application processor. PEX 
 enforces software-defined policies
 at the granularity of each instruction executed by the AP(i.e application process)
 CPU. Hardware interlocks enforce strict separation between code and data 
 for user-land and policy-related. The Dover system has 
 a dover specialized kernel and modifications to the GCC toolchain 
 which can implement a wide range security and safety policies on 
-top exsisting C based applications. 
+top existing C based applications. 
 %// TODO ADD DIAGRAM. 
 
 %\subsection{Shakti-T}
@@ -408,7 +570,7 @@ capability architecture that can combine capabilities with conventional MMU(i.e 
         compress capabilities to reduce memory overhead.   
   \item Newly designed software construction model for that uses capability to provide
         fine grain memory protection and scalable software compartmentalization.  
-  \item Langauge and Compiler extension to use capabilities for C and C++.
+  \item Language and Compiler extension to use capabilities for C and C++.
   \item OS extensions to use (and support application use of) fine-grained memory protection
         (spatial, referential, and (non-stack) temporal memory safety) and abstraction extensions
         to support scalable software compartmentalization. 

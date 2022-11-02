@@ -4,6 +4,249 @@
 
 % ---------------------------- Unikernels ------------------------------
 
+
+% Introduction: 
+- https://dl.acm.org/doi/10.1145/2490301.2451167 (First paper)
+- http://unikernel.org (Definition) 
+- https://github.com/cetic/unikernels (Introduction to Uni-kernels and survey) 
+- https://dl.acm.org/doi/10.1145/1961296.1950399 (Library operating system)
+
+@article{FirstUnikernelPaper,
+	title = {Unikernels: library operating systems for the cloud},
+	volume = {41},
+	issn = {0163-5964},
+	shorttitle = {Unikernels},
+	url = {https://doi.org/10.1145/2490301.2451167},
+	doi = {10.1145/2490301.2451167},
+	abstract = {We present unikernels, a new approach to deploying cloud services via applications written in high-level source code. Unikernels are single-purpose appliances that are compile-time specialised into standalone kernels, and sealed against modification when deployed to a cloud platform. In return they offer significant reduction in image sizes, improved efficiency and security, and should reduce operational costs. Our Mirage prototype compiles OCaml code into unikernels that run on commodity clouds and offer an order of magnitude reduction in code size without significant performance penalty. The architecture combines static type-safety with a single address-space layout that can be made immutable via a hypervisor extension. Mirage contributes a suite of type-safe protocol libraries, and our results demonstrate that the hypervisor is a platform that overcomes the hardware compatibility issues that have made past library operating systems impractical to deploy in the real-world.},
+	number = {1},
+	urldate = {2022-11-02},
+	journal = {ACM SIGARCH Computer Architecture News},
+	author = {Madhavapeddy, Anil and Mortier, Richard and Rotsos, Charalampos and Scott, David and Singh, Balraj and Gazagnaire, Thomas and Smith, Steven and Hand, Steven and Crowcroft, Jon},
+	month = mar,
+	year = {2013},
+	keywords = {functional programming, hypervisor, microkernel},
+	pages = {461--472},
+}
+
+@misc{UnikernelDefinition,
+	title = {Unikernels - {Rethinking} {Cloud} {Infrastructure}},
+	url = {http://unikernel.org/},
+	urldate = {2022-11-02},
+	file = {Unikernels - Rethinking Cloud Infrastructure:/Users/akilan/Zotero/storage/JZ4TZA2Z/unikernel.org.html:text/html},
+}
+
+@misc{UnikernelSurvey,
+	title = {Unikernel and {Immutable} {Infrastructures}},
+	url = {https://github.com/cetic/unikernels},
+	abstract = {Unikernel and immutable infrastructures},
+	urldate = {2022-11-02},
+	publisher = {CETIC},
+	month = nov,
+	year = {2022},
+	note = {original-date: 2018-05-11T13:37:54Z},
+}
+
+@article{LibraryOS,
+	title = {Rethinking the library {OS} from the top down},
+	volume = {46},
+	issn = {0362-1340},
+	url = {https://doi.org/10.1145/1961296.1950399},
+	doi = {10.1145/1961296.1950399},
+	abstract = {This paper revisits an old approach to operating system construc-tion, the library OS, in a new context. The idea of the library OS is that the personality of the OS on which an application depends runs in the address space of the application. A small, fixed set of abstractions connects the library OS to the host OS kernel, offering the promise of better system security and more rapid independent evolution of OS components. We describe a working prototype of a Windows 7 library OS that runs the latest releases of major applications such as Microsoft Excel, PowerPoint, and Internet Explorer. We demonstrate that desktop sharing across independent, securely isolated, library OS instances can be achieved through the pragmatic reuse of net-working protocols. Each instance has significantly lower overhead than a full VM bundled with an application: a typical application adds just 16MB of working set and 64MB of disk footprint. We contribute a new ABI below the library OS that enables application mobility. We also show that our library OS can address many of the current uses of hardware virtual machines at a fraction of the overheads. This paper describes the first working prototype of a full commercial OS redesigned as a library OS capable of running significant applications. Our experience shows that the long-promised benefits of the library OS approach better protection of system integrity and rapid system evolution are readily obtainable.},
+	number = {3},
+	urldate = {2022-11-02},
+	journal = {ACM SIGPLAN Notices},
+	author = {Porter, Donald E. and Boyd-Wickizer, Silas and Howell, Jon and Olinsky, Reuben and Hunt, Galen C.},
+	month = mar,
+	year = {2011},
+	keywords = {drawbridge, libos, library os},
+	pages = {291--304},
+	file = {Full Text:/Users/akilan/Zotero/storage/WJF24P29/Porter et al. - 2011 - Rethinking the library OS from the top down.pdf:application/pdf},
+}
+
+% Uni-kraft 
+- https://dl.acm.org/doi/pdf/10.1145/3447786.3456248
+
+@inproceedings{Unikraft,
+	address = {New York, NY, USA},
+	series = {{EuroSys} '21},
+	title = {Unikraft: fast, specialized unikernels the easy way},
+	isbn = {978-1-4503-8334-9},
+	shorttitle = {Unikraft},
+	url = {https://doi.org/10.1145/3447786.3456248},
+	doi = {10.1145/3447786.3456248},
+	abstract = {Unikernels are famous for providing excellent performance in terms of boot times, throughput and memory consumption, to name a few metrics. However, they are infamous for making it hard and extremely time consuming to extract such performance, and for needing significant engineering effort in order to port applications to them. We introduce Unikraft, a novel micro-library OS that (1) fully modularizes OS primitives so that it is easy to customize the unikernel and include only relevant components and (2) exposes a set of composable, performance-oriented APIs in order to make it easy for developers to obtain high performance. Our evaluation using off-the-shelf applications such as nginx, SQLite, and Redis shows that running them on Unikraft results in a 1.7x-2.7x performance improvement compared to Linux guests. In addition, Unikraft images for these apps are around 1MB, require less than 10MB of RAM to run, and boot in around 1ms on top of the VMM time (total boot time 3ms-40ms). Unikraft is a Linux Foundation open source project and can be found at www.unikraft.org.},
+	urldate = {2022-11-02},
+	booktitle = {Proceedings of the {Sixteenth} {European} {Conference} on {Computer} {Systems}},
+	publisher = {Association for Computing Machinery},
+	author = {Kuenzer, Simon and Bădoiu, Vlad-Andrei and Lefeuvre, Hugo and Santhanam, Sharan and Jung, Alexander and Gain, Gaulthier and Soldani, Cyril and Lupu, Costin and Teodorescu, Ştefan and Răducanu, Costi and Banu, Cristian and Mathy, Laurent and Deaconescu, Răzvan and Raiciu, Costin and Huici, Felipe},
+	month = apr,
+	year = {2021},
+	pages = {376--394},
+	file = {Full Text PDF:/Users/akilan/Zotero/storage/KCNRN8FP/Kuenzer et al. - 2021 - Unikraft fast, specialized unikernels the easy wa.pdf:application/pdf},
+}
+
+% OSv 
+- https://www.usenix.org/system/files/conference/atc14/atc14-paper-kivity.pdf
+- (Lock free design) https://link.springer.com/chapter/10.1007/11561071_31
+- Diagram (https://www.slideshare.net/ScyllaDB/osv-unikernel-optimizing-guest-os-to-run-stateless-and-serverless-apps-in-the-cloud)
+
+@article{OSvPaper,
+	title = {{OSv}— {Optimizing} the {Operating} {System} for {Virtual} {Machines}},
+	abstract = {Virtual machines in the cloud typically run existing general-purpose operating systems such as Linux. We notice that the cloud’s hypervisor already provides some features, such as isolation and hardware abstraction, which are duplicated by traditional operating systems, and that this duplication comes at a cost.},
+	language = {en},
+	author = {Kivity, Avi and Laor, Dor and Costa, Glauber and Enberg, Pekka and Har’El, Nadav and Marti, Don and Zolotarov, Vlad},
+	pages = {13},
+	file = {Kivity et al. - OSv— Optimizing the Operating System for Virtual M.pdf:/Users/akilan/Zotero/storage/KXSBJ98E/Kivity et al. - OSv— Optimizing the Operating System for Virtual M.pdf:application/pdf},
+}
+
+@inproceedings{LockFree,
+	address = {Berlin, Heidelberg},
+	series = {Lecture {Notes} in {Computer} {Science}},
+	title = {Allocating {Memory} in a {Lock}-{Free} {Manner}},
+	isbn = {978-3-540-31951-1},
+	doi = {10.1007/11561071_31},
+	abstract = {The potential of multiprocessor systems is often not fully realized by their system services. Certain synchronization methods, such as lock-based ones, may limit the parallelism. It is significant to see the impact of wait/lock-free synchronization design in key services for multiprocessor systems, such as the memory allocation service. Efficient, scalable memory allocators for multithreaded applications on multiprocessors is a significant goal of recent research projects.},
+	language = {en},
+	booktitle = {Algorithms – {ESA} 2005},
+	publisher = {Springer},
+	author = {Gidenstam, Anders and Papatriantafilou, Marina and Tsigas, Philippas},
+	editor = {Brodal, Gerth Stølting and Leonardi, Stefano},
+	year = {2005},
+	keywords = {False Sharing, Memory Request, Move Operation, Multiprocessor System, Shared Location},
+	pages = {329--342},
+}
+
+@misc{OSvDiagram,
+	title = {{OSv} {Unikernel} — {Optimizing} {Guest} {OS} to {Run} {Stateless} and {Serverless} {A}…},
+	url = {https://www.slideshare.net/ScyllaDB/osv-unikernel-optimizing-guest-os-to-run-stateless-and-serverless-apps-in-the-cloud},
+	urldate = {2022-11-02},
+	author = {ScyllaDB},
+}
+
+
+% Hermit core 
+- https://dl.acm.org/doi/pdf/10.1145/2931088.2931093
+
+@inproceedings{HermitCore,
+	address = {New York, NY, USA},
+	series = {{ROSS} '16},
+	title = {{HermitCore}: {A} {Unikernel} for {Extreme} {Scale} {Computing}},
+	isbn = {978-1-4503-4387-9},
+	shorttitle = {{HermitCore}},
+	url = {https://doi.org/10.1145/2931088.2931093},
+	doi = {10.1145/2931088.2931093},
+	abstract = {We expect that the size and the complexity of future supercomputers will increase on their path to exascale systems and beyond. Therefore, system software has to adapt to the complexity of these systems for a simplification of the development of scalable applications. In this paper, we present a unikernel operating system design for HPC. It extends the multi-kernel approach while providing better programmability and scalability for hierarchical systems, such as HLRS' Hazel Hen, which base on multiple cluster-on-a-chip processors. We prove the scalability of the design via micro benchmarks by taking the example of HermitCore---our prototype implementation of the new design.},
+	urldate = {2022-11-02},
+	booktitle = {Proceedings of the 6th {International} {Workshop} on {Runtime} and {Operating} {Systems} for {Supercomputers}},
+	publisher = {Association for Computing Machinery},
+	author = {Lankes, Stefan and Pickartz, Simon and Breitbart, Jens},
+	month = jun,
+	year = {2016},
+	pages = {1--8},
+} 
+
+
+@inproceedings{Hermitux,
+	address = {Providence, RI, USA},
+	title = {A binary-compatible unikernel},
+	isbn = {978-1-4503-6020-3},
+	url = {http://dl.acm.org/citation.cfm?doid=3313808.3313817},
+	doi = {10.1145/3313808.3313817},
+	language = {en},
+	urldate = {2022-11-02},
+	booktitle = {Proceedings of the 15th {ACM} {SIGPLAN}/{SIGOPS} {International} {Conference} on {Virtual} {Execution} {Environments} - {VEE} 2019},
+	publisher = {ACM Press},
+	author = {Olivier, Pierre and Chiba, Daniel and Lankes, Stefan and Min, Changwoo and Ravindran, Binoy},
+	year = {2019},
+	pages = {59--73},
+	file = {Olivier et al. - 2019 - A binary-compatible unikernel.pdf:/Users/akilan/Zotero/storage/JYXQMJRI/Olivier et al. - 2019 - A binary-compatible unikernel.pdf:application/pdf},
+}
+
+
+@inproceedings{HermitMPK,
+author = {Sung, Mincheol and Olivier, Pierre and Lankes, Stefan and Ravindran, Binoy},
+title = {Intra-Unikernel Isolation with Intel Memory Protection Keys},
+year = {2020},
+isbn = {9781450375542},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3381052.3381326},
+doi = {10.1145/3381052.3381326},
+booktitle = {Proceedings of the 16th ACM SIGPLAN/SIGOPS International Conference on Virtual Execution Environments},
+pages = {143–156},
+numpages = {14},
+keywords = {unikernels, memory safety, memory protection keys},
+location = {Lausanne, Switzerland},
+series = {VEE '20}
+}
+
+@inproceedings{RustyHermit,
+author = {Lankes, Stefan and Breitbart, Jens and Pickartz, Simon},
+title = {Exploring Rust for Unikernel Development},
+year = {2019},
+isbn = {9781450370172},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3365137.3365395},
+doi = {10.1145/3365137.3365395},
+booktitle = {Proceedings of the 10th Workshop on Programming Languages and Operating Systems},
+pages = {8–15},
+numpages = {8},
+location = {Huntsville, ON, Canada},
+series = {PLOS'19}
+}
+
+
+
+
+% RKOS - https://media.taricorp.net/rkos.pdf
+
+@article{RKOS,
+	title = {{RKOS}: {UNIKERNEL} {DESIGN} {FOR} {SAFETY} {AND} {PERFORMANCE}},
+	language = {en},
+	author = {Marheine, Peter H},
+	pages = {71},
+	file = {Marheine - RKOS UNIKERNEL DESIGN FOR SAFETY AND PERFORMANCE.pdf:/Users/akilan/Zotero/storage/HZJ6ECFN/Marheine - RKOS UNIKERNEL DESIGN FOR SAFETY AND PERFORMANCE.pdf:application/pdf},
+}
+
+% Click OS
+% - https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-martins.pd
+
+@article{ClickOS,
+	title = {{ClickOS} and the {Art} of {Network} {Function} {Virtualization}},
+	abstract = {Over the years middleboxes have become a fundamental part of today’s networks. Despite their usefulness, they come with a number of problems, many of which arise from the fact that they are hardware-based: they are costly, difﬁcult to manage, and their functionality is hard or impossible to change, to name a few.},
+	language = {en},
+	author = {Martins, Joao and Ahmed, Mohamed and Raiciu, Costin and Olteanu, Vladimir and Honda, Michio and Huici, Felipe},
+	pages = {16},
+	file = {Martins et al. - ClickOS and the Art of Network Function Virtualiza.pdf:/Users/akilan/Zotero/storage/AE7V2DA5/Martins et al. - ClickOS and the Art of Network Function Virtualiza.pdf:application/pdf},
+}
+
+% NanoOS
+% - https://nanos.org/thebook
+
+@misc{NanoOS,
+	title = {The {Book} — {Nanos}.org},
+	url = {https://nanos.org/thebook},
+	urldate = {2022-11-02},
+	file = {The Book — Nanos.org:/Users/akilan/Zotero/storage/Q4ZDAN4M/thebook.html:text/html},
+}
+
+% Include OS 
+% - https://www.researchgate.net/publication/285734407_IncludeOS_A_Minimal_Resource_Efficient_Unikernel_for_Cloud_Services
+
+@inproceedings{IncludeOS,
+	title = {{IncludeOS}: {A} {Minimal}, {Resource} {Efficient} {Unikernel} for {Cloud} {Services}},
+	shorttitle = {{IncludeOS}},
+	doi = {10.1109/CloudCom.2015.89},
+	abstract = {The emergence of cloud computing as a ubiquitous platform for elastically scaling services has generated need and opportunity for new types of operating systems. A service that needs to be both elastic and resource efficient needs A) highly specialized components, and B) to run with minimal resource overhead. Classical general purpose operating systems designed for extensive hardware support are by design far from meeting these requirements. In this paper we present IncludeOS, a single tasking library operating system for cloud services, written from scratch in C++. Key features include: extremely small disk-and memory footprint, efficient asynchronous I/O, OS-library where only what your service needs gets included, and only one device driver by default (virtio). As a test case a bootable disk image consisting of a simple DNS server with OS included is shown to require only 158 kb of disk space and to require 5-20\% less CPU-time, depending on hardware, compared to the same binary running on Linux.},
+	author = {Bratterud, Alfred and Walla, Alf-Andre and Haugerud, Hårek and Engelstad, Paal E. and Begnum, Kyrre},
+	month = dec,
+	year = {2015},
+	file = {Full Text PDF:/Users/akilan/Zotero/storage/3FNFHJYF/Bratterud et al. - 2015 - IncludeOS A Minimal, Resource Efficient Unikernel.pdf:application/pdf},
+}
+
 % Azelea 
 % https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8539634 (Base 
 % paper)
@@ -11,8 +254,43 @@
 %   - OS Noise  https://ieeexplore.ieee.org/document/9370730 
 %   - IO offload acceleration (https://www.researchgate.net/publication/347805645_Azalea_unikernel_IO_offload_acceleration) 
 
-% Click OS 
-% https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-martins.pdf
+@misc{Azelea,
+	title = {Azalea-{Unikernel}: {Unikernel} into {Multi}-kernel {Operating} {System} for {Manycore} {Systems}},
+	shorttitle = {Azalea-{Unikernel}},
+	url = {https://ieeexplore.ieee.org/document/8539634/},
+	abstract = {As applications such as a big data processing require more CPUs, manycore systems with a large number of CPUs have been developed to meet this requirement. However, without the in-depth consideration of parallelism, only increasing the number of cores cannot provide performance scalability. Furthermore, the current monolithic operating systems (e.g., Linux) cannot also provide performance scalability in manycore systems due to the cache coherency of shared data problems. As a result, multi-kernel operating systems have emerged as an alternative solution for scalability in manycore systems. We have developed a multi-kernel operating system called Azalea, which consists of a full-weight kernel (FWK) and lightweight kernel (LWK). The FWK handles heavy kernel services (i.e., file system services), and the LWK supports the minimal kernel functions as much as needed of application execution and eliminates the sharing of kernel data. However, there remain kernel noises in LWK such as context switching and page fault handling, even though they are less than Linux. In this paper, we propose Azalea-unikernel, which applies unikernel techniques into the LWK to reduce kernel noises. It eliminates privilege switching and address space switching by integrating user-kernel-address space. In particular case, the azalea-unikernel shows 7.5× better performance than LWK and Linux.},
+	language = {en-US},
+	urldate = {2022-11-02},
+	file = {Snapshot:/Users/akilan/Zotero/storage/QABKDP2E/document.html:text/html},
+}
+
+@inproceedings{AzeleaOSNoise,
+	title = {{OS} noise {Analysis} on {Azalea}-unikernel},
+	doi = {10.23919/ICACT51234.2021.9370730},
+	abstract = {Operating System noise is a well-known problem that occurs mainly in large-scale systems running HPC application, and it also limits performance scalability. In order to reduce OS noise occurring in a general-purpose OS, different design approached kernels like micro-kernel and lightweight kernel are studied. Recently unikernel optimized for application program has been studied. The purpose of this paper is to measure OS noise in unikernel. We compared OS noise of Linux, general-purposed OS, and Azalea-unikernel, one of the unikernels. Well-known OS noise measurement benchmarks such as fixed work quanta (FTQ), fixed time quanta (FWQ), and Hourglass were used. As a result of the experiment, it was confirmed that Azalea-unikernel has less OS noise than Linux, and it also means unikernel is a kernel suitable for supporting scalability on manycore systems.},
+	booktitle = {2021 23rd {International} {Conference} on {Advanced} {Communication} {Technology} ({ICACT})},
+	author = {Cha, Seung-Jun and Jeon, Seung Hyub and Jeong, Yeon Jeong and Kim, Jin Mee and Jung, Sungin},
+	month = feb,
+	year = {2021},
+	note = {ISSN: 1738-9445},
+	keywords = {Azalea-unikernel, Benchmark testing, interference, Interference, Kernel, Large-scale systems, Linux, Noise measurement, operating systems, OS noise, Scalability},
+	pages = {81--84},
+	file = {IEEE Xplore Abstract Record:/Users/akilan/Zotero/storage/9APIHSBQ/9370730.html:text/html},
+}
+
+@inproceedings{AzeleaIOAccerleration,
+	title = {Azalea unikernel {IO} offload acceleration},
+	doi = {10.1109/ICTC49870.2020.9289322},
+	author = {Jeong, Yeonjeong and Kim, Jinmee and Jeon, Seunghyub and Cha, Seung-Jun and Lee, Yongseob and Woo, Youngjoo and Jung, Sungin},
+	month = oct,
+	year = {2020},
+	pages = {1377--1380},
+}
+
+
+
+
+
 % ---------------------------- TAG Based Architecture --------------------------
 
 %===== TAG Survey =======

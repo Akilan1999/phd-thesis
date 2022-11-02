@@ -26,28 +26,28 @@ of the various Uni-kernel implementations.
 
 \subsection{Introduction to Unikernels}
 Unikernel is a relatively new concept that was first introduced around 2013 by Anil Madhavapeddy in a 
-paper titled "Unikernels: Library Operating Systems for the Cloud" (todo reference). Unikernels 
+paper titled "Unikernels: Library Operating Systems for the Cloud" \cite{FirstUnikernelPaper}. Unikernels 
 is defined as "Unikernels are specialized, single-address-space machine images constructed by using library 
-operating systems." (todo reference). Specialized indicates that an Unikernel holds a single application.
+operating systems." \cite{UnikernelDefinition}. Specialized indicates that an Unikernel holds a single application.
 Single address indicates that Unikernels does not have separation between the user and kernel address 
 space. 
 
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.2\textwidth]{unikernel_application_stack}
-  \caption[Unikernel]{Unikernel application stack}
+  \caption[Unikernel]{Unikernel application stack \cite{UnikernelSurvey}}
   \label{fig:unikernel_application_stack}
   \end{figure}
 
   \begin{figure}[htbp!] 
     \centering    
     \includegraphics[width=0.2\textwidth]{normal_application_stack}
-    \caption[Normal]{Normal application stack}
+    \caption[Normal]{Normal application stack \cite{UnikernelSurvey}}
     \label{fig:normal_application_stack}
     \end{figure}
 
 \subsubsection{Library Operating Systems}
-Library operating system is an method of constructing an operating system where the kernel modules  
+Library\cite{LibraryOS} operating system is an method of constructing an operating system where the kernel modules  
 required by an application is executed in the same address space as the application. The original goal 
 of Library operating systems was to improve performance by enabling applications to manage resources according to 
 their own needs, thereby allowing a high level of customizability. One of the major drawbacks for 
@@ -96,7 +96,7 @@ are the ones surveyed in the following paper:
 %
 \subsection{Implementations}
 
-\subsubsection{Unikraft}
+\subsubsection{Unikraft \cite{Unikraft}}
 Unikraft is a uni-kernel implementation that claims to be 
 a micro library OS. The major features of Unikraft is:
 \begin{itemize}
@@ -138,12 +138,12 @@ In terms of performance the following was evaluated:
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.6\textwidth]{UnikraftStack}
-  \caption[Unikraft]{Unikraft application stack}
+  \caption[Unikraft]{Unikraft application stack \cite{Unikraft}}
   \label{fig:UnikraftStack}
   \end{figure}
   % source https://dl.acm.org/doi/pdf/10.1145/3447786.3456248
 
-\subsubsection{OSv}
+\subsubsection{OSv \cite{OSvPaper}}
 OSv is an Unikernel that runs existing Linux cloud applications on various hypervisors 
 and machine architectures. OSv runs on 64-bit x86 and
 ARM architectures and supports KVM/Qemu, VMware, Xen and VirtualBox 
@@ -160,9 +160,8 @@ The following below is the design of OSv:
   general purpose OSs.OSv supports demand paging and memory mapping
   via the mmap API.
   \item No Spinlocks: The mutex implementation is based on a lock-free design 
-  by Gidenstam \& Papatriantafilou (add reference), which protects
-  the mutex’s internal data structures with atomic opera-
-  tions in a lock-free fashion.
+  by Gidenstam \& Papatriantafilou \cite{LockFree}, which protects
+  the mutex's internal data structures with atomic operations in a lock-free fashion.
   \item Network Channels: OSv almost all packet processing is performed in an application thread. 
   Upon packet receipt, a simple classifier associates it with a channel, which is a single producer/single
   consumer queue for transferring packets to the application thread.
@@ -171,14 +170,14 @@ The following below is the design of OSv:
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.7\textwidth]{OSvStack}
-  \caption[OSv]{OSv application stack}
+  \caption[OSv]{OSv application stack \cite{OSvDiagram}}
   \label{fig:OSv}
   \end{figure}
   % source https://www.slideshare.net/ScyllaDB/osv-unikernel-optimizing-guest-os-to-run-stateless-and-serverless-apps-in-the-cloud
 
 
 
-\subsubsection{HermitCore}
+\subsubsection{HermitCore \cite{HermitCore}}
 HermitCore is an Unikernel implementation designed for HPC. The kernel extends the
 multi-kernel approach with the advantages of a Unikernel.The focus of HermitCore is 
 the mapping of the hardware to
@@ -203,10 +202,24 @@ Benchmarks conducted:
   \item OpenMP Micro-Benchmarks.
 \end{itemize}
 
+There are derived projects from the hermit-core project:
+\begin{itemize}
+  \item HermitTux \cite{Hermitux} : It is a linux binary compatible Unikernel that can run native linux executables. 
+  \item RustyHermit \cite{RustyHermit}: Implementation of the Hermit core Unikernel in Rust. 
+  \item Lib-hermitMPK \cite{HermitMPK} : Providing support for IntelMPK for RustyHermit to isolate the unsafe parts of the kernel and 
+  application with proven performance similar RustyHermit without the memory protection.
+\end{itemize}
+% \begin{itemize}
+%   \item HermitTux : It is a linux binary compatible Unikernel that can run native linux executables. 
+%   \item RustyHermit : Implementation of the Hermit core Unikernel in Rust. 
+%   \item Lib-hermitMPK : Providing support for IntelMPK for RustyHermit to isolate the unsafe parts of the kernel and isolate 
+%   the application with a similar performance of RustyHermit without the memory protection.
+% \end{itemize}
+
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.5\textwidth]{HermitCoreStack}
-  \caption[HermitCore]{HermitCore Software stack}
+  \caption[HermitCore]{HermitCore Software stack \cite{HermitCore}}
   \label{fig:HermitCoreStack}
   \end{figure}
   % source https://dl.acm.org/doi/pdf/10.1145/2931088.2931093
@@ -214,14 +227,14 @@ Benchmarks conducted:
   \begin{figure}[htbp!] 
     \centering    
     \includegraphics[width=0.8\textwidth]{NumaHermitCore}
-    \caption[HermitCore]{A NUMA system with one satellite kernel per NUMA node}
+    \caption[HermitCore]{A NUMA system with one satellite kernel per NUMA node \cite{HermitCore}}
     \label{fig:HermitCoreStack}
     \end{figure}
     % source https://dl.acm.org/doi/pdf/10.1145/2931088.2931093
 
 
 
-\subsubsection{RKOS}
+\subsubsection{RKOS \cite{RKOS}}
 % source: https://media.taricorp.net/rkos.pdf
 RKOS is an unikernel implemented in Rust which
 offers safety guarantees comparable to implementations which depend on complex runtime
@@ -238,7 +251,7 @@ Performance Evaluations conducted:
   \item Binary size 
 \end{itemize}
 
-\subsubsection{ClickOS}
+\subsubsection{ClickOS \cite{ClickOS}}
 ClickOS is an unikernel optimized for middleboxes that runs exclusively on
 the Xen hypervisor with small virtual machine memory footprint overhead
 (5 MB), fast boot times (under 30 milliseconds), and high performance
@@ -250,12 +263,12 @@ and as much as 13.6x times higher for minimum-sized packets.
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.6\textwidth]{ClickOSStack}
-  \caption[ClickOS]{ClickOS architecture}
+  \caption[ClickOS]{ClickOS architecture \cite{ClickOS}}
   \label{fig:ClickOSStack}
   \end{figure}
   % source https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-martins.pdf
 
-\subsubsection{NanoOS}
+\subsubsection{NanoOS \cite{NanoOS}}
 Nanos is a Unikernel implementation designed to run micro services on the 
 Cloud it runs on top a Qemu Hypervisor. It has it's own Orchestrator 
 written in Go called OPS. 
@@ -292,7 +305,7 @@ Performance Evaluations conducted:
   \item Requests per second.
 \end{itemize}
 
-\subsubsection{IncludeOS}
+\subsubsection{IncludeOS \cite{IncludeOS}}
 IncludeOS is a single tasking library operating system for 
 cloud services which is written from scratch in C++. Key features include:
 extremely small disk and memory footprint, efficient asynchronous I/O, 
@@ -327,7 +340,7 @@ Performance Evaluations conducted:
   \item Memory performance (i.e The Stream Benchmark)
 \end{itemize}
 
-\subsubsection{Azelea} 
+\subsubsection{Azelea \cite{Azelea}} 
 Azalea is a multi-kernel OS, which consists of Unikernels and a full kernel. Azelea Unikernel provides scalability and parallel performance. 
 The full kernel provides compatibility with POSIX APIs that Unikernel cannot handle. The Full kernel is combined with the Unikernel for 
 side by side partitioning. The Azelea Unikernel is a library OS which consists of the following: 
@@ -347,14 +360,14 @@ The contributions of Azelea Uni-kernels are:
 
 Performance Evaluations conducted:
 \begin{itemize}
-  \item OS Noise (FTQ(todo: reference), FWQ(todo: reference), Hour Glass(todo: reference))
-  \item IO offload acceleration 
+  \item OS Noise (FTQ, FWQ, Hour Glass) \cite{AzeleaOSNoise}
+  \item IO offload acceleration \cite{AzeleaIOAccerleration}
 \end{itemize}
 
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.6\textwidth]{AzeleaKNL}
-  \caption[Azelea]{Azelea-unikernel in a single KNL}
+  \caption[Azelea]{Azelea-unikernel in a single KNL \cite{Azelea}}
   \label{fig:AzeleaKNL}
   \end{figure}
   % source https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8539634
@@ -368,13 +381,13 @@ implementations surveyed in the current literature:
   \begin{tabular}{@{}|l|l|l|l|@{}}
   \toprule
   \textit{\textbf{Unikernel}} & \textit{\textbf{Languages supported}}                                                                   & \textit{\textbf{Targets}}                                                                            & \textbf{Performance evaluation}                                                                                                                                                                                                                   \\ \midrule
-  \textit{Unikraft}           & \textit{C, C++, Rust, Go, Python}                                                                       & \textit{\begin{tabular}[c]{@{}l@{}}KVM, Xen, Linux Userspace, Solo5, \\ VMware, HyperV\end{tabular}} & \begin{tabular}[c]{@{}l@{}}- Resource \\   Efficiency \\ - Filesystem \\   Performance \\ - Application \\   throughput. \\ - Performance of \\   Automatically ported \\   apps.\end{tabular}                                                    \\ \midrule
-  OSv                         & Java, C, C++, Node, Ruby, Go                                                                            & Virtual Box, EXSi, KVM and HyperV.                                                                   &                                                                                                                                                                                                                                                   \\ \midrule
-  NanoOS                      & \begin{tabular}[c]{@{}l@{}}C, C++, Go, Java, Node js, Python, \\ Rust, Rust, Ruby, and PHP\end{tabular} & \begin{tabular}[c]{@{}l@{}}KVM, XEN,ESXi and \\ Hyper V\end{tabular}                                 & \begin{tabular}[c]{@{}l@{}}- Boot Up \\    times \\ - Request \\   per second\end{tabular}                                                                                                                                                        \\ \midrule
-  HermitCore                  & Rust, C,C++, Go and Fortran                                                                             & uhyve, KVM and bare metal                                                                            & \begin{tabular}[c]{@{}l@{}}- Operating system \\   micro benchmark\\ - Hourglass benchmark \\ - Inter-kernel \\   communication benchmark \\ - OpenMP micro benchmark\end{tabular}                                                                \\ \midrule
-  RKOS                        & Rust                                                                                                    & Bare metal                                                                                           & \begin{tabular}[c]{@{}l@{}}- Run time \\   memory footprint \\ - Binary size\end{tabular}                                                                                                                                                         \\ \midrule
-  ClickOS                     & C++                                                                                                     & Xen                                                                                                  & \begin{tabular}[c]{@{}l@{}}- ClickOS Switch \\ - Memory Footprint \\ - Boot times \\ - Delay (When processing packets)\\ - Throughput (Amount of packets \\    ClickOS can handle)\\ - State Insertion \\ - Chaning \\ - Scaling out\end{tabular} \\ \midrule
-  IncludeOS                   & C++                                                                                                     & KVM, VirtualBox, ESXi, OpenStack                                                                     & \begin{tabular}[c]{@{}l@{}}- Bootup times \\ - Memory Performance\end{tabular}                                                                                                                                                                    \\ \bottomrule
+  \textit{Unikraft\cite{Unikraft}}           & \textit{C, C++, Rust, Go, Python}                                                                       & \textit{\begin{tabular}[c]{@{}l@{}}KVM, Xen, Linux Userspace, Solo5, \\ VMware, HyperV\end{tabular}} & \begin{tabular}[c]{@{}l@{}}- Resource \\   Efficiency \\ - Filesystem \\   Performance \\ - Application \\   throughput. \\ - Performance of \\   Automatically ported \\   apps.\end{tabular}                                                    \\ \midrule
+  OSv\cite{OSvPaper}                         & Java, C, C++, Node, Ruby, Go                                                                            & Virtual Box, EXSi, KVM and HyperV.                                                                   &                                                                                                                                                                                                                                                   \\ \midrule
+  NanoOS\cite{NanoOS}                     & \begin{tabular}[c]{@{}l@{}}C, C++, Go, Java, Node js, Python, \\ Rust, Rust, Ruby, and PHP\end{tabular} & \begin{tabular}[c]{@{}l@{}}KVM, XEN,ESXi and \\ Hyper V\end{tabular}                                 & \begin{tabular}[c]{@{}l@{}}- Boot Up \\    times \\ - Request \\   per second\end{tabular}                                                                                                                                                        \\ \midrule
+  HermitCore\cite{HermitCore}                  & Rust, C,C++, Go and Fortran                                                                             & uhyve, KVM and bare metal                                                                            & \begin{tabular}[c]{@{}l@{}}- Operating system \\   micro benchmark\\ - Hourglass benchmark \\ - Inter-kernel \\   communication benchmark \\ - OpenMP micro benchmark\end{tabular}                                                                \\ \midrule
+  RKOS\cite{RKOS}                        & Rust                                                                                                    & Bare metal                                                                                           & \begin{tabular}[c]{@{}l@{}}- Run time \\   memory footprint \\ - Binary size\end{tabular}                                                                                                                                                         \\ \midrule
+  ClickOS\cite{ClickOS}                     & C++                                                                                                     & Xen                                                                                                  & \begin{tabular}[c]{@{}l@{}}- ClickOS Switch \\ - Memory Footprint \\ - Boot times \\ - Delay (When processing packets)\\ - Throughput (Amount of packets \\    ClickOS can handle)\\ - State Insertion \\ - Chaning \\ - Scaling out\end{tabular} \\ \midrule
+  IncludeOS\cite{IncludeOS}                   & C++                                                                                                     & KVM, VirtualBox, ESXi, OpenStack                                                                     & \begin{tabular}[c]{@{}l@{}}- Bootup times \\ - Memory Performance\end{tabular}                                                                                                                                                                    \\ \bottomrule
   \end{tabular}%
   }
   \end{table}

@@ -432,7 +432,7 @@ efforts on TAG based architectures over the past decade and 20 published efforts
 \subsection{Timder V \cite{weiser_timber-v_2019}}
  It is a tagged memory architecture for flexible and efficient isolation of code and data on 
  small embedded systems. The TAG isolation is augmented with a memory protection unit to isolate 
- induvidual processes. Timber V is compatible with existing code. The contributions of the paper 
+ individual processes. Timber V is compatible with existing code. The contributions of the paper 
  are: 
  \begin{itemize}
   \item Efficient tagged memory architecture for isolated execution on low-end processors. 
@@ -440,7 +440,13 @@ efforts on TAG based architectures over the past decade and 20 published efforts
   \item Lightweight shared memory between enclaves. 
   \item Efficient shared MPU (i.e Memory Protection Unit) design. 
  \end{itemize}
- 
+
+ \begin{figure}[htbp!] 
+  \centering
+  \includegraphics[width=0.6\textwidth]{Timber-V}
+  \caption[MTE]{TimberV TAG interleaved on flat physical memory\cite{weiser_timber-v_2019}}
+  \label{fig:MTE}
+  \end{figure}
 
 %~\ref{weiser_timber-v_2019}
 %           FORMAT     
@@ -456,6 +462,13 @@ recompilation. It generally focuses on the bounds checking use case, Though it
 provides limited tags which means it can only provide probabilistic overflow detection. 
 It is one of the latest commercial incarnations of memory-safety-focused tagged architectures.   
 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.2\textwidth]{ARMMTE}
+  \caption[MTE]{Example of an ARM MTE-based system \cite{ARMMTE}}
+  \label{fig:MTE}
+  \end{figure}
+
 \subsection{D-RI5CY \cite{D-RISCY}}
 It provides a design a design and implementation of a hardware dynamic information flow 
 tracking (DIFT) architecture for RISC-V processor cores. The paper presents a low 
@@ -470,6 +483,12 @@ for IOT applications. The following are high level contributions:
   \item Efficient shared MPU (i.e Memory Protection Unit) design.
 \end{itemize}
 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{D-RISCV}
+  \caption[D-RISCY]{ Block diagram of the D-RI5CY processor. In red and pink the DIFT components. \cite{D-RISCY}}
+  \label{fig:MTE}
+  \end{figure}
 
 %\subsection{TMDFI}
 
@@ -513,7 +532,7 @@ Lazy Clearing and Cache Line Tagging.
   \item The performance modeling results of the policies on
 a standard benchmark set, including the impact of the
 proposed optimizations.
-\end{itemize}  
+\end{itemize}
 
 \subsection{Typed Architecture \cite{TypedArchitecture}}
 This paper introduces Typed
@@ -546,9 +565,16 @@ and provide a more accurate estimate of area and power
 using a TSMC 40nm standard cell library.
 \end{itemize}
 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.8\textwidth]{TypedArchitecture}
+  \caption[TypedArchitecture]{Pipeline structure augmented with Typed Architecture \cite{TypedArchitecture}}
+  \label{fig:TypedArchitecture}
+  \end{figure}
+
 \subsection{Dover \cite{Dover}}
 It is a secure processor that extends the conventional CPU with
-a Policy EXecution co-processor (PEX). PEX maintains metadata 
+a Policy Execution co-processor (PEX). PEX maintains metadata 
 of every word assessable by the application processor. PEX 
 enforces software-defined policies
 at the granularity of each instruction executed by the AP(i.e application process)
@@ -557,6 +583,14 @@ for user-land and policy-related. The Dover system has
 a dover specialized kernel and modifications to the GCC toolchain 
 which can implement a wide range security and safety policies on 
 top existing C based applications. 
+
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.8\textwidth]{Dover}
+  \caption[Dover]{High level overview of Dover Architecture \cite{Dover}}
+  \label{fig:Dover}
+  \end{figure}
+
 %// TODO ADD DIAGRAM. 
 
 %\subsection{Shakti-T}
@@ -587,10 +621,35 @@ capability architecture that can combine capabilities with conventional MMU(i.e 
         (spatial, referential, and (non-stack) temporal memory safety) and abstraction extensions
         to support scalable software compartmentalization. 
 \end{itemize}
-	
-%\subsection{SPARC M7/M8 SSM}
 
-%\subsection{Low-Fat Pointers}
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.9\textwidth]{Cheri}
+  \caption[Cheri]{Spectrum of Hardware-software architectures, from conventional MMU-based virtualization and OS process models to single address-space capability system \cite{CHERI}}
+  \label{fig:Cheri}
+  \end{figure}
+	
+% \subsection{SPARC M7/M8 SSM}
+
+\subsection{Low-Fat Pointers}
+% https://dl.acm.org/doi/10.1145/2508859.2516713
+Low-Fat Pointers adds hardware-managed tags to the pointer. 
+This, in turn, allows the pointers to be used as capabilities to facilitate fine-grained 
+access control and fast security domain crossing. The dedicated checking hardware runs in parallel 
+with the processor's normal data-path so that the checks do not slow down processor operation 
+(0\% runtime overhead).The following paper has a gate-level implementations of the logic for updating 
+and validating these compact fat pointers and show that the hardware requirements are low 
+and the critical paths for common operations are smaller than processor(i.e ALU operations).
+The contribution of the following project include: 
+\begin{itemize}
+  \item Design and evaluation of a new, compact fat-pointer
+  encoding and implementation (BIMA).
+  \item Hardware that enforces the BIMA bounds checking and update, making the fat pointers 
+  unforgeable and non-bypass able.
+  \item Pipeline organization that allows the BIMA encoding to run just as fast as the baseline
+   processor without spatial safety checking.
+\end{itemize}
+
 
 %\subsection{SAFE}
 
@@ -612,7 +671,8 @@ capability architecture that can combine capabilities with conventional MMU(i.e 
 
 %\subsection{DIFT Coprocessor}
 
-%\subsection{HardBound}
+\subsection{HardBound}
+
 
 %\subsection{Loki}
 
@@ -626,7 +686,7 @@ capability architecture that can combine capabilities with conventional MMU(i.e 
 
 %\subsection{Minos}
 
-%\subsection{DIFT}
+\subsection{DIFT}
 
 %\subsection{RIFLE}
 

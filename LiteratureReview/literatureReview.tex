@@ -373,24 +373,100 @@ the server acts as a driver and that loads each Unikernel or supports communicat
 
 \subsection{Unikernel analysis}
 The following section consists of analysis of the Uni-kernels 
-implementations surveyed in the current literature: 
+implementations surveyed in the current literature. The 
+analyses is based on: 
+\begin{itemize}
+\item Best suitable implementations for various platforms supported ? 
+\item Best suitable for various architectures ?
+% \item Best implementation in terms of performance ?
+\item How do each of them handle parallel applications ?
+\item Best tools with the most concrete evaluation ? 
+\end{itemize}
 
-\begin{table}[]
+
+% \begin{table}[]
+%   \resizebox{\columnwidth}{!}{%
+%   \begin{tabular}{@{}|l|l|l|l|@{}}
+%   \toprule
+%   \textit{\textbf{Unikernel}} & \textit{\textbf{Languages supported}}                                                                   & \textit{\textbf{Targets}}                                                                            & \textbf{Performance evaluation}                                                                                                                                                                                                                   \\ \midrule
+%   \textit{Unikraft\cite{Unikraft}}           & \textit{C, C++, Rust, Go, Python}                                                                       & \textit{\begin{tabular}[c]{@{}l@{}}KVM, Xen, Linux Userspace, Solo5, \\ VMware, HyperV\end{tabular}} & \begin{tabular}[c]{@{}l@{}}- Resource \\   Efficiency \\ - Filesystem \\   Performance \\ - Application \\   throughput. \\ - Performance of \\   Automatically ported \\   apps.\end{tabular}                                                    \\ \midrule
+%   OSv\cite{OSvPaper}                         & Java, C, C++, Node, Ruby, Go                                                                            & Virtual Box, EXSi, KVM and HyperV.                                                                   &                                                                                                                                                                                                                                                   \\ \midrule
+%   NanoOS\cite{NanoOS}                     & \begin{tabular}[c]{@{}l@{}}C, C++, Go, Java, Node js, Python, \\ Rust, Rust, Ruby, and PHP\end{tabular} & \begin{tabular}[c]{@{}l@{}}KVM, XEN,ESXi and \\ Hyper V\end{tabular}                                 & \begin{tabular}[c]{@{}l@{}}- Boot Up \\    times \\ - Request \\   per second\end{tabular}                                                                                                                                                        \\ \midrule
+%   HermitCore\cite{HermitCore}                  & Rust, C,C++, Go and Fortran                                                                             & uhyve, KVM and bare metal                                                                            & \begin{tabular}[c]{@{}l@{}}- Operating system \\   micro benchmark\\ - Hourglass benchmark \\ - Inter-kernel \\   communication benchmark \\ - OpenMP micro benchmark\end{tabular}                                                                \\ \midrule
+%   RKOS\cite{RKOS}                        & Rust                                                                                                    & Bare metal                                                                                           & \begin{tabular}[c]{@{}l@{}}- Run time \\   memory footprint \\ - Binary size\end{tabular}                                                                                                                                                         \\ \midrule
+%   ClickOS\cite{ClickOS}                     & C++                                                                                                     & Xen                                                                                                  & \begin{tabular}[c]{@{}l@{}}- ClickOS Switch \\ - Memory Footprint \\ - Boot times \\ - Delay (When processing packets)\\ - Throughput (Amount of packets \\    ClickOS can handle)\\ - State Insertion \\ - Chaning \\ - Scaling out\end{tabular} \\ \midrule
+%   IncludeOS\cite{IncludeOS}                   & C++                                                                                                     & KVM, VirtualBox, ESXi, OpenStack                                                                     & \begin{tabular}[c]{@{}l@{}}- Bootup times \\ - Memory Performance\end{tabular}                                                                                                                                                                    \\ \bottomrule
+%   \end{tabular}%
+%   }
+%   \end{table}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+% \usepackage{lscape}
+\begin{landscape}
+  \begin{table}[]
+  \caption{Analyzing various Uni-kernel implementations}
+  \label{tab:unikerneltable}
   \resizebox{\columnwidth}{!}{%
-  \begin{tabular}{@{}|l|l|l|l|@{}}
-  \toprule
-  \textit{\textbf{Unikernel}} & \textit{\textbf{Languages supported}}                                                                   & \textit{\textbf{Targets}}                                                                            & \textbf{Performance evaluation}                                                                                                                                                                                                                   \\ \midrule
-  \textit{Unikraft\cite{Unikraft}}           & \textit{C, C++, Rust, Go, Python}                                                                       & \textit{\begin{tabular}[c]{@{}l@{}}KVM, Xen, Linux Userspace, Solo5, \\ VMware, HyperV\end{tabular}} & \begin{tabular}[c]{@{}l@{}}- Resource \\   Efficiency \\ - Filesystem \\   Performance \\ - Application \\   throughput. \\ - Performance of \\   Automatically ported \\   apps.\end{tabular}                                                    \\ \midrule
-  OSv\cite{OSvPaper}                         & Java, C, C++, Node, Ruby, Go                                                                            & Virtual Box, EXSi, KVM and HyperV.                                                                   &                                                                                                                                                                                                                                                   \\ \midrule
-  NanoOS\cite{NanoOS}                     & \begin{tabular}[c]{@{}l@{}}C, C++, Go, Java, Node js, Python, \\ Rust, Rust, Ruby, and PHP\end{tabular} & \begin{tabular}[c]{@{}l@{}}KVM, XEN,ESXi and \\ Hyper V\end{tabular}                                 & \begin{tabular}[c]{@{}l@{}}- Boot Up \\    times \\ - Request \\   per second\end{tabular}                                                                                                                                                        \\ \midrule
-  HermitCore\cite{HermitCore}                  & Rust, C,C++, Go and Fortran                                                                             & uhyve, KVM and bare metal                                                                            & \begin{tabular}[c]{@{}l@{}}- Operating system \\   micro benchmark\\ - Hourglass benchmark \\ - Inter-kernel \\   communication benchmark \\ - OpenMP micro benchmark\end{tabular}                                                                \\ \midrule
-  RKOS\cite{RKOS}                        & Rust                                                                                                    & Bare metal                                                                                           & \begin{tabular}[c]{@{}l@{}}- Run time \\   memory footprint \\ - Binary size\end{tabular}                                                                                                                                                         \\ \midrule
-  ClickOS\cite{ClickOS}                     & C++                                                                                                     & Xen                                                                                                  & \begin{tabular}[c]{@{}l@{}}- ClickOS Switch \\ - Memory Footprint \\ - Boot times \\ - Delay (When processing packets)\\ - Throughput (Amount of packets \\    ClickOS can handle)\\ - State Insertion \\ - Chaning \\ - Scaling out\end{tabular} \\ \midrule
-  IncludeOS\cite{IncludeOS}                   & C++                                                                                                     & KVM, VirtualBox, ESXi, OpenStack                                                                     & \begin{tabular}[c]{@{}l@{}}- Bootup times \\ - Memory Performance\end{tabular}                                                                                                                                                                    \\ \bottomrule
+  \begin{tabular}{llll}
+  \hline
+  \multicolumn{1}{l|}{\textbf{Unikernel}} & \multicolumn{1}{l|}{\textbf{Languages supported}} & \multicolumn{1}{l|}{\textbf{Targets}} & \textbf{Performance evaluation} \\ \hline
+  \multicolumn{1}{l|}{Unikraft} & \multicolumn{1}{l|}{C, C++, Rust, Go, Python} & \multicolumn{1}{l|}{KVM, Xen, Linux Userspace, Solo5, VMware, HyperV} & \begin{tabular}[c]{@{}l@{}}- Resource  Efficiency \\ - Filesystem Performance\\ - Application throughput. \\ - Performance of  Automatically ported apps.\end{tabular} \\ \hline
+  \multicolumn{1}{l|}{OSv} & \multicolumn{1}{l|}{Java, C, C++, Node, Ruby, Go} & \multicolumn{1}{l|}{Virtual Box, EXSi, KVM and HyperV.} & \begin{tabular}[c]{@{}l@{}}-  Macro Benchmarks (Memcached, SPECjvm2008)\\ -  Micro Benchmarks (Network performance, \\    JVM ballon, \\    context switches)\end{tabular} \\ \hline
+  \multicolumn{1}{l|}{NanoOS} & \multicolumn{1}{l|}{C, C++, Go, Java, Node js, Python,  Rust, Ruby, and PHP} & \multicolumn{1}{l|}{KVM, XEN,ESXi and Hyper V} & \begin{tabular}[c]{@{}l@{}}- Boot Up times \\ - Request per second\end{tabular} \\ \hline
+  \multicolumn{1}{l|}{HermitCore} & \multicolumn{1}{l|}{Rust, C, C++, Go and Fortran} & \multicolumn{1}{l|}{uhyve, KVM and bare metal} & \begin{tabular}[c]{@{}l@{}}- Operating system micro benchmark\\ - Hourglass benchmark \\ - Inter-kernel communication benchmark \\ - OpenMP micro benchmark\end{tabular} \\ \hline
+  \multicolumn{1}{l|}{RKOS} & \multicolumn{1}{l|}{Rust} & \multicolumn{1}{l|}{Bare metal} & \begin{tabular}[c]{@{}l@{}}- Run time memory footprint \\ - Binary size\end{tabular} \\ \hline
+  \multicolumn{1}{l|}{ClickOS} & \multicolumn{1}{l|}{C++} & \multicolumn{1}{l|}{Xen} & \begin{tabular}[c]{@{}l@{}}- ClickOS Switch \\ - Memory Footprint \\ - Boot times \\ - Delay (When processing packets)\\ - Throughput (Amount of packets ClickOS \\    can handle)\\ - State Insertion\\ - Chaining \\ - Scaling out\end{tabular} \\ \hline
+  \multicolumn{1}{l|}{IncludeOS} & \multicolumn{1}{l|}{C++} & \multicolumn{1}{l|}{KVM, VirtualBox, ESXi, OpenStack} & \begin{tabular}[c]{@{}l@{}}- Bootup times \\ - Memory Performance\end{tabular} \\ \hline
+  Azelea & C & Bare-metal & \begin{tabular}[c]{@{}l@{}}- OS Noise (FTQ, FWQ, Hour Glass)\\ - IO offload acceleration\end{tabular}
   \end{tabular}%
   }
   \end{table}
+  \end{landscape}
 
+\subsubsection{Best suitable implementations based on platforms(i.e targets) supported ?}
+This refers to which Uni-kernel implementation would be preferred based on the various targets supported, this is 
+based in \ref{tab:unikerneltable}. Based on the number of targets supported Unikraft has the most amount of 
+targets supported. Since the the research goals (//todo refer research goals) for using Uni-kernels is to run on 
+bare-metal as a major requirement (This is because of the way multi-kernels work(//todo refer to the multi-kernel
+section once complete)).Unikraft would be suitable for testing a multi-kernel environment, but porting to 
+bare-metal would be an important step along the way. Hermit-core would be suitable since it does support running 
+on bare-metal and runs on a hypervisor (i.e KVM and uhyve). 
+
+% \subsubsection{Best suitable for various architectures ?}
+\subsubsection{Multi-core}
+Unikraft does not currently support Multi-core mode yet. By default it uses the library
+uklock which synchronization primitives such as Mutexes and semaphores. If multi-core 
+was supported primitives such as spin-locks and RCUs would be supported. 
+
+OSv supports running application in multiple cores. OSv thread scheduler is lock-free, 
+preemptive, tick-less, fair, scalable and efficient. 
+\begin{itemize}
+  \item Lock-free: The scheduler keeps separate run-queue on CPU. Sleeping threads 
+  are not listed on any run-queue. Separate run queues leads to a situation where 
+  one CPUs queue has more runnable threads than another CPUs queue, this impacts 
+  the scheduler. This is solved by a load balancer thread on each CPU. 
+  \item Preemptive: OSv supports preemptive multi-tasking. According to the 
+  paper\cite{OSv} this feature is useful for maintaining per-CPU variables and 
+  RCU locks. 
+  \item Tick-less: OSv uses a high resolution clock, scheduler accounts to each thread 
+  the exact time it consumed, this is in-contrast to approximating ticks. 
+  \item Fair: On each reschedule, the scheduler must decide which of the CPUs runnable 
+  threads should run next and for how long. OSv scheduler calculates the exponentially-decaying 
+  moving average of each thread's recent run time. The scheduler decides the next runnable 
+  thread with the lowest moving-average runtime.
+  \item Scalable: OSv scheduler has O(log N) complexity in the number of runnable threads on 
+  each CPU.
+  \item Efficient: Apart from the scheduler scalability, OSv employs additional techniques to 
+  make the scheduler and context switches more efficient. OSv single address space 
+  means there is no need to switch page tables and or flush the TLB on context switches. 
+  This means that context switches are significantly cheaper than the standard 
+  multi-process operating system.
+\end{itemize}
+
+
+
+% ------------------------------ Best suited for various architectures -----------------------------
 
 \section[TAG based architecture survey]{TAG based architecture survey}   
 The following was a survey conducted on existing TAG based implementations and the 
@@ -399,6 +475,8 @@ in 2022 was a good staring point to understand about various implementations of 
 based architectures with the high level metrits and limitations. The following section 
 provides our own version of the Survey to help decide the best implementations 
 to answer the research questions (//TODO reference research questions chapter).
+
+\subsection{Introduction to TAG based architectures}
 
 Before deep diving into TAG based architecture implementations it is important to 
 answer what is a TAG based architecture ? and the high level of various 
@@ -425,11 +503,14 @@ TAG policies can be categorized into 5 main categories which is:
   \item Capability models
   \item Programmable architectures
 \end{itemize}
+
+\subsection{Implementations}
  
 According to the TAG based architecture survey \cite{acmTAGSurvey} there are 37 published
 efforts on TAG based architectures over the past decade and 20 published efforts preceding that. 
+The following below are relevant papers in relation to the research questions: 
 
-\subsection{Timder V \cite{weiser_timber-v_2019}}
+\subsubsection{Timder V \cite{weiser_timber-v_2019}}
  It is a tagged memory architecture for flexible and efficient isolation of code and data on 
  small embedded systems. The TAG isolation is augmented with a memory protection unit to isolate 
  individual processes. Timber V is compatible with existing code. The contributions of the paper 
@@ -455,7 +536,7 @@ efforts on TAG based architectures over the past decade and 20 published efforts
 %  - Start paragraph 
 %  - Benchmarks and test performaned  
 	
-\subsection{ARM MTE \cite{ARMMTE}}
+\subsubsection{ARM MTE \cite{ARMMTE}}
 The ARMv8.5-Memory Tagging Extension (MTE) aims to increase the memory safety written for 
 unsafe languages without requiring source code changes and in certain cases without 
 recompilation. It generally focuses on the bounds checking use case, Though it 
@@ -469,7 +550,7 @@ It is one of the latest commercial incarnations of memory-safety-focused tagged 
   \label{fig:MTE}
   \end{figure}
 
-\subsection{D-RI5CY \cite{D-RISCY}}
+\subsubsection{D-RI5CY \cite{D-RISCY}}
 It provides a design a design and implementation of a hardware dynamic information flow 
 tracking (DIFT) architecture for RISC-V processor cores. The paper presents a low 
 overhead implementation of DIFT that is specialized for low-end embedded systems
@@ -493,7 +574,7 @@ for IOT applications. The following are high level contributions:
 %\subsection{TMDFI}
 
 
-\subsection{HyperFlow \cite{HyperFlow}} 
+\subsubsection{HyperFlow \cite{HyperFlow}} 
 It is a design and security implementation that offers security assurance because it is implemented 
 using a security-typed hardware description language. It allows complex information flow policies to 
 be configured at run time. The paper introduces ChiselFlow, a new secure hardware description language. 
@@ -511,7 +592,7 @@ running code. The modifications to avoid timing side channels seem more extensiv
 authors report overheads in cycles per instruction of between 1\% and 69\%, largely due to padding the multiply
 operation to the worst-case number of cycles.
 
-\subsection{SDMP \cite{Sdmp}}
+\subsubsection{SDMP \cite{Sdmp}}
 This paper focuses on designing metadata tag based stack-protection security policies for general purpose tagged
 architecture. The policies specifically
 exploit the natural locality of dynamic program call graphs to
@@ -534,7 +615,7 @@ a standard benchmark set, including the impact of the
 proposed optimizations.
 \end{itemize}
 
-\subsection{Typed Architecture \cite{TypedArchitecture}}
+\subsubsection{Typed Architecture \cite{TypedArchitecture}}
 This paper introduces Typed
 Architectures, a high-efficiency, low-cost execution substrate 
 for dynamic scripting languages, where each data
@@ -572,7 +653,7 @@ using a TSMC 40nm standard cell library.
   \label{fig:TypedArchitecture}
   \end{figure}
 
-\subsection{Dover \cite{Dover}}
+\subsubsection{Dover \cite{Dover}}
 It is a secure processor that extends the conventional CPU with
 a Policy Execution co-processor (PEX). PEX maintains metadata 
 of every word assessable by the application processor. PEX 
@@ -603,7 +684,7 @@ top existing C based applications.
 
 %\subsection{Pump}
 
-\subsection{CHERI \cite{CHERI}}
+\subsubsection{CHERI \cite{CHERI}}
 CHERI (Capability Hardware Enhanced RISC Instructions) extends conventional processor
 Instruction-Set Architectures (ISAs) with architectural capabilities to enable fine-grained
 memory protection and highly scalable software compartmentalization. CHERI is a hybrid 
@@ -631,7 +712,7 @@ capability architecture that can combine capabilities with conventional MMU(i.e 
 	
 % \subsection{SPARC M7/M8 SSM}
 
-\subsection{Low-Fat Pointers}
+\subsubsection{Low-Fat Pointers}
 % https://dl.acm.org/doi/10.1145/2508859.2516713
 Low-Fat Pointers adds hardware-managed tags to the pointer. 
 This, in turn, allows the pointers to be used as capabilities to facilitate fine-grained 
@@ -671,7 +752,31 @@ The contribution of the following project include:
 
 %\subsection{DIFT Coprocessor}
 
-\subsection{HardBound}
+\subsubsection{HardBound}
+% https://acg.cis.upenn.edu/papers/asplos08_hardbound.pdf
+The following paper focuses on an architectural hardware bounded pointer primitive 
+that supports hardware and software enforcements for memory safety in C programs. 
+The C pointer representation is left intact but the bounds information is maintained 
+separately and invisibly by the hardware. This means the bounds are initialized by 
+software and is then propagated and transparently maintained by hardware (which automatically 
+checks a pointer bound before it's dereferenced). The paper combined intra-procedural compiler 
+instrumentation and hardware bounded pointers to enable a low overhead approach to enforce 
+complete spatial memory safety in unmodified C programs. Based on the experiments conducted 
+on the following paper the runtime overhead was between 5\% to 9\%. The following does not provide 
+full type safety, handling dangling pointers and uninitialized memory reads.
+The contribution of the following project include: 
+\begin{itemize}
+  \item A hardware bounded pointer primitive and accompanying complier transformation 
+  that when combined enforce spatial safety for C programs. This is to minimize changes 
+  to the compiler infrastructure and to retain compatibility with legacy C code. 
+  \item Efficient implementation of hardware bounded pointers: This means using a compressed 
+  metadata encoding, the entire base and metadata for bounds are stored in a reserver portion 
+  of virtual memory. The hardware encodes the bounded pointer metadata by using just a few bits.
+  These bits can be stored either in memory or unused bits in the pointer itself.
+  \item Experimentally evaluating functional correctness and performance of the approach 
+  in this paper.
+\end{itemize}
+
 
 
 %\subsection{Loki}
@@ -686,7 +791,10 @@ The contribution of the following project include:
 
 %\subsection{Minos}
 
-\subsection{DIFT}
+% \subsection{DIFT}
+% The following paper provides simple architectural mechanism called dynamic information 
+% flow tracking. DIFT protects programs from malicious attacks by identifying phony information 
+% from untrusted I/O and restricting the usage of the phony information.
 
 %\subsection{RIFLE}
 

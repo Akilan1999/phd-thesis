@@ -143,8 +143,8 @@ a micro library OS. \emph{The major features of Unikraft is:}
   \end{figure}
   % source https://dl.acm.org/doi/pdf/10.1145/3447786.3456248
 
-\subsubsection{OSv \cite{OSvPaper}}
-OSv is an Unikernel that runs existing Linux cloud applications on various hypervisors 
+\subsubsection{OSv}
+OSv\cite{OSvPaper} is an Unikernel that runs existing Linux cloud applications on various hypervisors 
 and machine architectures. OSv runs on 64-bit x86 and
 ARM architectures and supports KVM/Qemu, VMware, Xen and VirtualBox 
 hypervisors.OSv demonstrates up to 25\% increase in throughput and 47\% 
@@ -177,8 +177,8 @@ supported subset of the Linux application binary interface (ABI).
 
 
 
-\subsubsection{HermitCore \cite{HermitCore}}
-HermitCore is an Unikernel implementation designed for HPC. The kernel extends the
+\subsubsection{HermitCore}
+HermitCore\cite{HermitCore} is an Unikernel implementation designed for HPC. The kernel extends the
 multi-kernel approach with the advantages of a Unikernel.The focus of HermitCore is 
 the mapping of the hardware to
 the software structure rather than full support of the Linux
@@ -233,9 +233,9 @@ API.In a HermitCore system, each NUMA node runs its own HermitCore instance mana
 
 
 
-\subsubsection{RKOS \cite{RKOS}}
+\subsubsection{RKOS}
 % source: https://media.taricorp.net/rkos.pdf
-RKOS is an unikernel implemented in Rust which
+RKOS\cite{RKOS} is an unikernel implemented in Rust which
 offers safety guarantees comparable to implementations which depend on complex runtime
 libraries while being capable of providing predictable application performance demanded
 by real-time applications in a relatively simple implementation. 
@@ -250,8 +250,8 @@ by real-time applications in a relatively simple implementation.
   \item Binary size 
 \end{itemize}
 
-\subsubsection{ClickOS \cite{ClickOS}}
-ClickOS is an unikernel optimized for middleboxes that runs exclusively on
+\subsubsection{ClickOS}
+ClickOS\cite{ClickOS} is an unikernel optimized for middleboxes that runs exclusively on
 the Xen hypervisor with small virtual machine memory footprint overhead
 (5 MB), fast boot times (under 30 milliseconds), and high performance
 networking capabilities.ClickOS adds only a 45 microsecond delay per
@@ -304,8 +304,8 @@ that the compilers produce.
   \item Requests per second.
 \end{itemize}
 
-\subsubsection{IncludeOS \cite{IncludeOS}}
-IncludeOS is a single tasking library operating system for 
+\subsubsection{IncludeOS}
+IncludeOS\cite{IncludeOS} is a single tasking library operating system for 
 cloud services which is written from scratch in C++. Key features include:
 extremely small disk and memory footprint, efficient asynchronous I/O, 
 OS-library where only what your service needs gets included.
@@ -339,8 +339,8 @@ to require only 158 kb of disk space and to require
   \item Memory performance (i.e The Stream Benchmark)
 \end{itemize}
 
-\subsubsection{Azelea \cite{Azelea}} 
-Azalea is a multi-kernel OS, which consists of Unikernels and a full kernel. Azelea Unikernel provides scalability and parallel performance. 
+\subsubsection{Azelea}
+Azalea\cite{Azelea} is a multi-kernel OS, which consists of Unikernels and a full kernel. Azelea Unikernel provides scalability and parallel performance. 
 The full kernel provides compatibility with POSIX APIs that the Unikernel cannot handle. The Full kernel is combined with the Unikernel for 
 side by side partitioning. \emph{The Azelea Unikernel is a library OS which consists of the following:}
 \begin{itemize}
@@ -371,16 +371,77 @@ the server acts as a driver and that loads each Unikernel or supports communicat
   \end{figure}
   % source https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8539634
 
+\subsubsection{HaLVM}
+HaLVM(Haskell Lightweight Virtual machine) is an unikernel implementation based on Xen hypervisor (i.e type 1 hypervisor). 
+HaLVM is implemented using Haskell. HaLVM is suitable for small, single-use and
+low-dependence programs. There was only 1 published work was a paper on analyzing 
+parallel programs model for HaLVM\cite{HaLVM}. 
+
+% \emph{Performance Evaluations conducted(parallel model):}
+% \begin{itemize}
+%   \item Eval monad
+%   \item forkIO
+%   \item forkOS
+%   \item Cloud Haskell
+%   \item IVC
+% \end{itemize}
+
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.8\textwidth]{halvm-execution}
+  \caption[halvm-execution]{Performance Evaluations conducted(parallel model) \cite{HaLVM}}
+  \label{fig:HaLVM}
+  \end{figure}
+
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{halvm}
+  \caption[HaLVM]{HaLVM architecture \cite{HaLVM}}
+  \label{fig:HaLVM}
+  \end{figure}
+
+  \subsubsection{Mirage}
+  Mirage\cite{mirage} produces an Unikernel by compiling and 
+  linking OCaml to an Xen VM image. The objective 
+  was to combine static type-safety with a single
+  address-space layout. Using Mirage it is possible 
+  to use libraries such as networking, storage and concurrency
+  that works under unix during development, when compiled 
+  to production becomes operating system drivers. 
+
+  \emph{Mirage takes advantage of Ocaml for the following reasons:}
+  \begin{itemize}
+    \item Static type checking
+    \item Automatic memory management
+    \item Modules
+    \item Metaprogramming
+  \end{itemize}
+
+  \emph{Performance Evaluations conducted:}
+  \begin{itemize}
+    \item Boot time.
+    \item Thread performance.
+    \item Throughput.
+    \item Sessions per for a sample dynamic web application.
+  \end{itemize}
+  
+  \begin{figure}[htbp!] 
+    \centering    
+    \includegraphics[width=0.6\textwidth]{Mirage}
+    \caption[Mirage]{Azelea-unikernel in a single KNL \cite{Azelea}}
+    \label{fig:Mirage}
+    \end{figure}
+
 \subsection{Unikernel analysis}
 The following section consists of analysis of the Uni-kernels 
 implementations surveyed in the current literature. The 
 analyses is based on: 
 \begin{itemize}
 \item Best suitable implementations for various platforms supported ? 
-\item Best suitable for various architectures ?
+% \item Best suitable for various architectures ?
 % \item Best implementation in terms of performance ?
 \item How do each of them handle parallel applications ?
-\item Best tools with the most concrete evaluation ? 
+% \item Best tools with the most concrete evaluation ? 
 \end{itemize}
 
 
@@ -426,20 +487,20 @@ analyses is based on:
 
 \subsubsection{Best suitable implementations based on platforms(i.e targets) supported ?}
 This refers to which Uni-kernel implementation would be preferred based on the various targets supported, this is 
-based in \ref{tab:unikerneltable}. Based on the number of targets supported Unikraft has the most amount of 
+based on table \ref{tab:unikerneltable}. Based on the number of targets supported Unikraft has the most amount of 
 targets supported. Since the the research goals (//todo refer research goals) for using Uni-kernels is to run on 
-bare-metal as a major requirement (This is because of the way multi-kernels work(//todo refer to the multi-kernel
-section once complete)).Unikraft would be suitable for testing a multi-kernel environment, but porting to 
+bare-metal as a major requirement (This is because of the way multi-kernels work~\ref{Multi-kernels} ).Unikraft would be suitable for testing a multi-kernel environment, but porting to 
 bare-metal would be an important step along the way. Hermit-core would be suitable since it does support running 
 on bare-metal and runs on a hypervisor (i.e KVM and uhyve). 
 
 % \subsubsection{Best suitable for various architectures ?}
 \subsubsection{Multi-core}
-Unikraft does not currently support Multi-core mode yet. By default it uses the library
+\underline{Unikraft} does not currently support Multi-core mode yet. By default it uses the library
 uklock which synchronization primitives such as Mutexes and semaphores. If multi-core 
 was supported primitives such as spin-locks and RCUs would be supported. 
+\hfill \break
 
-OSv supports running application in multiple cores. OSv thread scheduler is lock-free, 
+\underline{OSv} supports running application in multiple cores. OSv thread scheduler is lock-free, 
 preemptive, tick-less, fair, scalable and efficient. 
 \begin{itemize}
   \item Lock-free: The scheduler keeps separate run-queue on CPU. Sleeping threads 
@@ -463,6 +524,150 @@ preemptive, tick-less, fair, scalable and efficient.
   This means that context switches are significantly cheaper than the standard 
   multi-process operating system.
 \end{itemize}
+\hfill \break
+
+\underline{HermitCore} (i.e currently called RustyHermit) supports multi-threaded and 
+multiprocessing applications. The scheduler does not support load balancing 
+this is because explicit thread placing is preferred over automatic 
+strategies. The scheduling overhead is also minimized by employing a 
+dynamic timer (i.e the kernel does not interrupt computational threads which runs on 
+particular cores and due to this a timer is not needed).
+\hfill \break
+
+\underline{RKOS} supports concurrency and multi-threading. The threads are preemptive and scheduled non-cooperatively.
+Preemptive multitasking was selected because it was largely used with existing systems. 
+\hfill \break
+
+\underline{Azelea} Unikernel supports multi threaded applications. Each core uses a queue to manage multiple threads 
+and with a round robin scheduler. 
+
+% \subsubsection{Best tools with the most concrete evaluation ? }
+
+% Compare Unikraft and HermitCore (i.e Rusty hermit)
+
+
+% ------------------------------ Multi-kernel --------------------------------
+
+\section[Multi-kernels]{Multi-kernels Survey}
+\label{Multi-kernels}
+The following is the survey for Multi-kernels. The introduction is 
+based on the first paper published on Multi-kernels \cite{multi_kernel_first_paper},
+follows up with a survey on various implementations and with an 
+analysis section of various multi-kernel implementation. 
+
+
+\subsection{Introduction to Multi-kernels}
+"A multikernel operating system treats a multi-core machine as a network of independent cores, as if it were a distributed system" \cite{Multi_kernel_wikipedia}.
+It implements interprocess communications as message-passing. The design of multi-kernels can be stated as the following: 
+\begin{itemize}
+  \item Inter-core communication is explicit. 
+  \item OS Structure is hardware neutral.
+  \item State is view as replicated instead of shared.
+\end{itemize}
+
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{Multi-kernel}
+  \caption[Multi-kernel]{The Multi-kernel model \cite{multi_kernel_first_paper}}
+  \label{fig:AzeleaKNL}
+  \end{figure}
+
+\subsubsection{Benefits of Multi-kernels}
+The following below highlights the major characteristics
+of Multi-kernels. 
+
+\begin{itemize}
+  \item Ability to handle diverse set of cores: 
+  \item Interconnect matters: 
+  \item Messages cost less than shared memory:
+\end{itemize}
+
+\subsection{Implementation}
+The following section mentions about the Multi-kernel
+implementations. 
+
+\subsubsection{Barrelfish}
+Barrelfish\cite{multi_kernel_first_paper} is a multi-kernel operating system that consists of a small kernel 
+running on each core. The kernels share no memory (even on 
+machines with cache-coherent shared RAM). A CPU 
+driver in Barrelfish represents a kernel when is ran 
+on a given core. In a heterogeneous system the CPU 
+driver would different based on the architecture
+of the core. 
+% Add image 
+
+\subsection{Popcorn Linux}
+% https://www.kernel.org/doc/ols/2014/ols2014-barbalace.pdf
+Popcorn\cite{PopcornLinux} linux is a replicated-kernel OS based on Linux. Popcorn 
+boots up multiple instances of Linux kernels on a 
+multi-core hardware. Popcorn linux was evaluated 
+based on the NAS benchmark \cite{NAS}. 
+% todo add more context about approach 
+% todo Add image 
+
+\subsection{FusedOS}
+% Todo what is ran on the light weight cores 
+FusedOS was one of the first to combine 
+linux with a LWK(Light weight kernel). FusedOS 
+was assuming heterogeneous hardware architecture 
+that consists of both a light weight and full 
+weight cores. The full cores runs linux and 
+is also responsible to partition hardware 
+resources between itself and LWKs.
+To execute an application the LWK requests 
+hardware resources (i.e light weight cores and memory) 
+from the FWK(Full weight Kernel, This refers to the 
+linux kernel). The system calls are generated 
+by the application and are forwarded to Linux 
+which is then handled with LWK process. 
+% todo look at Github implementation 
+
+\subsection{IHK/McKernel}
+IHK/McKernel is a multi-kernel approach 
+which runs Linux and LWKs side by side on 
+compute nodes. A low-level software infrastructure
+which is present at the heart of the stack 
+which is called Interface for Heterogeneous
+Kernels (IHK). By using IHK it is 
+possible to dynamically partition resources 
+in a many-core environment. An IKC (Inter-Kernel 
+communication) layer is also introduced upon which 
+the system call delegation is implemented. 
+McKernel is a light weight kernel written 
+from scratch and designed for HPC. McKernel
+retains a binary compatible ABI with Linux. 
+It supports multi-threading with a simple 
+round robin cooperative scheduler. 
+
+% \subsection{mOS}
+% mOS creates a m
+
+\subsection{FFMK}
+FFMK (Fast and fault tolerant Microkernel based system) which 
+is designed for Exascale computing. It investigates 
+the feasibility of a Microkernel based hybrid OS designed 
+for HPC.It relies on a L4 microkernel and a para-virtualized
+Linux instance (i.e L4Linux\cite{l4linux}).
+The idea of FFMK is to run HPC application directly on 
+L4 with transparent access to linux features by using 
+L4Linux. The L4Linux user process can be decoupled 
+from the linux kernel and moved to another core 
+if required (i.e by using the L4 Thread).
+
+% \subsection{Hobbes}
+% todo read: https://link.springer.com/chapter/10.1007/978-981-13-6624-6_15
+
+
+% \subsection{Pisces/Kitten}
+
+% \subsection{Kitten/Palacios}
+
+
+
+
+% Major features 
+% Implementation 
+% upto 4 major ones 
 
 
 
@@ -472,7 +677,7 @@ preemptive, tick-less, fair, scalable and efficient.
 The following was a survey conducted on existing TAG based implementations and the 
 recent survey based on TAG based architectures \cite{acmTAGSurvey} published
 in 2022 was a good staring point to understand about various implementations of TAG
-based architectures with the high level metrits and limitations. The following section 
+based architectures with the high level merits and limitations. The following section 
 provides our own version of the Survey to help decide the best implementations 
 to answer the research questions (//TODO reference research questions chapter).
 
@@ -510,8 +715,8 @@ According to the TAG based architecture survey \cite{acmTAGSurvey} there are 37 
 efforts on TAG based architectures over the past decade and 20 published efforts preceding that. 
 The following below are relevant papers in relation to the research questions: 
 
-\subsubsection{Timder V \cite{weiser_timber-v_2019}}
- It is a tagged memory architecture for flexible and efficient isolation of code and data on 
+\subsubsection{Timder V}
+ Timber V\cite{weiser_timber-v_2019} is a tagged memory architecture for flexible and efficient isolation of code and data on 
  small embedded systems. The TAG isolation is augmented with a memory protection unit to isolate 
  individual processes. Timber V is compatible with existing code. The contributions of the paper 
  are: 
@@ -528,16 +733,9 @@ The following below are relevant papers in relation to the research questions:
   \caption[MTE]{TimberV TAG interleaved on flat physical memory\cite{weiser_timber-v_2019}}
   \label{fig:MTE}
   \end{figure}
-
-%~\ref{weiser_timber-v_2019}
-%           FORMAT     
-% TODO 
-%  - Get bibtex file for references for TAG based architecture 
-%  - Start paragraph 
-%  - Benchmarks and test performaned  
 	
-\subsubsection{ARM MTE \cite{ARMMTE}}
-The ARMv8.5-Memory Tagging Extension (MTE) aims to increase the memory safety written for 
+\subsubsection{ARM MTE}
+The ARMv8.5-Memory Tagging Extension (MTE)\cite{ARMMTE} aims to increase the memory safety written for 
 unsafe languages without requiring source code changes and in certain cases without 
 recompilation. It generally focuses on the bounds checking use case, Though it 
 provides limited tags which means it can only provide probabilistic overflow detection. 
@@ -550,8 +748,8 @@ It is one of the latest commercial incarnations of memory-safety-focused tagged 
   \label{fig:MTE}
   \end{figure}
 
-\subsubsection{D-RI5CY \cite{D-RISCY}}
-It provides a design a design and implementation of a hardware dynamic information flow 
+\subsubsection{D-RI5CY}
+D-RISCY\cite{D-RISCY} provides a design a design and implementation of a hardware dynamic information flow 
 tracking (DIFT) architecture for RISC-V processor cores. The paper presents a low 
 overhead implementation of DIFT that is specialized for low-end embedded systems
 for IOT applications. The following are high level contributions:
@@ -574,8 +772,8 @@ for IOT applications. The following are high level contributions:
 %\subsection{TMDFI}
 
 
-\subsubsection{HyperFlow \cite{HyperFlow}} 
-It is a design and security implementation that offers security assurance because it is implemented 
+\subsubsection{HyperFlow} 
+Hyperflow\cite{HyperFlow} is a design and security implementation that offers security assurance because it is implemented 
 using a security-typed hardware description language. It allows complex information flow policies to 
 be configured at run time. The paper introduces ChiselFlow, a new secure hardware description language. 
 The contribution of the paper includes: 
@@ -592,8 +790,8 @@ running code. The modifications to avoid timing side channels seem more extensiv
 authors report overheads in cycles per instruction of between 1\% and 69\%, largely due to padding the multiply
 operation to the worst-case number of cycles.
 
-\subsubsection{SDMP \cite{Sdmp}}
-This paper focuses on designing metadata tag based stack-protection security policies for general purpose tagged
+\subsubsection{SDMP}
+SDMP\cite{Sdmp} paper focuses on designing metadata tag based stack-protection security policies for general purpose tagged
 architecture. The policies specifically
 exploit the natural locality of dynamic program call graphs to
 achieve cache-ability of the metadata rules that they require.
@@ -615,9 +813,9 @@ a standard benchmark set, including the impact of the
 proposed optimizations.
 \end{itemize}
 
-\subsubsection{Typed Architecture \cite{TypedArchitecture}}
+\subsubsection{Typed Architecture}
 This paper introduces Typed
-Architectures, a high-efficiency, low-cost execution substrate 
+Architectures\cite{TypedArchitecture}, a high-efficiency, low-cost execution substrate 
 for dynamic scripting languages, where each data
 variable retains high-level type information at an ISA level.
 Typed Architectures calculate and check the dynamic type
@@ -653,8 +851,8 @@ using a TSMC 40nm standard cell library.
   \label{fig:TypedArchitecture}
   \end{figure}
 
-\subsubsection{Dover \cite{Dover}}
-It is a secure processor that extends the conventional CPU with
+\subsubsection{Dover}
+Dover\cite{Dover} is a secure processor that extends the conventional CPU with
 a Policy Execution co-processor (PEX). PEX maintains metadata 
 of every word assessable by the application processor. PEX 
 enforces software-defined policies
@@ -670,9 +868,7 @@ top existing C based applications.
   \includegraphics[width=0.8\textwidth]{Dover}
   \caption[Dover]{High level overview of Dover Architecture \cite{Dover}}
   \label{fig:Dover}
-  \end{figure}
-
-%// TODO ADD DIAGRAM. 
+  \end{figure}x
 
 %\subsection{Shakti-T}
 
@@ -714,7 +910,7 @@ capability architecture that can combine capabilities with conventional MMU(i.e 
 
 \subsubsection{Low-Fat Pointers}
 % https://dl.acm.org/doi/10.1145/2508859.2516713
-Low-Fat Pointers adds hardware-managed tags to the pointer. 
+Low-Fat Pointers\cite{LowFatPointer} adds hardware-managed tags to the pointer. 
 This, in turn, allows the pointers to be used as capabilities to facilitate fine-grained 
 access control and fast security domain crossing. The dedicated checking hardware runs in parallel 
 with the processor's normal data-path so that the checks do not slow down processor operation 
@@ -754,7 +950,7 @@ The contribution of the following project include:
 
 \subsubsection{HardBound}
 % https://acg.cis.upenn.edu/papers/asplos08_hardbound.pdf
-The following paper focuses on an architectural hardware bounded pointer primitive 
+HardBound\cite{Hardbound} focuses on an architectural hardware bounded pointer primitive 
 that supports hardware and software enforcements for memory safety in C programs. 
 The C pointer representation is left intact but the bounds information is maintained 
 separately and invisibly by the hardware. This means the bounds are initialized by 
@@ -776,6 +972,14 @@ The contribution of the following project include:
   \item Experimentally evaluating functional correctness and performance of the approach 
   in this paper.
 \end{itemize}
+
+% Evaluation (Hierarchy evaluation based on diagram provided in Survey)
+% Choose either performance or Security 
+
+
+% Concrete evaluation bring all together 
+% - Combining multi-kernel with efficiency of Uni-kernels with Custom hardware to for type system checking.\\
+% - Analyzing memory interleaving is also of interest. 
 
 
 

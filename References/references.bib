@@ -199,7 +199,6 @@ series = {PLOS'19}
 
 
 
-
 % RKOS - https://media.taricorp.net/rkos.pdf
 
 @article{RKOS,
@@ -284,6 +283,28 @@ series = {PLOS'19}
 	month = oct,
 	year = {2020},
 	pages = {1377--1380},
+}
+
+% HaLVM 
+@article{HaLVM,
+author = {Cheon, Junseok and Kim, Yeoneo and Hur, Taekwang and Byun, Sugwoo and Woo, Gyun},
+year = {2020},
+month = {06},
+pages = {012070},
+title = {An Analysis of Haskell Parallel Programming Model in the HaLVM},
+volume = {1566},
+journal = {Journal of Physics: Conference Series},
+doi = {10.1088/1742-6596/1566/1/012070}
+}
+
+% mirage
+@article{mirage,
+	title = {Unikernels: {Library} {Operating} {Systems} for the {Cloud}},
+	abstract = {We present unikernels, a new approach to deploying cloud services via applications written in high-level source code. Unikernels are single-purpose appliances that are compile-time specialised into standalone kernels, and sealed against modiﬁcation when deployed to a cloud platform. In return they offer signiﬁcant reduction in image sizes, improved efﬁciency and security, and should reduce operational costs. Our Mirage prototype compiles OCaml code into unikernels that run on commodity clouds and offer an order of magnitude reduction in code size without signiﬁcant performance penalty. The architecture combines static type-safety with a single address-space layout that can be made immutable via a hypervisor extension. Mirage contributes a suite of type-safe protocol libraries, and our results demonstrate that the hypervisor is a platform that overcomes the hardware compatibility issues that have made past library operating systems impractical to deploy in the real-world.},
+	language = {en},
+	author = {Madhavapeddy, Anil and Mortier, Richard and Rotsos, Charalampos and Scott, David and Singh, Balraj and Gazagnaire, Thomas and Smith, Steven and Hand, Steven and Crowcroft, Jon},
+	pages = {12},
+	file = {Madhavapeddy et al. - Unikernels Library Operating Systems for the Clou.pdf:/Users/akilan/Zotero/storage/MPAQMZNF/Madhavapeddy et al. - Unikernels Library Operating Systems for the Clou.pdf:application/pdf},
 }
 
 
@@ -439,6 +460,108 @@ keywords = {type checking, microarchitecture, instruction set architecture, pipe
   pages={20-37},
 
   doi={10.1109/SP.2015.9}}
+
+  % Low fat pointer
+  @inproceedings{LowFatPointer,
+author = {Kwon, Albert and Dhawan, Udit and Smith, Jonathan M. and Knight, Thomas F. and DeHon, Andre},
+title = {Low-Fat Pointers: Compact Encoding and Efficient Gate-Level Implementation of Fat Pointers for Spatial Safety and Capability-Based Security},
+year = {2013},
+isbn = {9781450324779},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2508859.2516713},
+doi = {10.1145/2508859.2516713},
+booktitle = {Proceedings of the 2013 ACM SIGSAC Conference on Computer and Communications Security},
+pages = {721–732},
+numpages = {12},
+keywords = {fat pointer, capabilities, memory safety, spatial confinement, processor, security},
+location = {Berlin, Germany},
+series = {CCS '13}
+}
+  % Hardbound
+  @article{HardBound,
+	title = {{HardBound}: {Architectural} {Support} for {Spatial} {Safety} of the {C} {Programming} {Language}},
+	abstract = {The C programming language is at least as well known for its absence of spatial memory safety guarantees (i.e., lack of bounds checking) as it is for its high performance. C’s unchecked pointer arithmetic and array indexing allow simple programming mistakes to lead to erroneous executions, silent data corruption, and security vulnerabilities. Many prior proposals have tackled enforcing spatial safety in C programs by checking pointer and array accesses. However, existing software-only proposals have signiﬁcant drawbacks that may prevent wide adoption, including: unacceptably high runtime overheads, lack of completeness, incompatible pointer representations, or need for non-trivial changes to existing C source code and compiler infrastructure.},
+	language = {en},
+	author = {Devietti, Joe and Blundell, Colin and Martin, Milo M K and Zdancewic, Steve},
+	pages = {12},
+	file = {Devietti et al. - HardBound Architectural Support for Spatial Safet.pdf:/Users/akilan/Zotero/storage/CBG4EXZL/Devietti et al. - HardBound Architectural Support for Spatial Safet.pdf:application/pdf},
+}
+
+
+% ---------------------------- Multi-kernel --------------------------
+
+
+@misc{Multi_kernel_wikipedia,
+	title = {Multikernel},
+	copyright = {Creative Commons Attribution-ShareAlike License},
+	url = {https://en.wikipedia.org/w/index.php?title=Multikernel&oldid=1109168202},
+	abstract = {A multikernel operating system treats a multi-core machine as a network of independent cores, as if it were a distributed system.  It does not assume shared memory but rather implements inter-process communications as message-passing. Barrelfish was the first operating system to be described as a multikernel.},
+	language = {en},
+	urldate = {2022-11-25},
+	journal = {Wikipedia},
+	month = sep,
+	year = {2022},
+	note = {Page Version ID: 1109168202},
+	file = {Snapshot:/Users/akilan/Zotero/storage/JRM4DGKA/Multikernel.html:text/html},
+}
+
+
+@inproceedings{multi_kernel_first_paper,
+	address = {Big Sky, Montana, USA},
+	title = {The multikernel: a new {OS} architecture for scalable multicore systems},
+	isbn = {978-1-60558-752-3},
+	shorttitle = {The multikernel},
+	url = {http://portal.acm.org/citation.cfm?doid=1629575.1629579},
+	doi = {10.1145/1629575.1629579},
+	abstract = {Commodity computer systems contain more and more processor cores and exhibit increasingly diverse architectural tradeoﬀs, including memory hierarchies, interconnects, instruction sets and variants, and IO conﬁgurations. Previous high-performance computing systems have scaled in speciﬁc cases, but the dynamic nature of modern client and server workloads, coupled with the impossibility of statically optimizing an OS for all workloads and hardware variants pose serious challenges for operating system structures.},
+	language = {en},
+	urldate = {2022-11-25},
+	booktitle = {Proceedings of the {ACM} {SIGOPS} 22nd symposium on {Operating} systems principles - {SOSP} '09},
+	publisher = {ACM Press},
+	author = {Baumann, Andrew and Barham, Paul and Dagand, Pierre-Evariste and Harris, Tim and Isaacs, Rebecca and Peter, Simon and Roscoe, Timothy and Schüpbach, Adrian and Singhania, Akhilesh},
+	year = {2009},
+	pages = {29},
+	file = {Baumann et al. - 2009 - The multikernel a new OS architecture for scalabl.pdf:/Users/akilan/Zotero/storage/UWMS9RII/Baumann et al. - 2009 - The multikernel a new OS architecture for scalabl.pdf:application/pdf},
+}
+
+@article{PopcornLinux,
+	title = {Popcorn: a replicated-kernel {OS} based on {Linux}},
+	abstract = {In recent years, the number of CPUs per platform has continuously increased, affecting almost all segments of the computer market. Because of this trend, many researchers have investigated the problem of how to scale operating systems better on high core-count machines. While many projects have used Linux as a vehicle for this investigation, others have proposed new OS designs. Among them, the replicated-kernel OS model, speciﬁcally the multikernel, has gained traction. In this paper, we present Popcorn: a replicated-kernel OS based on Linux. Popcorn boots multiple Linux kernel instances on multicore hardware, one per core or group of cores. Kernels communicate to give to applications the illusion that they are running on top of a single OS. Applications can freely migrate between kernels, exploiting all the hardware resources available on the platform, as in SMP Linux.},
+	language = {en},
+	author = {Barbalace, Antonio and Ravindran, Binoy and Katz, David},
+	pages = {16},
+	file = {Barbalace et al. - Popcorn a replicated-kernel OS based on Linux.pdf:/Users/akilan/Zotero/storage/NFQ78YDM/Barbalace et al. - Popcorn a replicated-kernel OS based on Linux.pdf:application/pdf},
+}
+
+@article{NAS,
+	title = {{NAS} parallel benchmark results},
+	volume = {1},
+	issn = {1558-1861},
+	doi = {10.1109/88.219861},
+	abstract = {Benchmark results for the Numerical Aerodynamic Simulation (NAS) Program at NASA Ames Research Center, which is dedicated to advancing the science of computational aerodynamics are presented. The benchmark performance results are for the Y-MP, Y-MO EL, and C-90 systems from Cray Research; the TC2000 from Bolt Baranek and Newman; the Gamma iPSC/860 from Intel; the CM-2, CM-200, and CM-5 from Thinking Machines; the CS-1 from Meiko Scientific; the MP-1 and MP-2 from MasPar Computer; and the KSR-1 from Kendall Square Research. The results for the MP-1 and -2, the KSR-1, and the CM-5 have not been published before. Many of the other results are improved from previous listings, reflecting improvements both in compilers and in implementations.{\textless}{\textgreater}},
+	number = {1},
+	journal = {IEEE Parallel \& Distributed Technology: Systems \& Applications},
+	author = {Bailey, D.H. and Barszcz, E. and Dagum, L. and Simon, H.D.},
+	month = feb,
+	year = {1993},
+	note = {Conference Name: IEEE Parallel \& Distributed Technology: Systems \& Applications},
+	keywords = {Aerodynamics, Computational fluid dynamics, Computational modeling, Concurrent computing, Data structures, High performance computing, Kernel, NASA, Power system reliability, Supercomputers},
+	pages = {43--51},
+	file = {IEEE Xplore Abstract Record:/Users/akilan/Zotero/storage/X2BNLWG8/219861.html:text/html;IEEE Xplore Full Text PDF:/Users/akilan/Zotero/storage/4PXBIGNJ/Bailey et al. - 1993 - NAS parallel benchmark results.pdf:application/pdf},
+}
+
+@article{l4linux,
+	title = {{L4Linux} {Porting} {Optimizations}},
+	language = {en},
+	author = {Lackorzynski, Adam},
+	pages = {58},
+	file = {Lackorzynski - L4Linux Porting Optimizations.pdf:/Users/akilan/Zotero/storage/R2MRZ86X/Lackorzynski - L4Linux Porting Optimizations.pdf:application/pdf},
+}
+
+
+
+
 
 
 

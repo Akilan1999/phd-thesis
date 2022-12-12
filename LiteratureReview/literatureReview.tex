@@ -596,12 +596,28 @@ driver would different based on the architecture
 of the core. 
 % Add image 
 
-\subsection{Popcorn Linux}
+\subsection{Popcorn Linux} % 1 
 % https://www.kernel.org/doc/ols/2014/ols2014-barbalace.pdf
 Popcorn\cite{PopcornLinux} linux is a replicated-kernel OS based on Linux. Popcorn 
 boots up multiple instances of Linux kernels on a 
 multi-core hardware. Popcorn linux was evaluated 
-based on the NAS benchmark \cite{NAS}. 
+based on the NAS benchmark \cite{NAS}. Popcorn 
+linux uses a customized compiler based 
+off LLVM which translates C/C++ applications 
+into machine code for runtime execution and migration 
+across multiple ISAs. Papers and sub projects 
+derived from popcorn Linux: 
+\begin{itemize}
+  \item Aparapi: Applying Source Level Auto-Vectorization
+  \item AIRA: A Framework for Flexible Compute Kernel Execution in Heterogeneous Platforms
+  \item HEXO: Offloading HPC Compute-Intensive Workloads on Low-Cost, Low-Power Embedded Systems.
+  \item H-Container: Enabling Heterogeneous-ISA Container Migration in Edge Computing.
+  \item HeterSec: Software diversification using ISA heterogeneity
+\end{itemize}
+
+
+% Skim through all the papers published 
+% In depth writing (Understand the analysis of the survey paper)
 % todo add more context about approach 
 % todo Add image 
 
@@ -653,6 +669,10 @@ L4 with transparent access to linux features by using
 L4Linux. The L4Linux user process can be decoupled 
 from the linux kernel and moved to another core 
 if required (i.e by using the L4 Thread).
+
+% Analysis 
+% - Build table as per the survey (Simplify)
+% - Mention 2 Multi-kernels that support Uni-kernels
 
 % \subsection{Hobbes}
 % todo read: https://link.springer.com/chapter/10.1007/978-981-13-6624-6_15
@@ -972,6 +992,20 @@ The contribution of the following project include:
   \item Experimentally evaluating functional correctness and performance of the approach 
   in this paper.
 \end{itemize}
+
+% Analysis 
+% - Similar to the Survey (Important architecture supported)
+% - Comparing a security based TAG based architecture to performance 
+% based one.  
+
+% Mentioning all the comparisons 
+% https://www.ssrg.ece.vt.edu/papers/hpdc19.pdf
+
+
+% Main analysis iterate over the research questions 
+% - Security Gurantees of Uni-kernels 
+% - Security provided by TAG 
+% - 
 
 % Evaluation (Hierarchy evaluation based on diagram provided in Survey)
 % Choose either performance or Security 

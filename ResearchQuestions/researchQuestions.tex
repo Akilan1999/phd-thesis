@@ -8,14 +8,22 @@
 The following section talks about research questions: 
 
 \begin{itemize}
-    \item Which areas can Unikernels provide performance gains for TAG based architectures in comparison to the same implementation built using a monolithic OS? 
-    \item Does using Enclaves inside Unikernels provide a isolation mechanism within Unikernels, maintain lightweightness characterestics, and 
-    what would be the performance differnence between using Intel SGX and a open source implementation such as Timber V?
-    \item Due to lesser depencies in Unikernels does that mean lesser TAG policies are required for the appication ? 
-    \item Can Unikernel provide sufficient performance in such a way that a dedicated processor is not required for processing TAGS ?   
-    \item Does Unikernels with TAGS provide a secure and elastic environment ? 
+    % \item Which areas can Unikernels provide performance gains for TAG based architectures in comparison to the same implementation built using a monolithic OS? 
+    % \item Does using Enclaves inside Unikernels provide a isolation mechanism within Unikernels, maintain lightweightness characterestics, and 
+    % what would be the performance differnence between using Intel SGX and a open source implementation such as Timber V?
+    % \item Due to lesser depencies in Unikernels does that mean lesser TAG policies are required for the appication ? 
+    % \item Can Unikernel provide sufficient performance in such a way that a dedicated processor is not required for processing TAGS ?   
+    % \item Does Unikernels with TAGS provide a secure and elastic environment ? 
 
-    % New ones 
-    \item Using TAG standard memory with interleaving for speeding up types for dynamic languages and execution of parallelization on Mult-kernels with each core 
-          running a Uni-kernel.
+    % % New ones 
+    % \item Using TAG standard memory with interleaving for speeding up types for dynamic languages and execution of parallelization on Mult-kernels with each core 
+    %       running a Uni-kernel.
+    % Just TAG based architecture with Unikernels 
+    % Multi-kernels with TAG based uni-kernels to offload secure parts of a program 
+    % The Design of a new scheduler when TAG based hardware comes into the picture of multi-kernels 
+    \item Does using a Uni-kernels built with a safe language such as Rust reduce the number of TAG policies needed ? 
+    \item Does offloading only parts of a program to a TAG based hardware using the Multi-kernel approach improve runtime performance 
+    and enhances security to the critical areas of a program only ? 
+    \item Design of a new scheduler with the picture of adding TAG hardware to multi-kernels ?
+    \item Benefits of using a multi-kernel approach with functional programming languages such as Haskell (to be investigated mid 2023) ?
 \end{itemize}

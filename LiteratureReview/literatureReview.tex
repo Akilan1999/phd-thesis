@@ -1016,6 +1016,33 @@ The contribution of the following project include:
 % - Combining multi-kernel with efficiency of Uni-kernels with Custom hardware to for type system checking.\\
 % - Analyzing memory interleaving is also of interest. 
 
+% Prove choice of CHERI
+
+\subsection{TAG based architecture analysis}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{landscape}
+\begin{table}[]
+  \centering
+  \caption{Analyzing various TAG-based implementations}
+  \begin{tabular}{@{}lllllll@{}}
+  \toprule
+  \textbf{Architecture} & \textbf{Policy Goal} & \textbf{Complier} & \textbf{Bootloader} & \textbf{OS kernel} & \textbf{Processor} & \textbf{Evaluation} \\ \midrule
+  Timder V              & IFC                  & Yes               & Yes                 & Yes                & Yes                & Simulation          \\
+  ARM MTE               & Memory Safety        & Yes               & Yes                 & Yes                & Yes                & ASIC                \\
+  D-RI5CY               & DIFT                 & Yes               & Yes                 & Yes                & Yes                & FPGA                \\
+  HyperFlow             & IFC                  & No                & No                  & No                 & Yes                & FPGA                \\
+  SDMP                  & Memory Safety        & Yes               & Yes                 & No                 & Yes                & Simulation          \\
+  Typed Architecture    & N/A (Performance)    & Yes               & Yes                 & Yes                & Yes                & FPGA                \\
+  Dover                 & Programmable         & Yes               & Yes                 & No                 & Yes                & FPGA                \\
+  CHERI                 & Programmable         & Yes               & Yes                 & Yes                & Yes                & ASIC                \\
+  HardBound             & Memory Safety        & Yes               & Yes                 & Yes                & Yes                & Simulation          \\ \bottomrule
+  \end{tabular}
+  \end{table}
+\end{landscape}
+
+
 
 
 %\subsection{Loki}

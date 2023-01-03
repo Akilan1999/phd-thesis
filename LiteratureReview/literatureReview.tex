@@ -566,13 +566,6 @@ It implements interprocess communications as message-passing. The design of mult
   \item State is view as replicated instead of shared.
 \end{itemize}
 
-\begin{figure}[htbp!] 
-  \centering    
-  \includegraphics[width=0.6\textwidth]{Multi-kernel}
-  \caption[Multi-kernel]{The Multi-kernel model \cite{multi_kernel_first_paper}}
-  \label{fig:AzeleaKNL}
-  \end{figure}
-
 \subsubsection{Benefits of Multi-kernels}
 The following below highlights the major characteristics
 of Multi-kernels. 
@@ -595,9 +588,22 @@ driver in Barrelfish represents a kernel when is ran
 on a given core. In a heterogeneous system the CPU 
 driver would different based on the architecture
 of the core. 
-% Add image 
 
-\subsection{Popcorn Linux} % 1 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{Multi-kernel}
+  \caption[Multi-kernel]{Barrelfish Multi-kernel model \cite{multi_kernel_first_paper}}
+  \label{fig:Barrelfish}
+  \end{figure}
+% % Add image 
+% \begin{figure}[htbp!] 
+%   \centering    
+%   \includegraphics[width=0.6\textwidth]{FigsMultikernel/barrel}
+%   \caption[Azelea]{Azelea-unikernel in a single KNL \cite{Azelea}}
+%   \label{fig:AzeleaKNL}
+%   \end{figure}
+
+\subsubsection{Popcorn Linux} % 1 
 % https://www.kernel.org/doc/ols/2014/ols2014-barbalace.pdf
 Popcorn\cite{PopcornLinux} linux is a replicated-kernel OS based on Linux. Popcorn 
 boots up multiple instances of Linux kernels on a 
@@ -608,6 +614,7 @@ off LLVM which translates C/C++ applications
 into machine code for runtime execution and migration 
 across multiple ISAs. Papers and sub projects 
 derived from popcorn Linux: 
+% todo reference these
 \begin{itemize}
   \item Aparapi: Applying Source Level Auto-Vectorization
   \item AIRA: A Framework for Flexible Compute Kernel Execution in Heterogeneous Platforms
@@ -616,15 +623,24 @@ derived from popcorn Linux:
   \item HeterSec: Software diversification using ISA heterogeneity
 \end{itemize}
 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{FigsMultikernel/popcornLinux}
+  \caption[Multi-kernel]{PopcornLinux Multi-kernel model \cite{PopcornLinux}}
+  \label{fig:PopcornLinux}
+  \end{figure}
+
+
+
 
 % Skim through all the papers published 
 % In depth writing (Understand the analysis of the survey paper)
 % todo add more context about approach 
 % todo Add image 
 
-\subsection{FusedOS}
+\subsubsection{FusedOS}
 % Todo what is ran on the light weight cores 
-FusedOS was one of the first to combine 
+FusedOS\cite{FusedOS} was one of the first to combine 
 linux with a LWK(Light weight kernel). FusedOS 
 was assuming heterogeneous hardware architecture 
 that consists of both a light weight and full 
@@ -639,8 +655,15 @@ by the application and are forwarded to Linux
 which is then handled with LWK process. 
 % todo look at Github implementation 
 
-\subsection{IHK/McKernel}
-IHK/McKernel is a multi-kernel approach 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{FigsMultikernel/fusedOSarchitecture}
+  \caption[Multi-kernel]{FusedOS Multi-kernel model \cite{FusedOS}}
+  \label{fig:FusedOS}
+  \end{figure}
+
+\subsubsection{IHK/McKernel}
+IHK/McKernel\cite{McKernel} is a multi-kernel approach 
 which runs Linux and LWKs side by side on 
 compute nodes. A low-level software infrastructure
 which is present at the heart of the stack 
@@ -655,12 +678,18 @@ from scratch and designed for HPC. McKernel
 retains a binary compatible ABI with Linux. 
 It supports multi-threading with a simple 
 round robin cooperative scheduler. 
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{FigsMultikernel/mckernel}
+  \caption[Multi-kernel]{IHK/McKernel Multi-kernel model \cite{McKernel}}
+  \label{fig:McKernel}
+  \end{figure}
 
 % \subsection{mOS}
 % mOS creates a m
 
-\subsection{FFMK}
-FFMK (Fast and fault tolerant Microkernel based system) which 
+\subsubsection{FFMK}
+FFMK\cite{FFMK} (Fast and fault tolerant Microkernel based system) which 
 is designed for Exascale computing. It investigates 
 the feasibility of a Microkernel based hybrid OS designed 
 for HPC.It relies on a L4 microkernel and a para-virtualized
@@ -670,6 +699,12 @@ L4 with transparent access to linux features by using
 L4Linux. The L4Linux user process can be decoupled 
 from the linux kernel and moved to another core 
 if required (i.e by using the L4 Thread).
+\begin{figure}[htbp!] 
+  \centering    
+  \includegraphics[width=0.6\textwidth]{FigsMultikernel/ffmk}
+  \caption[Multi-kernel]{FFMK Multi-kernel model \cite{FFMK}}
+  \label{fig:FMK}
+  \end{figure}
 
 % Analysis 
 % - Build table as per the survey (Simplify)
@@ -689,6 +724,14 @@ if required (i.e by using the L4 Thread).
 % Major features 
 % Implementation 
 % upto 4 major ones 
+
+
+\subsection{Multi-kernel analysis}
+
+% Table analysis 
+% - Standalone light weight kernel 
+% - Node booted by 
+% - Inter-kernel shared memory
 
 
 
@@ -785,7 +828,7 @@ for IOT applications. The following are high level contributions:
 
 \begin{figure}[htbp!] 
   \centering    
-  \includegraphics[width=0.6\textwidth]{D-RISCV}
+  \includegraphics[width=0.6  \textwidth]{D-RISCV}
   \caption[D-RISCY]{ Block diagram of the D-RI5CY processor. In red and pink the DIFT components. \cite{D-RISCY}}
   \label{fig:MTE}
   \end{figure}
@@ -889,7 +932,7 @@ top existing C based applications.
   \includegraphics[width=0.8\textwidth]{Dover}
   \caption[Dover]{High level overview of Dover Architecture \cite{Dover}}
   \label{fig:Dover}
-  \end{figure}x
+  \end{figure}
 
 %\subsection{Shakti-T}
 

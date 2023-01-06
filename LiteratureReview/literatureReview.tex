@@ -571,9 +571,9 @@ The following below highlights the major characteristics
 of Multi-kernels. 
 
 \begin{itemize}
-  \item Ability to handle diverse set of cores: 
-  \item Interconnect matters: 
-  \item Messages cost less than shared memory:
+  \item Ability to handle diverse set of cores.
+  \item Interconnect matters. 
+  \item Messages cost less than shared memory.
 \end{itemize}
 
 \subsection{Implementation}
@@ -618,7 +618,7 @@ derived from popcorn Linux:
 \begin{itemize}
   \item Aparapi: Applying Source Level Auto-Vectorization
   \item AIRA: A Framework for Flexible Compute Kernel Execution in Heterogeneous Platforms
-  \item HEXO: Offloading HPC Compute-Intensive Workloads on Low-Cost, Low-Power Embedded Systems.
+  \item HEXO \cite{HEXO}: Offloading HPC Compute-Intensive Workloads on Low-Cost, Low-Power Embedded Systems.
   \item H-Container: Enabling Heterogeneous-ISA Container Migration in Edge Computing.
   \item HeterSec: Software diversification using ISA heterogeneity
 \end{itemize}
@@ -1085,9 +1085,6 @@ The contribution of the following project include:
   \end{table}
 \end{landscape}
 
-
-
-
 %\subsection{Loki}
 
 %\subsection{FLexiTaint}
@@ -1126,6 +1123,16 @@ The contribution of the following project include:
 %\subsection{HEP}
 
 %\subsection{Burroughs}
+
+\subsection{Analysis tied up with research questions}
+The following helps derive based on the research questions phrases which implementations 
+will be most suitable to be used: 
+
+\subsubsection{Does using a Uni-kernels built with a safe language such as Rust reduce the number of TAG policies needed ?}
+Based on the 10 papers surveyed for Unikernels on section. The best Uni-kernel that could 
+be used to the answer the following question would be Rusty-Hermit. Rusty-Hermit is a Rust 
+implementation of the Hermit-Core implementation. Since there is massive porting efforts complete 
+for the Hermit-Core implementation.
 
 
 

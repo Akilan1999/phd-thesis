@@ -461,6 +461,14 @@ keywords = {type checking, microarchitecture, instruction set architecture, pipe
 
   doi={10.1109/SP.2015.9}}
 
+  % CheriBSD
+  @misc{CHERIBSD,
+	title = {Department of {Computer} {Science} and {Technology}: {CheriBSD}},
+	url = {https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/cheribsd.html},
+	urldate = {2023-01-04},
+	file = {Department of Computer Science and Technology\: CheriBSD:/Users/akilan/Zotero/storage/K5M3MUTZ/cheribsd.html:text/html},
+}
+
   % Low fat pointer
   @inproceedings{LowFatPointer,
 author = {Kwon, Albert and Dhawan, Udit and Smith, Jonathan M. and Knight, Thomas F. and DeHon, Andre},
@@ -532,6 +540,33 @@ series = {CCS '13}
 	author = {Barbalace, Antonio and Ravindran, Binoy and Katz, David},
 	pages = {16},
 	file = {Barbalace et al. - Popcorn a replicated-kernel OS based on Linux.pdf:/Users/akilan/Zotero/storage/NFQ78YDM/Barbalace et al. - Popcorn a replicated-kernel OS based on Linux.pdf:application/pdf},
+}
+
+% - Sub papers based on popcorn linux
+@inproceedings{HEXO,
+author = {Olivier, Pierre and Mehrab, A. K. M. Fazla and Lankes, Stefan and Karaoui, Mohamed Lamine and Lyerly, Robert and Ravindran, Binoy},
+title = {HEXO: Offloading HPC Compute-Intensive Workloads on Low-Cost, Low-Power Embedded Systems},
+year = {2019},
+isbn = {9781450366700},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3307681.3325408},
+doi = {10.1145/3307681.3325408},
+abstract = {OS-capable embedded systems exhibiting a very low power consumption are available at an extremely low price point. It makes them highly compelling in a datacenter context. In this paper we show that sharing long-running, compute-intensive datacenter HPC workloads between a server machine and one or a few connected embedded boards of negligible cost and power consumption can bring significant benefits in terms of consolidation. Our approach, named Heterogeneous EXecution Offloading (HEXO), selectively offloads Virtual Machines (VMs) from server class machines to embedded boards. Our design tackles several challenges. We address the Instruction Set Architecture (ISA) difference between typical servers (x86) and embedded systems (ARM) through hypervisor and guest OS-level support for heterogeneous-ISA runtime VM migration. We cope with the low amount of resources in embedded systems by using lightweight VMs: unikernels. VMs are offloaded based on an estimation of the slowdown expected from running on a given board. We build a prototype of HEXO and demonstrate significant increase in throughput (up to 67\%) and energy efficiency (up to 56\%) over a set of macro-benchmarks running datacenter compute-intensive jobs.},
+booktitle = {Proceedings of the 28th International Symposium on High-Performance Parallel and Distributed Computing},
+pages = {85–96},
+numpages = {12},
+keywords = {unikernels, heterogeneous isas, migration, offloading},
+location = {Phoenix, AZ, USA},
+series = {HPDC '19}}
+
+% - Sub paper based on popcorn linux on Enclave offlaoding 
+@article{PopcornEnclave,
+	title = {Transparent, {Cross}-{ISA} {Enclave} {Offloading}},
+	abstract = {Hardware vendors constantly design new architecture extensions to improve software security. Due to intellectual property protection and architecture design issues, these hardware extensions are often CPU-specific. This creates an availability gap between different CPU types (security extensions) and software code that runs on top. This is particularly an issue for low-end, embedded devices as they often utilize wimpy CPU cores. This paper aims to bridge this availability gap for security-related CPU extensions, focusing on low-end embedded devices’ access to hardware trusted execution environments (TEEs). We present PopSGX, a framework to transparently offload security-sensitive workloads to a remote enclave of a centralized edge server. The low-end embedded devices act as clients, taking advantage of hardware security features provided by the edge server. We have built an early prototype of PopSGX on top of an open-sourced hardware-agnostic Open Enclave SDK [21]. Any application written using the Open Enclave SDK can leverage the framework without modifying source code. We evaluate our prototype on a simulated IoT/edge computing environment (a Raspberry Pi and an SGX-enabled laptop). The result shows that PopSGX has reasonable performance overhead but secures confidential computations running on the Raspberry Pi.},
+	language = {en},
+	author = {Wang, Xiaoguang and Bilbao, Carlos and Ravindran, Binoy},
+	file = {Wang et al. - Transparent, Cross-ISA Enclave Offloading.pdf:/Users/akilan/Zotero/storage/NP99NIW7/Wang et al. - Transparent, Cross-ISA Enclave Offloading.pdf:application/pdf},
 }
 
 @INPROCEEDINGS{FusedOS,

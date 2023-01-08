@@ -69,8 +69,8 @@ as opposed to attempting to support various hardware drivers.
 Designed to utilize all the modern features of software and hardware, without worrying about backward
 compatibility. They are not POSIX-compliant. 
 \begin{itemize}
-  \item Halvm (TODO survey)
-  \item MirageOS (TODO survey)
+  \item Halvm 
+  \item MirageOS
 \end{itemize}
 
 \subsubsection{Legacy (Generalized "fat" unikernels)}
@@ -614,13 +614,12 @@ off LLVM which translates C/C++ applications
 into machine code for runtime execution and migration 
 across multiple ISAs. Papers and sub projects 
 derived from popcorn Linux: 
-% todo reference these
 \begin{itemize}
-  \item Aparapi: Applying Source Level Auto-Vectorization
-  \item AIRA: A Framework for Flexible Compute Kernel Execution in Heterogeneous Platforms
-  \item HEXO \cite{HEXO}: Offloading HPC Compute-Intensive Workloads on Low-Cost, Low-Power Embedded Systems.
-  \item H-Container: Enabling Heterogeneous-ISA Container Migration in Edge Computing.
-  \item HeterSec: Software diversification using ISA heterogeneity
+  \item Aparapi\cite{APARI}: Applying Source Level Auto-Vectorization.
+  \item AIRA\cite{AIRA}: A Framework for Flexible Compute Kernel Execution in Heterogeneous Platforms.
+  \item HEXO\cite{HEXO}: Offloading HPC Compute-Intensive Workloads on Low-Cost, Low-Power Embedded Systems.
+  \item H-Container\cite{EdgeContainer}: Enabling Heterogeneous-ISA Container Migration in Edge Computing.
+  \item HeterSec\cite{HeterSec}: Software diversification using ISA heterogeneity.
 \end{itemize}
 
 \begin{figure}[htbp!] 
@@ -767,10 +766,28 @@ Tags policies as designed to address mostly:
 
 TAG policies can be categorized into 5 main categories which is:
 \begin{itemize}
-  \item Information-low control (IFC) policies
-  \item Dynamic information-low tracking (DIFT) policies
-  \item Capability models
-  \item Programmable architectures
+  \item Information-low control (IFC) policies: It is concerned with 
+  leaking sensitive information such as crypto keys or accessing classified 
+  information in a non-privileged mode. IFC uses TAGs to enforce the 
+  Bell-LaPadula\cite{BellAndLaPadulaSecurityModel} or Biba\cite{Biba} security model. Timber-V\cite{weiser_timber-v_2019} 
+  covered in the implementations below is an example.
+  \item Dynamic information-low tracking (DIFT) policies: It is a sub-set of IFC
+  DIFT policies are based on how the user inputs / data is derived from user 
+  inputs. DIFT policies are commonly designed to address attacks from
+  control-flow hijacking to data leaks. There is a great Survey paper of 
+  DIFT\cite{DIFT} which provides in depth details. 
+  \item Capability models: Capabilities allow a programmer to 
+  encapsulate code, data with possibility of the compiler to 
+  add more complier to add custom policies. The CHERI capability 
+  model is most widely explored\cite{CHERI-RISC} and 
+  recently used with the
+  ARM fabricated boards\cite{morello} 
+  designed based on the model. 
+  \item Programmable Policies: The programmable policies 
+  are the most flexible in comparison to other 
+  sort of policies mentioned above. It can be 
+  designed to interpret any sort of policy model.
+
 \end{itemize}
 
 \subsection{Implementations}

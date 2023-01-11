@@ -1143,14 +1143,14 @@ The contribution of the following project include:
 %\subsection{Burroughs}
 
 \subsection{Analysis tied up with research questions}
-The following helps derive based on the research questions phrases which implementations 
+The following helps derive based on the research questions phrased which implementations 
 will be most suitable to be used: 
 
 \subsubsection{Does using a Uni-kernels built with a safe language such as Rust reduce the number of TAG policies needed ?}
 Based on the 10 papers surveyed for Uni-kernels above. The best Uni-kernel that could 
 be used to the answer the following question would be Rusty-Hermit. Rusty-Hermit is a Rust 
 implementation of the Hermit-Core implementation. Rusty-Hermit is the most active Rust 
-implementation of a Uni-kernel currently maintained. This question will be answered 
+implementation of the Uni-kernel Hermit-core currently maintained. This question will be answered 
 by porting the CHERI architecture to Rusty-Hermit.
 
 \subsubsection{Does offloading only parts of a program to a TAG based hardware using the Multi-kernel approach improve runtime performance 
@@ -1158,18 +1158,18 @@ and enhances security to the critical areas of a program only ?}
 Based on the survey of Popcorn linux there are 2 main papers which help provide a good starting point towards this question. The first 
 paper is HEXO \cite{HEXO} which is a branch of PopcornLinux multi-kernel implementation which runs the Uni-kernel HermitTux(Branch of 
 Hermit-Core to run Linux ABI binaries) for offloading tasks to a secondary machine and other one is Cross-ISA enclave offloading using
-popcorn linux \cite{PopcornEnclave} which allows programmers to annotate which parts of their program who they want to offload and run it 
-IntelSGX as an example. The HEXO can be considered as a paper which uses the Multi-kernel implementation in combination with Uni-kernels
+popcorn linux \cite{PopcornEnclave} which allows programmers to annotate which parts of their program they want to offload and run on
+IntelSGX\cite{IntelSGX} as an example. The HEXO paper can be considered as an implementation which uses a Multi-kernel in combination with Uni-kernels
 for a light OS image with lesser context switches for better performance (i.e run-time, memory usage and predictable runtimes)
-and the Cross-ISA enclave offloading using popcorn linux utilizes the IntelSGX\cite{IntelSGX}(Enclave model\cite{Enclave}) can considered as 
-security enhancement to Multi-kernel model. On the perspective of security IntelSGX cannot be considered as 
-a TAG based because it does not tie tags with addresses and only covers a sub-set of security policies in contract 
+and the Cross-ISA enclave offloading paper which utilizes the IntelSGX(Enclave model\cite{Enclave}) that can considered as 
+a security enhancement to the Multi-kernel model. On the perspective of security IntelSGX cannot be considered as 
+a TAG based architecture because it does not tie tags with addresses and only covers a sub-set of security policies in contract 
 to what TAG based architectures can provide.
 
 \subsubsection{Design of a new scheduler with the picture of adding TAG hardware to multi-kernels ?}
 Based on the previous research questions the factors added to a Multi-kernel would be supporting Uni-kernels running on 
 each core and as-well as Uni-kernels on top of a TAG based architecture. This would mean that the scheduler on 
-Popcorn linux would significantly change based on the possibility of adding TAG-based as a factor into the 
-Popcorn linux heterogeneous variety of architectures and based on Survey conducted there has been 1 paper\cite{TypedArchitecture} 
-which talks about utilizing TAG based-hardware to speedup dynamic checking. This opens the possibility to explore designing a 
+Popcorn linux would significantly change based on the possibility of adding TAG-based architecture as a factor into the 
+Popcorn linux variety of architectures supported and based on Survey conducted there has been 1 paper\cite{TypedArchitecture} 
+which talks about utilizing TAG based-hardware to speedup dynamic type checking in dynamic programming languages. This opens up the possibility to explore designing a 
 new scheduler that can offload tasks to TAG based hardware either for usage of the security features or performance reasons. 

@@ -16,7 +16,7 @@
 The following chapter talks about the research activity timeline conducted for a duration of 2 and half years. 
 The plan is subject to change based on any deviation which will be attempted to be covered in the risk analysis 
 section. The recent tasks are provided in depth in contrast to later tasks which will be more open ended 
-as it reliant to the results from preceding tasks. 
+as it reliant to the results from the preceding tasks. 
 
 \begin{figure}[htbp!] 
   \centering    
@@ -28,15 +28,15 @@ as it reliant to the results from preceding tasks.
 Before starting a heavy discussion of the plan and experiment a few things that should cleared out before starting would be 
 the higher overview of the experiment and why certain porting efforts are required. The Segments would be classified into: 
 \begin{enumerate}
-  \item Porting Unikernel implementation 
-  \item Porting CheriOS to a Uni-kernel
+  \item Porting the Unikernel implementation 
+  \item Porting CheriBSD to a Uni-kernel
 \end{enumerate}
 
-\subsubsection{Porting Unikernel implementation}
+\subsubsection{Porting the Unikernel implementation}
 The Uni-kernel implementation used for the following PhD would be RustyHermit 
 which is Rust implementation of the Uni-kernel project Hermit-core. The reason 
 RustyHermit was selected is because the Hermit-core project is deprecated and 
-the recent version of the project in the RustyHermit repo. To give a better 
+the recent version of the project is the RustyHermit repo. To give a better 
 background the HEXO paper \cite{HEXO} which uses Popcorn Linux to offload 
 tasks to a potato machine (i.e raspberry pi) which uses the HermitTux Uni-kernel (This 
 is a fork for the Hermit-core Uni-kernel). The HermitTux fork of HermitCore is used to 
@@ -45,7 +45,7 @@ planned experiments. It would recommended to port HermitTux to RustyHermit to en
 can sync the new version of HermitTux with the latest changes from RustyHermit. Fig ~\ref{fig:PlannerPorting}
  provides the visual description of the following paragraph. 
 
-\subsubsection{Porting CheriOS to a Uni-kernel}
+\subsubsection{Porting CheriBSD to a Uni-kernel}
 The selected TAG based architecture would be CHERI due to ease to acquiring of hardware 
 for performance (i.e the ARM based CHERI morello). The official supported OS for 
 the CHERI hardware is the CheriBSD \cite{CHERIBSD}. While doing experiments it 

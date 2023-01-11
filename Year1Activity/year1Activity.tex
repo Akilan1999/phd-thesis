@@ -4,6 +4,13 @@
 %*******************************************************************************
 
 \chapter{Year 1 Activity}  %Title of the Year 1 Activity
+
+\ifpdf
+    \graphicspath{{Year1Activity/Figs/Raster/}{Year1Activity/Figs/PDF/}{Year1Activity/Figs/}}
+\else
+    \graphicspath{{Year1Activity/Figs/}{Year1Activity/Figs/}}
+\fi
+
 This is section will be split into the timeline of activities of year 1.
 
 \subsection{Literature review year 1}
@@ -52,6 +59,14 @@ parallelised Mandelbrot benchmark, comparing with Docker and a
 monolithic VM for runtime, parallel speedups and boot-up time. OSv
 has the fastest boot-up time, and is comparable with the parallel
 speedups of Docker and the monolithic VM.
+
+
+\begin{figure}[htbp!] 
+    \centering    
+    \includegraphics[width=0.6\textwidth]{madelbrot-expirment}
+    \caption[Year1-Activity-Uni-kernel-activity-diagram]{Uni-kernel comparison experiment}
+    \label{fig:UnikernelExpirement}
+\end{figure}
 
 
 

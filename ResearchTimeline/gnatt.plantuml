@@ -1,0 +1,28 @@
+@startgantt
+Project starts 2023-01-01
+[Review of year 1 report review / submission] starts 2023-01-04 and ends 2023-01-13
+[Setup test cluster for testing popcorn linux] starts 2023-01-12 and ends 2023-01-15
+[Setup popcorn linux on the test cluster] starts 2023-01-15 and ends 2023-01-17
+[Start running existing popcorn linux benchmarks] starts 2023-01-17 and ends 2023-02-02
+[Setup RustyHermit and HermitCore independently with test application] starts 2023-01-18 and ends 2023-01-22
+[Setup Cheri on a QEMU emulator and run a sample C program] starts 2023-01-25 and ends 2023-02-01
+[Deep dive understanding to HEXO fork of popcorn linux source code vice] starts 2023-02-02 and ends 2023-02-07
+[Setup HEXO offload tasks to a uni-kernel on an external machine using hermit-core and test of 2 more external devices to benchmark the scheduler used by HEXO linux] starts 2023-02-08 and ends 2023-02-15
+[Start working more on porting HermitTux to RustyHermit and look into development of Unikraft for support of Cheri and switch into the Unikraft for further development if there is full support for Cheri.] starts 2023-02-16 and ends 2023-05-23
+[Start drafting a conference paper or journal based on improvements to the HEXO papers scheduler and support to either RustyHermit or Unikraft.] starts 2022-11-18 and ends 2023-02-22
+[Investigating having Popcorn modified LLVM C/C++ features with the GHC Haskell compiler.] starts 2023-02-23 and ends 2023-03-23
+[Get access to the ARM based Cheri Morello] starts 2023-04-01 and ends 2023-04-02
+[Catch up on the pending tasks not completed listed above] starts 2023-05-01 and ends 2023-06-30
+[Start writing completed research experiments to the thesis] starts 2023-05-31 and ends 2023-07-30
+[Summer break] starts 2023-08-03 and ends 2023-08-31
+[Start modifying Popcorn Linux for building parts of a program to a TAG based architecture.] starts 2023-09-01 and ends 2023-11-02
+[Start drafting proposals that could be used to potentially take the above features of popcorn linux and make a clone of base features which can be used in the GHC Haskell compiler.] starts 2023-09-02 and ends 2023-10-11
+[Start building a test framework to test Cheri with popcorn linux.] starts 2023-10-12 and ends 2023-11-16
+[Reiterate through the literature review and add more background context based on the implementation and experiments completed.] starts 2023-11-01 and ends 2023-11-30
+[Start working on proposal drafted for adding popcorn linux features to the Haskell GHC compiler.] starts 2023-11-10 and ends 2024-02-02
+[Catch up on pending tasks] starts 2023-12-01 and ends 2023-12-20
+[Create benchmark suite for the experiments conducted throughout the year] starts 2023-12-20 and ends 2024-01-02
+[Christmas and new year break] starts 2024-01-03 and ends 2024-02-27
+[Starting writing a conference paper which combines] starts 2023-12-20 and ends 2024-09-02
+[PhD writing period begin] starts 2024-09-03 and ends 2025-05-16
+@endgantt

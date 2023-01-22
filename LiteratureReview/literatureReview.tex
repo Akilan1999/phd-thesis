@@ -489,8 +489,10 @@ analyses is based on:
 \subsubsection{Best suitable implementations based on platforms(i.e targets) supported ?}
 This refers to which Uni-kernel implementation would be preferred based on the various targets supported, this is 
 based on table \ref{tab:unikerneltable}. Based on the number of targets supported Unikraft has the most amount of 
-targets supported. Since the the research goals (//todo refer research goals) for using Uni-kernels is to run on 
-bare-metal as a major requirement (This is because of the way multi-kernels work~\ref{Multi-kernels} ).Unikraft would be suitable for testing a multi-kernel environment, but porting to 
+targets supported. Since the research goal is for using Uni-kernels is to run on 
+bare-metal as a major requirement (This is because of the way multi-kernels work~\ref{Multi-kernels} ).Unikraft would have been 
+be suitable for testing a multi-kernel environment (Uni-kernel currently does 
+not support running on bare-metal machines), but porting to 
 bare-metal would be an important step along the way. Hermit-core would be suitable since it does support running 
 on bare-metal and runs on a hypervisor (i.e KVM and uhyve). 
 

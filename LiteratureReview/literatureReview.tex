@@ -13,22 +13,22 @@
 
 %********************************** %Introduction for literature review **************************************
 
-The literature review is split into 3 sections. The first section talks about the papers surveyed 
-for Unikernels and the 2nd section talks about papers surveyed for TAG based architectures and 
-the third sections talks about the possible incentives of combining them both which helps 
-answer the research questions stated.
+The literature review is split into 4 sections. The first section talks about the papers surveyed 
+for Unikernels and the 2nd section talks about papers surveyed for Multi-kernels and the following 
+with TAG based architectures as the 3rd section and the forth section talks about the possible incentives of combining all of 
+them which helps answer the research questions.
 % (TODO: Add reference to research question section). 
 
 \section[Unikernels]{Unikernels Survey}
 The following section is the Uni-kernel Survey which starts 
-with the Introduction of Unikernels, Types of Uni-kernels, 
-Various Uni-kernels implementations and analysis 
-of the various Uni-kernel implementations. 
+with the Introduction of Unikernels, Types of Uni-kernels and 
+various Uni-kernel implementations and the analysis 
+of various Uni-kernels. 
 
 \subsection{Introduction to Unikernels}
 Unikernel is a relatively new concept that was first introduced around 2013 by Anil Madhavapeddy in a 
 paper titled "Unikernels: Library Operating Systems for the Cloud" \cite{FirstUnikernelPaper}. Unikernels 
-is defined as "Unikernels are specialized, single-address-space machine images constructed by using library 
+is defined as "specialized, single-address-space machine images constructed by using library 
 operating systems." \cite{UnikernelDefinition}. Specialized indicates that an Unikernel holds a single application.
 Single address indicates that Unikernels does not have separation between the user and kernel address 
 space. 
@@ -48,11 +48,11 @@ space.
     \end{figure}
 
 \subsubsection{Library Operating Systems}
-Library\cite{LibraryOS} operating system is an method of constructing an operating system where the kernel modules  
+Library\cite{LibraryOS} operating system is a method of constructing an operating system where the kernel modules  
 required by an application is executed in the same address space as the application. The original goal 
 of Library operating systems was to improve performance by enabling applications to manage resources according to 
 their own needs, thereby allowing a high level of customizability. One of the major drawbacks for 
-Library OS was support for various device drivers written for specific hardware. 
+Library OS was providing support for various device drivers written for specific hardware. 
 
 Nowadays, however, virtualization already provides an abstraction of the underlying hardware by exposing 
 virtualized hardware drivers. This allows library OS implementations to support the generic virtual driver 
@@ -97,8 +97,8 @@ are the ones surveyed in the following paper:
 %
 \subsection{Implementations}
 
-\subsubsection{Unikraft \cite{Unikraft}}
-Unikraft is a uni-kernel implementation that claims to be 
+\subsubsection{Unikraft}
+Unikraft\cite{Unikraft} is a uni-kernel implementation that claims to be 
 a micro library OS. \emph{The major features of Unikraft is:}
 \begin{itemize}
   \item Single address space: Intended to target single applications.
@@ -557,7 +557,7 @@ and with a round robin scheduler.
 The following is the survey for Multi-kernels. The introduction is 
 based on the first paper published on Multi-kernels \cite{multi_kernel_first_paper},
 follows up with a survey on various implementations and with an 
-analysis section of various multi-kernel implementation. 
+analysis section of various multi-kernel implementations. 
 
 
 \subsection{Introduction to Multi-kernels}
@@ -589,7 +589,7 @@ running on each core. The kernels share no memory (even on
 machines with cache-coherent shared RAM). A CPU 
 driver in Barrelfish represents a kernel when is ran 
 on a given core. In a heterogeneous system the CPU 
-driver would different based on the architecture
+driver would differ based on the architecture
 of the core. 
 
 \begin{figure}[htbp!] 
@@ -643,9 +643,9 @@ derived from popcorn Linux:
 \subsubsection{FusedOS}
 % Todo what is ran on the light weight cores 
 FusedOS\cite{FusedOS} was one of the first to combine 
-linux with a LWK(Light weight kernel). FusedOS 
-was assuming heterogeneous hardware architecture 
-that consists of both a light weight and full 
+Linux with a LWK(Light weight kernel). FusedOS 
+heterogeneous hardware architecture 
+consists of both a light weight and full 
 weight cores. The full cores runs linux and 
 is also responsible to partition hardware 
 resources between itself and LWKs.
@@ -654,7 +654,7 @@ hardware resources (i.e light weight cores and memory)
 from the FWK(Full weight Kernel, This refers to the 
 linux kernel). The system calls are generated 
 by the application and are forwarded to Linux 
-which is then handled with LWK process. 
+which is then handled with the LWK process. 
 % todo look at Github implementation 
 
 \begin{figure}[htbp!] 
@@ -728,7 +728,7 @@ if required (i.e by using the L4 Thread).
 % upto 4 major ones 
 
 
-\subsection{Multi-kernel analysis}
+% \subsection{Multi-kernel analysis}
 
 % Table analysis 
 % - Standalone light weight kernel 
@@ -745,7 +745,7 @@ recent survey based on TAG based architectures \cite{acmTAGSurvey} published
 in 2022 was a good staring point to understand about various implementations of TAG
 based architectures with the high level merits and limitations. The following section 
 provides our own version of the Survey to help decide the best implementations 
-to answer the research questions (//TODO reference research questions chapter).
+to answer the research questions.
 
 \subsection{Introduction to TAG based architectures}
 
@@ -781,7 +781,7 @@ TAG policies can be categorized into 5 main categories which is:
   DIFT\cite{DIFT} which provides in depth details. 
   \item Capability models: Capabilities allow a programmer to 
   encapsulate code, data with possibility of the compiler to 
-  add more complier to add custom policies. The CHERI capability 
+  add custom policies. The CHERI capability 
   model is most widely explored\cite{CHERI-RISC} and 
   recently used with the
   ARM fabricated boards\cite{morello} 
@@ -833,15 +833,15 @@ It is one of the latest commercial incarnations of memory-safety-focused tagged 
   \end{figure}
 
 \subsubsection{D-RI5CY}
-D-RISCY\cite{D-RISCY} provides a design a design and implementation of a hardware dynamic information flow 
+D-RISCY\cite{D-RISCY} provides a design and implementation of a hardware dynamic information flow 
 tracking (DIFT) architecture for RISC-V processor cores. The paper presents a low 
 overhead implementation of DIFT that is specialized for low-end embedded systems
-for IOT applications. The following are high level contributions:
+for IOT applications. The following are the high level contributions:
 \begin{itemize}
-  \item Design f D-RI5CY, A DIFT-protected implementation of the RI5CY processor core. 
+  \item A DIFT-protected implementation of the RI5CY processor core. 
         The paper implements the modification of the DIFT TAG propagation and TAG checking
         mechanism in a way that is transparent to the execution of the regular instructions. 
-  \item Concept introduced called stack interleaving that allows efficient and dynamic memory management.
+  \item Stack interleaving that allows efficient and dynamic memory management.
   \item Lightweight shared memory between enclaves.
   \item Efficient shared MPU (i.e Memory Protection Unit) design.
 \end{itemize}
@@ -964,8 +964,8 @@ top existing C based applications.
 
 %\subsection{Pump}
 
-\subsubsection{CHERI \cite{CHERI}}
-CHERI (Capability Hardware Enhanced RISC Instructions) extends conventional processor
+\subsubsection{CHERI}
+CHERI\cite{CHERI} (Capability Hardware Enhanced RISC Instructions) extends conventional processor
 Instruction-Set Architectures (ISAs) with architectural capabilities to enable fine-grained
 memory protection and highly scalable software compartmentalization. CHERI is a hybrid 
 capability architecture that can combine capabilities with conventional MMU(i.e Memory Management
@@ -1082,7 +1082,7 @@ The contribution of the following project include:
 % Prove choice of CHERI
 
 \subsection{TAG based architecture analysis}
-
+The following below is the analysis of the various TAG based architectures surveyed in the following report.
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 \begin{landscape}
@@ -1104,6 +1104,12 @@ The contribution of the following project include:
   \end{tabular}
   \end{table}
 \end{landscape}
+
+   
+
+
+
+
 
 %\subsection{Loki}
 
@@ -1146,31 +1152,31 @@ The contribution of the following project include:
 
 \subsection{Analysis tied up with research questions}
 The following helps derive based on the research questions phrased which implementations 
-will be most suitable to be used: 
+will be the most suitable to be used to answer the following research questions: 
 
 \subsubsection{Does using a Uni-kernels built with a safe language such as Rust reduce the number of TAG policies needed ?}
 Based on the 10 papers surveyed for Uni-kernels above. The best Uni-kernel that could 
 be used to the answer the following question would be Rusty-Hermit. Rusty-Hermit is a Rust 
-implementation of the Hermit-Core implementation. Rusty-Hermit is the most active Rust 
-implementation of the Uni-kernel Hermit-core currently maintained. This question will be answered 
+ported implementation of the Hermit-Core implementation which is based on C. Rusty-Hermit is the most active Rust 
+implementation of the Uni-kernels surveyed(Hermit-core is currently not maintained). This question will be answered 
 by porting the CHERI architecture to Rusty-Hermit.
 
 \subsubsection{Does offloading only parts of a program to a TAG based hardware using the Multi-kernel approach improve runtime performance 
 and enhances security to the critical areas of a program only ?}
 Based on the survey of Popcorn linux there are 2 main papers which help provide a good starting point towards this question. The first 
 paper is HEXO \cite{HEXO} which is a branch of PopcornLinux multi-kernel implementation which runs the Uni-kernel HermitTux(Branch of 
-Hermit-Core to run Linux ABI binaries) for offloading tasks to a secondary machine and other one is Cross-ISA enclave offloading using
+Hermit-Core to run Linux ABI binaries) for offloading tasks to a secondary machine and the other one is fundamentally Cross-ISA enclave offloading using
 popcorn linux \cite{PopcornEnclave} which allows programmers to annotate which parts of their program they want to offload and run on
-IntelSGX\cite{IntelSGX} as an example. The HEXO paper can be considered as an implementation which uses a Multi-kernel in combination with Uni-kernels
+PopSGX as an example. The HEXO paper can be considered as an implementation which uses a Multi-kernel in combination with Uni-kernels
 for a light OS image with lesser context switches for better performance (i.e run-time, memory usage and predictable runtimes)
-and the Cross-ISA enclave offloading paper which utilizes the IntelSGX(Enclave model\cite{Enclave}) that can considered as 
-a security enhancement to the Multi-kernel model. On the perspective of security IntelSGX cannot be considered as 
-a TAG based architecture because it does not tie tags with addresses and only covers a sub-set of security policies in contract 
+and the Cross-ISA enclave offloading paper which utilizes the PopSGX(Enclave model\cite{Enclave}) that can considered as 
+a security enhancement to the Multi-kernel model. On the perspective of security PopSGX cannot be considered as 
+a TAG based architecture because it does not tie tags with addresses and only covers a sub-set of security policies in contrast
 to what TAG based architectures can provide.
 
 \subsubsection{Design of a new scheduler with the picture of adding TAG hardware to multi-kernels ?}
-Based on the previous research questions the factors added to a Multi-kernel would be supporting Uni-kernels running on 
-each core and as-well as Uni-kernels on top of a TAG based architecture. This would mean that the scheduler on 
+Based on the previous research questions the factor added to Multi-kernels would be to support running Uni-kernels running on 
+each core and as-well as Uni-kernels on top of a TAG based architecture. This means that the scheduler on 
 Popcorn linux would significantly change based on the possibility of adding TAG-based architecture as a factor into the 
 Popcorn linux variety of architectures supported and based on Survey conducted there has been 1 paper\cite{TypedArchitecture} 
 which talks about utilizing TAG based-hardware to speedup dynamic type checking in dynamic programming languages. This opens up the possibility to explore designing a 

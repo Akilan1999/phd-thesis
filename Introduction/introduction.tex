@@ -6,7 +6,7 @@
 \chapter{Introduction}  %Title of the Introduction
 Modern software practices aim for high performance and better security
 and scalability at the same time. There have been few areas of research 
-which have been of great interest in the recent research in support 
+which have been of great interest in support 
 of providing a high performant system with better security as well.
 Few of ways this has been achieved is by trimming down the size of 
 the operating systems, by building a dedicated hardware to manage 
@@ -16,19 +16,19 @@ various types of cores which could be completely different
 architectures.
 
 \subsubsection{Trimmed down OS}
-The approach of interest in context of this research would 
-be Uni-kernels. Uni-kernels is specialized single address 
+The approach of interest in context for a trimmed down OS for
+this research would be Uni-kernels. Uni-kernels is specialized single address 
 spaced OS image constructed by using the Library operating 
-system model. A library operating system is the standard services 
+system model. A library operating system\cite{LibraryOS} is a set of standard services 
 provided by a typical operating system such as networking provided 
-in a form of libraries which is then constructed with the application 
+in the form of libraries which is then constructed with the application 
 either at compile time or as a separate process after compile time.
 
 \subsubsection{Dedicated hardware to manage and execute security
 policies}
-In context of the following TAG based architectures would be 
-of interest. Tagged based architecture can be classified as 
-hardware security primitives which consists of data and code with tags. 
+In context of the following, TAG based architectures would be 
+of interest. A Tagged based architecture can be classified as 
+a hardware security primitives which consists of data and code with tags. 
 Tags function as security metadata mostly about memory. This is
 created before run-time. During run-time the hardware 
 would enforce the following policies which in return 
@@ -36,7 +36,7 @@ provides security guarantees.
 
 \subsubsection{Running a single program across cores of 
 various architectures}
-In context of the following the Multi kernel approach would 
+In context of the following, the Multi kernel approach would 
 be of interest. Multi-kernel approach treats a multi-core machine 
 as a network of independent cores. This means a program would interact
 with multiple cores the same way as it would interact with a distributed systems 
@@ -44,7 +44,7 @@ using message passing as an example.
 
 \subsection{Discussion}
 Based on the following 3 subsections the aim of the 
-following PhD would be combine all the 3 approaches into a 
+following PhD would be to combine all the 3 approaches into a 
 single system which would allow programs to be more scalable, 
 provide the possibility to run certain parts of a program on secure 
 hardware and improve the performance by using a slim down kernel. 

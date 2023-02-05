@@ -429,7 +429,7 @@ parallel programs model for HaLVM\cite{HaLVM}.
   \begin{figure}[htbp!] 
     \centering    
     \includegraphics[width=0.6\textwidth]{Mirage}
-    \caption[Mirage]{Azelea-unikernel in a single KNL \cite{Azelea}}
+    \caption[Mirage]{Mirage's stack \cite{mirage}}
     \label{fig:Mirage}
     \end{figure}
 
@@ -595,7 +595,7 @@ of the core.
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.6\textwidth]{Multi-kernel}
-  \caption[Multi-kernel]{Barrelfish Multi-kernel model \cite{multi_kernel_first_paper}}
+  \caption[Barrelfish]{Barrelfish Multi-kernel model \cite{multi_kernel_first_paper}}
   \label{fig:Barrelfish}
   \end{figure}
 % % Add image 
@@ -660,7 +660,7 @@ which is then handled with the LWK process.
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.6\textwidth]{FigsMultikernel/fusedOSarchitecture}
-  \caption[Multi-kernel]{FusedOS Multi-kernel model \cite{FusedOS}}
+  \caption[FusedOS]{FusedOS Multi-kernel model \cite{FusedOS}}
   \label{fig:FusedOS}
   \end{figure}
 
@@ -683,7 +683,7 @@ round robin cooperative scheduler.
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.6\textwidth]{FigsMultikernel/mckernel}
-  \caption[Multi-kernel]{IHK/McKernel Multi-kernel model \cite{McKernel}}
+  \caption[IHK/McKernel]{IHK/McKernel Multi-kernel model \cite{McKernel}}
   \label{fig:McKernel}
   \end{figure}
 
@@ -704,7 +704,7 @@ if required (i.e by using the L4 Thread).
 \begin{figure}[htbp!] 
   \centering    
   \includegraphics[width=0.6\textwidth]{FigsMultikernel/ffmk}
-  \caption[Multi-kernel]{FFMK Multi-kernel model \cite{FFMK}}
+  \caption[FFMK]{FFMK Multi-kernel model \cite{FFMK}}
   \label{fig:FMK}
   \end{figure}
 
@@ -814,8 +814,8 @@ The following below are relevant papers in relation to the research questions:
  \begin{figure}[htbp!] 
   \centering
   \includegraphics[width=0.6\textwidth]{Timber-V}
-  \caption[MTE]{TimberV TAG interleaved on flat physical memory\cite{weiser_timber-v_2019}}
-  \label{fig:MTE}
+  \caption[TimberV]{TimberV TAG interleaved on flat physical memory\cite{weiser_timber-v_2019}}
+  \label{fig:TimberV}
   \end{figure}
 	
 \subsubsection{ARM MTE}
@@ -1081,29 +1081,29 @@ The contribution of the following project include:
 
 % Prove choice of CHERI
 
-\subsection{TAG based architecture analysis}
-The following below is the analysis of the various TAG based architectures surveyed in the following report.
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-\begin{landscape}
-\begin{table}[]
-  \centering
-  \caption{Analyzing various TAG-based implementations}
-  \begin{tabular}{@{}lllllll@{}}
-  \toprule
-  \textbf{Architecture} & \textbf{Policy Goal} & \textbf{Complier} & \textbf{Bootloader} & \textbf{OS kernel} & \textbf{Processor} & \textbf{Evaluation} \\ \midrule
-  Timder V              & IFC                  & Yes               & Yes                 & Yes                & Yes                & Simulation          \\
-  ARM MTE               & Memory Safety        & Yes               & Yes                 & Yes                & Yes                & ASIC                \\
-  D-RI5CY               & DIFT                 & Yes               & Yes                 & Yes                & Yes                & FPGA                \\
-  HyperFlow             & IFC                  & No                & No                  & No                 & Yes                & FPGA                \\
-  SDMP                  & Memory Safety        & Yes               & Yes                 & No                 & Yes                & Simulation          \\
-  Typed Architecture    & N/A (Performance)    & Yes               & Yes                 & Yes                & Yes                & FPGA                \\
-  Dover                 & Programmable         & Yes               & Yes                 & No                 & Yes                & FPGA                \\
-  CHERI                 & Programmable         & Yes               & Yes                 & Yes                & Yes                & ASIC                \\
-  HardBound             & Memory Safety        & Yes               & Yes                 & Yes                & Yes                & Simulation          \\ \bottomrule
-  \end{tabular}
-  \end{table}
-\end{landscape}
+% \subsection{TAG based architecture analysis}
+% The following below is the analysis of the various TAG based architectures surveyed in the following report.
+% % Please add the following required packages to your document preamble:
+% % \usepackage{booktabs}
+% \begin{landscape}
+% \begin{table}[]
+%   \centering
+%   \caption{Analyzing various TAG-based implementations}
+%   \begin{tabular}{@{}lllllll@{}}
+%   \toprule
+%   \textbf{Architecture} & \textbf{Policy Goal} & \textbf{Complier} & \textbf{Bootloader} & \textbf{OS kernel} & \textbf{Processor} & \textbf{Evaluation} \\ \midrule
+%   Timder V              & IFC                  & Yes               & Yes                 & Yes                & Yes                & Simulation          \\
+%   ARM MTE               & Memory Safety        & Yes               & Yes                 & Yes                & Yes                & ASIC                \\
+%   D-RI5CY               & DIFT                 & Yes               & Yes                 & Yes                & Yes                & FPGA                \\
+%   HyperFlow             & IFC                  & No                & No                  & No                 & Yes                & FPGA                \\
+%   SDMP                  & Memory Safety        & Yes               & Yes                 & No                 & Yes                & Simulation          \\
+%   Typed Architecture    & N/A (Performance)    & Yes               & Yes                 & Yes                & Yes                & FPGA                \\
+%   Dover                 & Programmable         & Yes               & Yes                 & No                 & Yes                & FPGA                \\
+%   CHERI                 & Programmable         & Yes               & Yes                 & Yes                & Yes                & ASIC                \\
+%   HardBound             & Memory Safety        & Yes               & Yes                 & Yes                & Yes                & Simulation          \\ \bottomrule
+%   \end{tabular}
+%   \end{table}
+% \end{landscape}
 
    
 
@@ -1150,8 +1150,9 @@ The following below is the analysis of the various TAG based architectures surve
 
 %\subsection{Burroughs}
 
-\subsection{Analysis tied up with research questions}
-The following helps derive based on the research questions phrased which implementations 
+\section[Analysis]{Analysis tied up with the research questions}
+\label{Analysis}
+The following helps derive based on the research questions phrased, which implementations 
 will be the most suitable to be used to answer the following research questions: 
 
 \subsubsection{Does using a Uni-kernels built with a safe language such as Rust reduce the number of TAG policies needed ?}
@@ -1165,7 +1166,7 @@ by porting the CHERI architecture to Rusty-Hermit.
 and enhances security to the critical areas of a program only ?}
 Based on the survey of Popcorn linux there are 2 main papers which help provide a good starting point towards this question. The first 
 paper is HEXO \cite{HEXO} which is a branch of PopcornLinux multi-kernel implementation which runs the Uni-kernel HermitTux(Branch of 
-Hermit-Core to run Linux ABI binaries) for offloading tasks to a secondary machine and the other one is fundamentally Cross-ISA enclave offloading using
+Hermit-Core to run Linux ABI binaries) for offloading tasks to a secondary machine and the other one is fundamentally a Cross-ISA enclave offloading using
 popcorn linux \cite{PopcornEnclave} which allows programmers to annotate which parts of their program they want to offload and run on
 PopSGX as an example. The HEXO paper can be considered as an implementation which uses a Multi-kernel in combination with Uni-kernels
 for a light OS image with lesser context switches for better performance (i.e run-time, memory usage and predictable runtimes)
@@ -1180,4 +1181,4 @@ each core and as-well as Uni-kernels on top of a TAG based architecture. This me
 Popcorn linux would significantly change based on the possibility of adding TAG-based architecture as a factor into the 
 Popcorn linux variety of architectures supported and based on Survey conducted there has been 1 paper\cite{TypedArchitecture} 
 which talks about utilizing TAG based-hardware to speedup dynamic type checking in dynamic programming languages. This opens up the possibility to explore designing a 
-new scheduler that can offload tasks to TAG based hardware either for usage of the security features or performance reasons. 
+new scheduler that can offload tasks to TAG based hardware either for usage of the security features or performance reasons(i.e for speeding up dynamic type checking). 

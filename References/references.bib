@@ -1,830 +1,196 @@
-% ------------------------------------------------------------------------
-% BIBLIOGRAPHY FILE
-% ------------------------------------------------------------------------
 
-% ---------------------------- Unikernels ------------------------------
+@article{navarro_practical_nodate,
+	title = {Practical, transparent operating system support for superpages},
+	abstract = {Most general-purpose processors provide support for memory pages of large sizes, called superpages. Superpages enable each entry in the translation lookaside buffer ({TLB}) to map a large physical memory region into a virtual address space. This dramatically increases {TLB} coverage, reduces {TLB} misses, and promises performance improvements for many applications. However, supporting superpages poses several challenges to the operating system, in terms of superpage allocation and promotion tradeoffs, fragmentation control, etc. We analyze these issues, and propose the design of an effective superpage management system. We implement it in {FreeBSD} on the Alpha {CPU}, and evaluate it on real workloads and benchmarks. We obtain substantial performance beneﬁts, often exceeding 30\%; these beneﬁts are sustained even under stressful workload scenarios.},
+	author = {Navarro, Juan},
+	langid = {english},
+	file = {Navarro - Practical, transparent operating system support fo.pdf:/Users/akilan/Zotero/storage/9RBYAPGM/Navarro - Practical, transparent operating system support fo.pdf:application/pdf},
+}
 
+@inproceedings{panwar_hawkeye_2019,
+	location = {Providence {RI} {USA}},
+	title = {{HawkEye}: Efficient Fine-grained {OS} Support for Huge Pages},
+	isbn = {978-1-4503-6240-5},
+	url = {https://dl.acm.org/doi/10.1145/3297858.3304064},
+	doi = {10.1145/3297858.3304064},
+	shorttitle = {{HawkEye}},
+	eventtitle = {{ASPLOS} '19: Architectural Support for Programming Languages and Operating Systems},
+	pages = {347--360},
+	booktitle = {Proceedings of the Twenty-Fourth International Conference on Architectural Support for Programming Languages and Operating Systems},
+	publisher = {{ACM}},
+	author = {Panwar, Ashish and Bansal, Sorav and Gopinath, K.},
+	urldate = {2024-05-27},
+	date = {2019-04-04},
+	langid = {english},
+	file = {Full Text PDF:/Users/akilan/Zotero/storage/VQLCKYCA/Panwar et al. - 2019 - HawkEye Efficient Fine-grained OS Support for Hug.pdf:application/pdf},
+}
 
-% Introduction: 
-- https://dl.acm.org/doi/10.1145/2490301.2451167 (First paper)
-- http://unikernel.org (Definition) 
-- https://github.com/cetic/unikernels (Introduction to Uni-kernels and survey) 
-- https://dl.acm.org/doi/10.1145/1961296.1950399 (Library operating system)
+@article{basu_efficient_nodate,
+	title = {Efficient Virtual Memory for Big Memory Servers},
+	abstract = {Our analysis shows that many “big-memory” server workloads, such as databases, in-memory caches, and graph analytics, pay a high cost for page-based virtual memory. They consume as much as 10\% of execution cycles on {TLB} misses, even using large pages. On the other hand, we find that these workloads use read-write permission on most pages, are provisioned not to swap, and rarely benefit from the full flexibility of page-based virtual memory.},
+	author = {Basu, Arkaprava and Gandhi, Jayneel and Chang, Jichuan and Hill, Mark D and Swift, Michael M},
+	langid = {english},
+	file = {Basu et al. - Efficient Virtual Memory for Big Memory Servers.pdf:/Users/akilan/Zotero/storage/JJ5M79Q9/Basu et al. - Efficient Virtual Memory for Big Memory Servers.pdf:application/pdf},
+}
 
-@article{FirstUnikernelPaper,
-	title = {Unikernels: library operating systems for the cloud},
-	volume = {41},
+@inproceedings{karakostas_redundant_2015,
+	location = {Portland Oregon},
+	title = {Redundant memory mappings for fast access to large memories},
+	isbn = {978-1-4503-3402-0},
+	url = {https://dl.acm.org/doi/10.1145/2749469.2749471},
+	doi = {10.1145/2749469.2749471},
+	abstract = {Page-based virtual memory improves programmer productivity, security, and memory utilization, but incurs performance overheads due to costly page table walks after {TLB} misses. This overhead can reach 50\% for modern workloads that access increasingly vast memory with stagnating {TLB} sizes. To reduce the overhead of virtual memory, this paper proposes Redundant Memory Mappings ({RMM}), which leverage ranges of pages and provides an efﬁcient, alternative representation of many virtual-to-physical mappings. We deﬁne a range be a subset of process’s pages that are virtually and physically contiguous. {RMM} translates each range with a single range table entry, enabling a modest number of entries to translate most of the process’s address space. {RMM} operates in parallel with standard paging and uses a software range table and hardware range {TLB} with arbitrarily large reach. We modify the operating system to automatically detect ranges and to increase their likelihood with eager page allocation. {RMM} is thus transparent to applications. We prototype {RMM} software in Linux and emulate the hardware. {RMM} performs substantially better than paging alone and huge pages, and improves a wider variety of workloads than direct segments (one range per program), reducing the overhead of virtual memory to less than 1\% on average.},
+	eventtitle = {{ISCA} '15: The 42nd Annual International Symposium on Computer Architecture},
+	pages = {66--78},
+	booktitle = {Proceedings of the 42nd Annual International Symposium on Computer Architecture},
+	publisher = {{ACM}},
+	author = {Karakostas, Vasileios and Gandhi, Jayneel and Ayar, Furkan and Cristal, Adrián and Hill, Mark D. and {McKinley}, Kathryn S. and Nemirovsky, Mario and Swift, Michael M. and Ünsal, Osman},
+	urldate = {2024-05-27},
+	date = {2015-06-13},
+	langid = {english},
+	file = {Karakostas et al. - 2015 - Redundant memory mappings for fast access to large.pdf:/Users/akilan/Zotero/storage/8JECES24/Karakostas et al. - 2015 - Redundant memory mappings for fast access to large.pdf:application/pdf},
+}
+
+@article{chen_flexpointer_2023,
+	title = {{FlexPointer}: Fast Address Translation Based on Range {TLB} and Tagged Pointers},
+	volume = {20},
+	issn = {1544-3566, 1544-3973},
+	url = {https://dl.acm.org/doi/10.1145/3579854},
+	doi = {10.1145/3579854},
+	shorttitle = {{FlexPointer}},
+	abstract = {Page-based virtual memory relies on {TLBs} to accelerate the address translation. Nowadays, the gap between application workloads and the capacity of {TLB} continues to grow, bringing many costly {TLB} misses and making the {TLB} a performance bottleneck. Previous studies seek to narrow the gap by exploiting the contiguity of physical pages. One promising solution is to group pages that are both virtually and physically contiguous into a memory range. Recording range translations can greatly increase the {TLB} reach, but ranges are also hard to index because they have arbitrary bounds. The processor has to compare against all the boundaries to determine which range an address falls in, which restricts the usage of memory ranges.
+            In this article, we propose a tagged-pointer-based scheme, {FlexPointer}, to solve the range indexing problem. The core insight of {FlexPointer} is that large memory objects are rare, so we can create memory ranges based on such objects and assign each of them a unique {ID}. With the range {ID} integrated into pointers, we can index the range {TLB} with {IDs} and greatly simplify its structure. Moreover, because the {ID} is stored in the unused bits of a pointer and is not manipulated by the address generation, we can shift the range lookup to an earlier stage, working in parallel with the address generation. According to our trace-based simulation results, {FlexPointer} can reduce nearly all the L1 {TLB} misses, and page walks for a variety of memory-intensive workloads. Compared with a 4K-page baseline system, {FlexPointer} shows a 14\% performance improvement on average and up to 2.8x speedup in the best case. For other workloads, {FlexPointer} shows no performance degradation.},
+	pages = {1--24},
+	number = {2},
+	journaltitle = {{ACM} Transactions on Architecture and Code Optimization},
+	shortjournal = {{ACM} Trans. Archit. Code Optim.},
+	author = {Chen, Dongwei and Tong, Dong and Yang, Chun and Yi, Jiangfang and Cheng, Xu},
+	urldate = {2024-05-27},
+	date = {2023-06-30},
+	langid = {english},
+	file = {Full Text PDF:/Users/akilan/Zotero/storage/L9XGZDFK/Chen et al. - 2023 - FlexPointer Fast Address Translation Based on Ran.pdf:application/pdf},
+}
+
+@article{woodruff_cheri_2019,
+	title = {{CHERI} Concentrate: Practical Compressed Capabilities},
+	volume = {68},
+	rights = {https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/{IEEE}.html},
+	issn = {0018-9340, 1557-9956, 2326-3814},
+	url = {https://ieeexplore.ieee.org/document/8703061/},
+	doi = {10.1109/TC.2019.2914037},
+	shorttitle = {{CHERI} Concentrate},
+	abstract = {We present {CHERI} Concentrate, a new fat-pointer compression scheme applied to {CHERI}, the most developed capability-pointer system at present. Capability fat pointers are a primary candidate to enforce ﬁne-grained and non-bypassable security properties in future computer systems, although increased pointer size can severely affect performance. Thus, several proposals for capability compression have been suggested elsewhere that do not support legacy instruction sets, ignore features critical to the existing software base, and also introduce design inefﬁciencies to {RISC}-style processor pipelines. {CHERI} Concentrate improves on the state-of-the-art region-encoding efﬁciency, solves important pipeline problems, and eases semantic restrictions of compressed encoding, allowing it to protect a full legacy software stack. We present the ﬁrst quantitative analysis of compiled capability code, which we use to guide the design of the encoding format. We analyze and extend logic from the open-source {CHERI} prototype processor design on {FPGA} to demonstrate encoding efﬁciency, minimize delay of pointer arithmetic, and eliminate additional load-to-use delay. To verify correctness of our proposed high-performance logic, we present a {HOL}4 machine-checked proof of the decode and pointer-modify operations. Finally, we measure a 50\% to 75\% reduction in L2 misses for many compiled C-language benchmarks running under a commodity operating system using compressed 128-bit and 64-bit formats, demonstrating both compatibility with and increased performance over the uncompressed, 256-bit format.},
+	pages = {1455--1469},
+	number = {10},
+	journaltitle = {{IEEE} Transactions on Computers},
+	shortjournal = {{IEEE} Trans. Comput.},
+	author = {Woodruff, Jonathan and Joannou, Alexandre and Xia, Hongyan and Fox, Anthony and Norton, Robert M. and Chisnall, David and Davis, Brooks and Gudka, Khilan and Filardo, Nathaniel W. and Markettos, A. Theodore and Roe, Michael and Neumann, Peter G. and Watson, Robert N. M. and Moore, Simon W.},
+	urldate = {2024-05-27},
+	date = {2019-10-01},
+	langid = {english},
+	file = {Woodruff et al. - 2019 - CHERI Concentrate Practical Compressed Capabiliti.pdf:/Users/akilan/Zotero/storage/3SZUIWQ5/Woodruff et al. - 2019 - CHERI Concentrate Practical Compressed Capabiliti.pdf:application/pdf},
+}
+
+@online{noauthor_capability-based_nodate,
+	title = {Capability-Based Computer Systems},
+	url = {https://homes.cs.washington.edu/~levy/capabook/},
+	urldate = {2024-06-07},
+	file = {Capability-Based Computer Systems:/Users/akilan/Zotero/storage/IAAG6ZF3/capabook.html:text/html},
+}
+
+@article{woodruff_cheri_2014,
+	title = {The {CHERI} capability model: revisiting {RISC} in an age of risk},
+	volume = {42},
 	issn = {0163-5964},
-	shorttitle = {Unikernels},
-	url = {https://doi.org/10.1145/2490301.2451167},
-	doi = {10.1145/2490301.2451167},
-	abstract = {We present unikernels, a new approach to deploying cloud services via applications written in high-level source code. Unikernels are single-purpose appliances that are compile-time specialised into standalone kernels, and sealed against modification when deployed to a cloud platform. In return they offer significant reduction in image sizes, improved efficiency and security, and should reduce operational costs. Our Mirage prototype compiles OCaml code into unikernels that run on commodity clouds and offer an order of magnitude reduction in code size without significant performance penalty. The architecture combines static type-safety with a single address-space layout that can be made immutable via a hypervisor extension. Mirage contributes a suite of type-safe protocol libraries, and our results demonstrate that the hypervisor is a platform that overcomes the hardware compatibility issues that have made past library operating systems impractical to deploy in the real-world.},
-	number = {1},
-	urldate = {2022-11-02},
-	journal = {ACM SIGARCH Computer Architecture News},
-	author = {Madhavapeddy, Anil and Mortier, Richard and Rotsos, Charalampos and Scott, David and Singh, Balraj and Gazagnaire, Thomas and Smith, Steven and Hand, Steven and Crowcroft, Jon},
-	month = mar,
-	year = {2013},
-	keywords = {functional programming, hypervisor, microkernel},
-	pages = {461--472},
-}
-
-@misc{UnikernelDefinition,
-	title = {Unikernels - {Rethinking} {Cloud} {Infrastructure}},
-	url = {http://unikernel.org/},
-	urldate = {2022-11-02},
-	file = {Unikernels - Rethinking Cloud Infrastructure:/Users/akilan/Zotero/storage/JZ4TZA2Z/unikernel.org.html:text/html},
-}
-
-@misc{UnikernelSurvey,
-	title = {Unikernel and {Immutable} {Infrastructures}},
-	url = {https://github.com/cetic/unikernels},
-	abstract = {Unikernel and immutable infrastructures},
-	urldate = {2022-11-02},
-	publisher = {CETIC},
-	month = nov,
-	year = {2022},
-	note = {original-date: 2018-05-11T13:37:54Z},
-}
-
-@article{LibraryOS,
-	title = {Rethinking the library {OS} from the top down},
-	volume = {46},
-	issn = {0362-1340},
-	url = {https://doi.org/10.1145/1961296.1950399},
-	doi = {10.1145/1961296.1950399},
-	abstract = {This paper revisits an old approach to operating system construc-tion, the library OS, in a new context. The idea of the library OS is that the personality of the OS on which an application depends runs in the address space of the application. A small, fixed set of abstractions connects the library OS to the host OS kernel, offering the promise of better system security and more rapid independent evolution of OS components. We describe a working prototype of a Windows 7 library OS that runs the latest releases of major applications such as Microsoft Excel, PowerPoint, and Internet Explorer. We demonstrate that desktop sharing across independent, securely isolated, library OS instances can be achieved through the pragmatic reuse of net-working protocols. Each instance has significantly lower overhead than a full VM bundled with an application: a typical application adds just 16MB of working set and 64MB of disk footprint. We contribute a new ABI below the library OS that enables application mobility. We also show that our library OS can address many of the current uses of hardware virtual machines at a fraction of the overheads. This paper describes the first working prototype of a full commercial OS redesigned as a library OS capable of running significant applications. Our experience shows that the long-promised benefits of the library OS approach better protection of system integrity and rapid system evolution are readily obtainable.},
+	url = {https://doi.org/10.1145/2678373.2665740},
+	doi = {10.1145/2678373.2665740},
+	shorttitle = {The {CHERI} capability model},
+	abstract = {Motivated by contemporary security challenges, we reevaluate and refine capability-based addressing for the {RISC} era. We present {CHERI}, a hybrid capability model that extends the 64-bit {MIPS} {ISA} with byte-granularity memory protection. We demonstrate that {CHERI} enables language memory model enforcement and fault isolation in hardware rather than software, and that the {CHERI} mechanisms are easily adopted by existing programs for efficient in-program memory safety. In contrast to past capability models, {CHERI} complements, rather than replaces, the ubiquitous page-based protection mechanism, providing a migration path towards deconflating data-structure protection and {OS} memory management. Furthermore, {CHERI} adheres to a strict {RISC} philosophy: it maintains a load-store architecture and requires only singlecycle instructions, and supplies protection primitives to the compiler, language runtime, and operating system. We demonstrate a mature {FPGA} implementation that runs the {FreeBSD} operating system with a full range of software and an open-source application suite compiled with an extended {LLVM} to use {CHERI} memory protection. A limit study compares published memory safety mechanisms in terms of instruction count and memory overheads. The study illustrates that {CHERI} is performance-competitive even while providing assurance and greater flexibility with simpler hardware},
+	pages = {457--468},
 	number = {3},
-	urldate = {2022-11-02},
-	journal = {ACM SIGPLAN Notices},
-	author = {Porter, Donald E. and Boyd-Wickizer, Silas and Howell, Jon and Olinsky, Reuben and Hunt, Galen C.},
-	month = mar,
-	year = {2011},
-	keywords = {drawbridge, libos, library os},
-	pages = {291--304},
-	file = {Full Text:/Users/akilan/Zotero/storage/WJF24P29/Porter et al. - 2011 - Rethinking the library OS from the top down.pdf:application/pdf},
+	journaltitle = {{ACM} {SIGARCH} Computer Architecture News},
+	shortjournal = {{SIGARCH} Comput. Archit. News},
+	author = {Woodruff, Jonathan and Watson, Robert N.M. and Chisnall, David and Moore, Simon W. and Anderson, Jonathan and Davis, Brooks and Laurie, Ben and Neumann, Peter G. and Norton, Robert and Roe, Michael},
+	urldate = {2024-06-07},
+	date = {2014-06-14},
 }
 
-% Uni-kraft 
-- https://dl.acm.org/doi/pdf/10.1145/3447786.3456248
-
-@inproceedings{Unikraft,
-	address = {New York, NY, USA},
-	series = {{EuroSys} '21},
-	title = {Unikraft: fast, specialized unikernels the easy way},
-	isbn = {978-1-4503-8334-9},
-	shorttitle = {Unikraft},
-	url = {https://doi.org/10.1145/3447786.3456248},
-	doi = {10.1145/3447786.3456248},
-	urldate = {2022-11-02},
-	booktitle = {Proceedings of the {Sixteenth} {European} {Conference} on {Computer} {Systems}},
-	publisher = {Association for Computing Machinery},
-	author = {Kuenzer, Simon and Bădoiu, Vlad-Andrei and Lefeuvre, Hugo and Santhanam, Sharan and Jung, Alexander and Gain, Gaulthier and Soldani, Cyril and Lupu, Costin and Teodorescu, Stefan and Răducanu, Costi and Banu, Cristian and Mathy, Laurent and Deaconescu, Răzvan and Raiciu, Costin and Huici, Felipe},
-	month = apr,
-	year = {2021},
-	pages = {376--394},
-	file = {Full Text PDF:/Users/akilan/Zotero/storage/KCNRN8FP/Kuenzer et al. - 2021 - Unikraft fast, specialized unikernels the easy wa.pdf:application/pdf},
+@article{miller_towards_nodate,
+	title = {Towards a Uniﬁed Approach to Access Control and Concurrency Control},
+	author = {Miller, Mark Samuel},
+	langid = {english},
+	file = {Miller - Towards a Uniﬁed Approach to Access Control and Co.pdf:/Users/akilan/Zotero/storage/7METVAKG/Miller - Towards a Uniﬁed Approach to Access Control and Co.pdf:application/pdf},
 }
 
-% OSv 
-- https://www.usenix.org/system/files/conference/atc14/atc14-paper-kivity.pdf
-- (Lock free design) https://link.springer.com/chapter/10.1007/11561071_31
-- Diagram (https://www.slideshare.net/ScyllaDB/osv-unikernel-optimizing-guest-os-to-run-stateless-and-serverless-apps-in-the-cloud)
-
-@article{OSvPaper,
-	title = {{OSv}— {Optimizing} the {Operating} {System} for {Virtual} {Machines}},
-	abstract = {Virtual machines in the cloud typically run existing general-purpose operating systems such as Linux. We notice that the cloud’s hypervisor already provides some features, such as isolation and hardware abstraction, which are duplicated by traditional operating systems, and that this duplication comes at a cost.},
-	language = {en},
-	author = {Kivity, Avi and Laor, Dor and Costa, Glauber and Enberg, Pekka and Har’El, Nadav and Marti, Don and Zolotarov, Vlad},
-	pages = {13},
-	file = {Kivity et al. - OSv— Optimizing the Operating System for Virtual M.pdf:/Users/akilan/Zotero/storage/KXSBJ98E/Kivity et al. - OSv— Optimizing the Operating System for Virtual M.pdf:application/pdf},
+@inproceedings{curtsinger_coz_2015,
+	title = {Coz: Finding Code that Counts with Causal Profiling},
+	url = {http://arxiv.org/abs/1608.03676},
+	doi = {10.1145/2815400.2815409},
+	shorttitle = {Coz},
+	abstract = {Improving performance is a central concern for software developers. To locate optimization opportunities, developers rely on software proﬁlers. However, these proﬁlers only report where programs spent their time: optimizing that code may have no impact on performance. Past proﬁlers thus both waste developer time and make it difﬁcult for them to uncover signiﬁcant optimization opportunities.},
+	pages = {184--197},
+	booktitle = {Proceedings of the 25th Symposium on Operating Systems Principles},
+	author = {Curtsinger, Charlie and Berger, Emery D.},
+	urldate = {2024-06-07},
+	date = {2015-10-04},
+	langid = {english},
+	eprinttype = {arxiv},
+	eprint = {1608.03676 [cs]},
+	keywords = {C.4, Computer Science - Performance, D.4.8},
+	file = {Curtsinger and Berger - 2015 - Coz Finding Code that Counts with Causal Profilin.pdf:/Users/akilan/Zotero/storage/QTFQXVHE/Curtsinger and Berger - 2015 - Coz Finding Code that Counts with Causal Profilin.pdf:application/pdf},
 }
 
-@inproceedings{LockFree,
-	address = {Berlin, Heidelberg},
-	series = {Lecture {Notes} in {Computer} {Science}},
-	title = {Allocating {Memory} in a {Lock}-{Free} {Manner}},
-	isbn = {978-3-540-31951-1},
-	doi = {10.1007/11561071_31},
-	abstract = {The potential of multiprocessor systems is often not fully realized by their system services. Certain synchronization methods, such as lock-based ones, may limit the parallelism. It is significant to see the impact of wait/lock-free synchronization design in key services for multiprocessor systems, such as the memory allocation service. Efficient, scalable memory allocators for multithreaded applications on multiprocessors is a significant goal of recent research projects.},
-	language = {en},
-	booktitle = {Algorithms – {ESA} 2005},
-	publisher = {Springer},
-	author = {Gidenstam, Anders and Papatriantafilou, Marina and Tsigas, Philippas},
-	editor = {Brodal, Gerth Stølting and Leonardi, Stefano},
-	year = {2005},
-	keywords = {False Sharing, Memory Request, Move Operation, Multiprocessor System, Shared Location},
-	pages = {329--342},
+@online{noauthor_benchmark_nodate,
+	title = {Benchmark {ABI} - {CheriBSD} 23.11 new features tutorial},
+	url = {https://www.cheribsd.org/tutorial/23.11/benchmark/index.html},
+	urldate = {2024-06-07},
+	file = {Benchmark ABI - CheriBSD 23.11 new features tutorial:/Users/akilan/Zotero/storage/9BDKUW28/index.html:text/html},
 }
 
-@misc{OSvDiagram,
-	title = {{OSv} {Unikernel} — {Optimizing} {Guest} {OS} to {Run} {Stateless} and {Serverless} {A}…},
-	url = {https://www.slideshare.net/ScyllaDB/osv-unikernel-optimizing-guest-os-to-run-stateless-and-serverless-apps-in-the-cloud},
-	urldate = {2022-11-02},
-	author = {ScyllaDB},
+@inproceedings{zhu_research_2018,
+	location = {Taipei, Taiwan},
+	title = {Research and Implementation of High Performance Traffic Processing Based on Intel {DPDK}},
+	isbn = {978-1-5386-9403-9},
+	url = {https://ieeexplore.ieee.org/document/8701793/},
+	doi = {10.1109/PAAP.2018.00018},
+	eventtitle = {2018 9th International Symposium on Parallel Architectures, Algorithms and Programming ({PAAP})},
+	pages = {62--68},
+	booktitle = {2018 9th International Symposium on Parallel Architectures, Algorithms and Programming ({PAAP})},
+	publisher = {{IEEE}},
+	author = {Zhu, Wenjun and Li, Peng and Luo, Baozhou and Xu, He and Zhang, Yujie},
+	urldate = {2024-06-07},
+	date = {2018-12},
 }
 
-
-% Hermit core 
-- https://dl.acm.org/doi/pdf/10.1145/2931088.2931093
-
-@inproceedings{HermitCore,
-	address = {New York, NY, USA},
-	series = {{ROSS} '16},
-	title = {{HermitCore}: {A} {Unikernel} for {Extreme} {Scale} {Computing}},
-	isbn = {978-1-4503-4387-9},
-	shorttitle = {{HermitCore}},
-	url = {https://doi.org/10.1145/2931088.2931093},
-	doi = {10.1145/2931088.2931093},
-	abstract = {We expect that the size and the complexity of future supercomputers will increase on their path to exascale systems and beyond. Therefore, system software has to adapt to the complexity of these systems for a simplification of the development of scalable applications. In this paper, we present a unikernel operating system design for HPC. It extends the multi-kernel approach while providing better programmability and scalability for hierarchical systems, such as HLRS' Hazel Hen, which base on multiple cluster-on-a-chip processors. We prove the scalability of the design via micro benchmarks by taking the example of HermitCore---our prototype implementation of the new design.},
-	urldate = {2022-11-02},
-	booktitle = {Proceedings of the 6th {International} {Workshop} on {Runtime} and {Operating} {Systems} for {Supercomputers}},
-	publisher = {Association for Computing Machinery},
-	author = {Lankes, Stefan and Pickartz, Simon and Breitbart, Jens},
-	month = jun,
-	year = {2016},
-	pages = {1--8},
-} 
-
-
-@inproceedings{Hermitux,
-	address = {Providence, RI, USA},
-	title = {A binary-compatible unikernel},
-	isbn = {978-1-4503-6020-3},
-	url = {http://dl.acm.org/citation.cfm?doid=3313808.3313817},
-	doi = {10.1145/3313808.3313817},
-	language = {en},
-	urldate = {2022-11-02},
-	booktitle = {Proceedings of the 15th {ACM} {SIGPLAN}/{SIGOPS} {International} {Conference} on {Virtual} {Execution} {Environments} - {VEE} 2019},
-	publisher = {ACM Press},
-	author = {Olivier, Pierre and Chiba, Daniel and Lankes, Stefan and Min, Changwoo and Ravindran, Binoy},
-	year = {2019},
-	pages = {59--73},
-	file = {Olivier et al. - 2019 - A binary-compatible unikernel.pdf:/Users/akilan/Zotero/storage/JYXQMJRI/Olivier et al. - 2019 - A binary-compatible unikernel.pdf:application/pdf},
+@article{bi_dpdk-based_2016,
+	title = {{DPDK}-based Improvement of Packet Forwarding},
+	volume = {7},
+	rights = {© Owned by the authors, published by {EDP} Sciences, 2016},
+	issn = {2271-2097},
+	url = {https://www.itm-conferences.org/articles/itmconf/abs/2016/02/itmconf_ita2016_01009/itmconf_ita2016_01009.html},
+	doi = {10.1051/itmconf/20160701009},
+	abstract = {Reel-time processing of packets occupies a significant position in the field of computer network security. With theexplosive growth of the backbone link rate,which is consistent with Gilder's law, many bottlenecks of server performance leave the real-time data stream unprocessed.Thus, we proposedto take use of {DPDK}(Data Plan Development Kit) framework to achieve an intelligent {NIC} packet forwarding system. During this research, we deeply analysis the forwarding process of packet in {DPDK} and improve its {DMA} mode.According to the results of experiment, the system greatly enhanced the performance of packet forwarding,and the throughput of forwarding 64-byet or random-length packets by 20Gbit {NIC} reaches13.3Gbps and 18.7Gbps(dual ports forwarding).},
+	pages = {01009},
+	journaltitle = {{ITM} Web of Conferences},
+	shortjournal = {{ITM} Web Conf.},
+	author = {Bi, Hao and Wang, Zhao-Hun},
+	urldate = {2024-06-07},
+	date = {2016},
+	langid = {english},
+	note = {Publisher: {EDP} Sciences},
+	file = {Full Text PDF:/Users/akilan/Zotero/storage/LEVMJ983/Bi and Wang - 2016 - DPDK-based Improvement of Packet Forwarding.pdf:application/pdf},
 }
 
-
-@inproceedings{HermitMPK,
-author = {Sung, Mincheol and Olivier, Pierre and Lankes, Stefan and Ravindran, Binoy},
-title = {Intra-Unikernel Isolation with Intel Memory Protection Keys},
-year = {2020},
-isbn = {9781450375542},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3381052.3381326},
-doi = {10.1145/3381052.3381326},
-booktitle = {Proceedings of the 16th ACM SIGPLAN/SIGOPS International Conference on Virtual Execution Environments},
-pages = {143–156},
-numpages = {14},
-keywords = {unikernels, memory safety, memory protection keys},
-location = {Lausanne, Switzerland},
-series = {VEE '20}
+@online{noauthor_arm_nodate,
+	title = {Arm Architecture Reference Manual for A-profile architecture},
+	url = {https://developer.arm.com/documentation/ddi0487/latest},
+	urldate = {2024-06-08},
+	file = {Arm Architecture Reference Manual for A-profile architecture:/Users/akilan/Zotero/storage/72DMZYM2/latest.html:text/html},
 }
 
-@inproceedings{RustyHermit,
-author = {Lankes, Stefan and Breitbart, Jens and Pickartz, Simon},
-title = {Exploring Rust for Unikernel Development},
-year = {2019},
-isbn = {9781450370172},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3365137.3365395},
-doi = {10.1145/3365137.3365395},
-booktitle = {Proceedings of the 10th Workshop on Programming Languages and Operating Systems},
-pages = {8–15},
-numpages = {8},
-location = {Huntsville, ON, Canada},
-series = {PLOS'19}
-}
-
-
-
-% RKOS - https://media.taricorp.net/rkos.pdf
-
-@article{RKOS,
-	title = {{RKOS}: {UNIKERNEL} {DESIGN} {FOR} {SAFETY} {AND} {PERFORMANCE}},
-	language = {en},
-	author = {Marheine, Peter H},
-	pages = {71},
-	file = {Marheine - RKOS UNIKERNEL DESIGN FOR SAFETY AND PERFORMANCE.pdf:/Users/akilan/Zotero/storage/HZJ6ECFN/Marheine - RKOS UNIKERNEL DESIGN FOR SAFETY AND PERFORMANCE.pdf:application/pdf},
-}
-
-% Click OS
-% - https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-martins.pd
-
-@article{ClickOS,
-	title = {{ClickOS} and the {Art} of {Network} {Function} {Virtualization}},
-	abstract = {Over the years middleboxes have become a fundamental part of today’s networks. Despite their usefulness, they come with a number of problems, many of which arise from the fact that they are hardware-based: they are costly, difﬁcult to manage, and their functionality is hard or impossible to change, to name a few.},
-	language = {en},
-	author = {Martins, Joao and Ahmed, Mohamed and Raiciu, Costin and Olteanu, Vladimir and Honda, Michio and Huici, Felipe},
-	pages = {16},
-	file = {Martins et al. - ClickOS and the Art of Network Function Virtualiza.pdf:/Users/akilan/Zotero/storage/AE7V2DA5/Martins et al. - ClickOS and the Art of Network Function Virtualiza.pdf:application/pdf},
-}
-
-% NanoOS
-% - https://nanos.org/thebook
-
-@misc{NanoOS,
-	title = {The {Book} — {Nanos}.org},
-	url = {https://nanos.org/thebook},
-	urldate = {2022-11-02},
-	file = {The Book — Nanos.org:/Users/akilan/Zotero/storage/Q4ZDAN4M/thebook.html:text/html},
-}
-
-% Include OS 
-% - https://www.researchgate.net/publication/285734407_IncludeOS_A_Minimal_Resource_Efficient_Unikernel_for_Cloud_Services
-
-@inproceedings{IncludeOS,
-	title = {{IncludeOS}: {A} {Minimal}, {Resource} {Efficient} {Unikernel} for {Cloud} {Services}},
-	shorttitle = {{IncludeOS}},
-	doi = {10.1109/CloudCom.2015.89},
-	abstract = {The emergence of cloud computing as a ubiquitous platform for elastically scaling services has generated need and opportunity for new types of operating systems. A service that needs to be both elastic and resource efficient needs A) highly specialized components, and B) to run with minimal resource overhead. Classical general purpose operating systems designed for extensive hardware support are by design far from meeting these requirements. In this paper we present IncludeOS, a single tasking library operating system for cloud services, written from scratch in C++. Key features include: extremely small disk-and memory footprint, efficient asynchronous I/O, OS-library where only what your service needs gets included, and only one device driver by default (virtio). As a test case a bootable disk image consisting of a simple DNS server with OS included is shown to require only 158 kb of disk space and to require 5-20\% less CPU-time, depending on hardware, compared to the same binary running on Linux.},
-	author = {Bratterud, Alfred and Walla, Alf-Andre and Haugerud, Hårek and Engelstad, Paal E. and Begnum, Kyrre},
-	month = dec,
-	year = {2015},
-	file = {Full Text PDF:/Users/akilan/Zotero/storage/3FNFHJYF/Bratterud et al. - 2015 - IncludeOS A Minimal, Resource Efficient Unikernel.pdf:application/pdf},
-}
-
-% Azelea 
-% https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8539634 (Base 
-% paper)
-% 1. Performance papers 
-%   - OS Noise  https://ieeexplore.ieee.org/document/9370730 
-%   - IO offload acceleration (https://www.researchgate.net/publication/347805645_Azalea_unikernel_IO_offload_acceleration) 
-
-@misc{Azelea,
-	title = {Azalea-{Unikernel}: {Unikernel} into {Multi}-kernel {Operating} {System} for {Manycore} {Systems}},
-	shorttitle = {Azalea-{Unikernel}},
-	url = {https://ieeexplore.ieee.org/document/8539634/},
-	abstract = {As applications such as a big data processing require more CPUs, manycore systems with a large number of CPUs have been developed to meet this requirement. However, without the in-depth consideration of parallelism, only increasing the number of cores cannot provide performance scalability. Furthermore, the current monolithic operating systems (e.g., Linux) cannot also provide performance scalability in manycore systems due to the cache coherency of shared data problems. As a result, multi-kernel operating systems have emerged as an alternative solution for scalability in manycore systems. We have developed a multi-kernel operating system called Azalea, which consists of a full-weight kernel (FWK) and lightweight kernel (LWK). The FWK handles heavy kernel services (i.e., file system services), and the LWK supports the minimal kernel functions as much as needed of application execution and eliminates the sharing of kernel data. However, there remain kernel noises in LWK such as context switching and page fault handling, even though they are less than Linux. In this paper, we propose Azalea-unikernel, which applies unikernel techniques into the LWK to reduce kernel noises. It eliminates privilege switching and address space switching by integrating user-kernel-address space. In particular case, the azalea-unikernel shows 7.5× better performance than LWK and Linux.},
-	language = {en-US},
-	urldate = {2022-11-02},
-	file = {Snapshot:/Users/akilan/Zotero/storage/QABKDP2E/document.html:text/html},
-}
-
-@inproceedings{AzeleaOSNoise,
-	title = {{OS} noise {Analysis} on {Azalea}-unikernel},
-	doi = {10.23919/ICACT51234.2021.9370730},
-	abstract = {Operating System noise is a well-known problem that occurs mainly in large-scale systems running HPC application, and it also limits performance scalability. In order to reduce OS noise occurring in a general-purpose OS, different design approached kernels like micro-kernel and lightweight kernel are studied. Recently unikernel optimized for application program has been studied. The purpose of this paper is to measure OS noise in unikernel. We compared OS noise of Linux, general-purposed OS, and Azalea-unikernel, one of the unikernels. Well-known OS noise measurement benchmarks such as fixed work quanta (FTQ), fixed time quanta (FWQ), and Hourglass were used. As a result of the experiment, it was confirmed that Azalea-unikernel has less OS noise than Linux, and it also means unikernel is a kernel suitable for supporting scalability on manycore systems.},
-	booktitle = {2021 23rd {International} {Conference} on {Advanced} {Communication} {Technology} ({ICACT})},
-	author = {Cha, Seung-Jun and Jeon, Seung Hyub and Jeong, Yeon Jeong and Kim, Jin Mee and Jung, Sungin},
-	month = feb,
-	year = {2021},
-	note = {ISSN: 1738-9445},
-	keywords = {Azalea-unikernel, Benchmark testing, interference, Interference, Kernel, Large-scale systems, Linux, Noise measurement, operating systems, OS noise, Scalability},
-	pages = {81--84},
-	file = {IEEE Xplore Abstract Record:/Users/akilan/Zotero/storage/9APIHSBQ/9370730.html:text/html},
-}
-
-@inproceedings{AzeleaIOAccerleration,
-	title = {Azalea unikernel {IO} offload acceleration},
-	doi = {10.1109/ICTC49870.2020.9289322},
-	author = {Jeong, Yeonjeong and Kim, Jinmee and Jeon, Seunghyub and Cha, Seung-Jun and Lee, Yongseob and Woo, Youngjoo and Jung, Sungin},
-	month = oct,
-	year = {2020},
-	pages = {1377--1380},
-}
-
-% HaLVM 
-@article{HaLVM,
-author = {Cheon, Junseok and Kim, Yeoneo and Hur, Taekwang and Byun, Sugwoo and Woo, Gyun},
-year = {2020},
-month = {06},
-pages = {012070},
-title = {An Analysis of Haskell Parallel Programming Model in the HaLVM},
-volume = {1566},
-journal = {Journal of Physics: Conference Series},
-doi = {10.1088/1742-6596/1566/1/012070}
-}
-
-% mirage
-@article{mirage,
-	title = {Unikernels: {Library} {Operating} {Systems} for the {Cloud}},
-	abstract = {We present unikernels, a new approach to deploying cloud services via applications written in high-level source code. Unikernels are single-purpose appliances that are compile-time specialised into standalone kernels, and sealed against modiﬁcation when deployed to a cloud platform. In return they offer signiﬁcant reduction in image sizes, improved efﬁciency and security, and should reduce operational costs. Our Mirage prototype compiles OCaml code into unikernels that run on commodity clouds and offer an order of magnitude reduction in code size without signiﬁcant performance penalty. The architecture combines static type-safety with a single address-space layout that can be made immutable via a hypervisor extension. Mirage contributes a suite of type-safe protocol libraries, and our results demonstrate that the hypervisor is a platform that overcomes the hardware compatibility issues that have made past library operating systems impractical to deploy in the real-world.},
-	language = {en},
-	author = {Madhavapeddy, Anil and Mortier, Richard and Rotsos, Charalampos and Scott, David and Singh, Balraj and Gazagnaire, Thomas and Smith, Steven and Hand, Steven and Crowcroft, Jon},
-	pages = {12},
-	file = {Madhavapeddy et al. - Unikernels Library Operating Systems for the Clou.pdf:/Users/akilan/Zotero/storage/MPAQMZNF/Madhavapeddy et al. - Unikernels Library Operating Systems for the Clou.pdf:application/pdf},
-}
-
-
-
-
-
-% ---------------------------- TAG Based Architecture --------------------------
-
-%===== TAG Survey =======
-% TODO: regenerate using Zotero
-@misc{acmTAGSurvey,
-	title = {{T}{A}{G}: {T}agged {A}rchitecture {G}uide | {A}{C}{M} {C}omputing {S}urveys --- dl.acm.org},
-	howpublished = {\url{https://dl.acm.org/doi/abs/10.1145/3533704}},
-	year = {2022},
-	note = {[Accessed 20-Oct-2022]},
-}
-
-@article{BellAndLaPadulaSecurityModel,
-	title = {The {Bell} and {La} {Padula} {Security} {Model}},
-	abstract = {A precise description is given of the Bell and La Padula security model using modern notation. The development faithfully follows that of the original presentation [1, 2]. The paper is intended to provide a basis for more exact, formal, and scientiﬁc discussion of the model than has been the case heretofore.},
-	language = {en},
-	author = {Rushby, John},
-	file = {Rushby - The Bell and La Padula Security Model.pdf:/Users/akilan/Zotero/storage/UZWBNZ4B/Rushby - The Bell and La Padula Security Model.pdf:application/pdf},
-}
-
-@misc{Biba,
-	title = {Biba {Model} - an overview {\textbar} {ScienceDirect} {Topics}},
-	url = {https://www.sciencedirect.com/topics/computer-science/biba-model},
-	urldate = {2023-01-08},
-	file = {Biba Model - an overview | ScienceDirect Topics:/Users/akilan/Zotero/storage/G3BA8P6K/biba-model.html:text/html},
-}
-
-
-@article{DIFT,
-	title = {Dynamic {Information} {Flow} {Tracking}: {Taxonomy}, {Challenges}, and {Opportunities}},
-	volume = {12},
-	issn = {2072-666X},
-	shorttitle = {Dynamic {Information} {Flow} {Tracking}},
-	url = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8399738/},
-	doi = {10.3390/mi12080898},
-	abstract = {Dynamic information flow tracking (DIFT) has been proven an effective technique to track data usage; prevent control data attacks and non-control data attacks at runtime; and analyze program performance. Therefore, a series of DIFT techniques have been developed recently. In this paper, we summarize the current DIFT solutions and analyze the features and limitations of these solutions. Based on the analysis, we classify the existing solutions into three categories, i.e., software, hardware, software and hardware co-design. We discuss the DIFT design from the perspective of whole system and point out the limitations of current DIFT frameworks. Potential enhancements to these solutions are also presented. Furthermore, we present suggestions about the possible future direction of DIFT solutions so that DIFT can help improve security levels.},
-	number = {8},
-	urldate = {2023-01-08},
-	journal = {Micromachines},
-	author = {Chen, Kejun and Guo, Xiaolong and Deng, Qingxu and Jin, Yier},
-	month = jul,
-	year = {2021},
-	pmid = {34442520},
-	pmcid = {PMC8399738},
-	pages = {898},
-	file = {PubMed Central Full Text PDF:/Users/akilan/Zotero/storage/XF6QDM6J/Chen et al. - 2021 - Dynamic Information Flow Tracking Taxonomy, Chall.pdf:application/pdf},
-}
-
-@misc{Morello,
-	title = {Department of {Computer} {Science} and {Technology} – {CHERI}: {The} {Arm} {Morello} {Board}},
-	url = {https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/cheri-morello.html},
-	urldate = {2023-01-08},
-	file = {Department of Computer Science and Technology – CHERI\: The Arm Morello Board:/Users/akilan/Zotero/storage/AYUQLXZ5/cheri-morello.html:text/html},
-}
-
-@article{CHERI-RISC,
-	title = {Capability {Hardware} {Enhanced} {RISC} {Instructions}: {CHERI} {Instruction}-set architecture},
-	language = {en},
-	author = {Watson, Robert N M and Neumann, Peter G and Woodruff, Jonathan and Anderson, Jonathan and Chisnall, David and Davis, Brooks and Laurie, Ben and Moore, Simon W and Murdoch, Steven J and Roe, Michael},
-	file = {Watson et al. - Capability Hardware Enhanced RISC Instructions CH.pdf:/Users/akilan/Zotero/storage/28G2DJHH/Watson et al. - Capability Hardware Enhanced RISC Instructions CH.pdf:application/pdf},
-}
-
-
-
-%===================
-
-% Timber 
-@inproceedings{weiser_timber-v_2019,
-	address = {San Diego, CA},
-	title = {{TIMBER}-{V}: {Tag}-{Isolated} {Memory} {Bringing} {Fine}-grained {Enclaves} to {RISC}-{V}},
-	isbn = {978-1-891562-55-6},
-	shorttitle = {{TIMBER}-{V}},
-	url = {https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_10-3_Weiser_paper.pdf},
-	doi = {10.14722/ndss.2019.23068},
-	abstract = {Embedded computing devices are used on a large scale in the emerging internet of things (IoT). However, their wide deployment raises the incentive for attackers to target these devices, as demonstrated by several recent attacks. As IoT devices are built for long service life, means are required to protect sensitive code in the presence of potential vulnerabilities, which might be discovered long after deployment. Tagged memory has been proposed as a mechanism to enforce various ﬁne-grained security policies at runtime. However, none of the existing tagged memory schemes provides efﬁcient and ﬂexible compartmentalization in terms of isolated execution environments.},
-	language = {en},
-	urldate = {2022-10-12},
-	booktitle = {Proceedings 2019 {Network} and {Distributed} {System} {Security} {Symposium}},
-	publisher = {Internet Society},
-	author = {Weiser, Samuel and Werner, Mario and Brasser, Ferdinand and Malenko, Maja and Mangard, Stefan and Sadeghi, Ahmad-Reza},
-	year = {2019},
-	file = {Weiser et al. - 2019 - TIMBER-V Tag-Isolated Memory Bringing Fine-graine.pdf:files/5/Weiser et al. - 2019 - TIMBER-V Tag-Isolated Memory Bringing Fine-graine.pdf:application/pdf},
-}
-
-% ARM MTE 
-@misc{ARMMTE,
-	title = {1 {Armv8}.5-{A} {Memory} {Tagging} {Extension}},
-	howpublished = {\url{https://developer.arm.com/-/media/Arm%20Developer%20Community/ PDF/Arm_Memory_Tagging_Extension_Whitepaper.pdf?revision=ef3521b9-322c-4536-a800-5ee35a0e7665&la=en&hash= D510ED84099D3B8AA34723AC110D48E3A28FA8D6}},
-	year = {2019},
-	note = {[Accessed 20-Oct-2022]},
-}
-
-% D-RISCY
-@inproceedings{D-RISCY,
-	title = {Design and {Implementation} of a {Dynamic} {Information} {Flow} {Tracking} {Architecture} to {Secure} a {RISC}-{V} {Core} for {IoT} {Applications}},
-	doi = {10.1109/HPEC.2018.8547578},
-	abstract = {Security for Internet-of-Things devices is an increasingly critical aspect of computer architecture, with implications that spread across a wide range of domains. We present the design and implementation of a hardware dynamic information flow tracking (DIFT) architecture for RISC-V processor cores. Our approach exhibits the following features at the architecture level. First, it supports a robust and software-programmable policy that protects bare-metal applications against memory corruption attacks such as buffer overflows and format strings, without causing false alarms when running real-world benchmarks. Second, it is fast and transparent, having a small impact on applications performances and providing a fine-grain management of security tags. Third, it consists of a flexible design that can be easily extended for targeting new sets of attacks. We implemented our architecture on PULPino, an open-source platform that supports the design of different RISC-V cores targeting IoT applications. FPGA-based experimental results show that the overall overhead is low, with no impact on the processor performance and negligible storage increase.},
-	booktitle = {2018 {IEEE} {High} {Performance} extreme {Computing} {Conference} ({HPEC})},
-	author = {Palmiero, Christian and Di Guglielmo, Giuseppe and Lavagno, Luciano and Carloni, Luca P.},
-	month = sep,
-	year = {2018},
-	note = {ISSN: 2377-6943},
-	keywords = {Computer architecture, Hardware, Instruction sets, Registers, Security, Technological innovation},
-	pages = {1--7},
-	file = {IEEE Xplore Abstract Record:files/9/8547578.html:text/html},
-}
-
-%HyperFlow
-@inproceedings{HyperFlow,
-author = {Ferraiuolo, Andrew and Zhao, Mark and Myers, Andrew C. and Suh, G. Edward},
-title = {HyperFlow: A Processor Architecture for Nonmalleable, Timing-Safe Information Flow Security},
-year = {2018},
-isbn = {9781450356930},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3243734.3243743},
-doi = {10.1145/3243734.3243743},
-abstract = {This paper presents HyperFlow, a processor that enforces secure information flow, including control over timing channels. The design and implementation of HyperFlow offer security assurance because it is implemented using a security-typed hardware description language that enforces secure information flow. Unlike prior processors that aim to enforce simple information-flow policies such as noninterference, HyperFlow allows complex information flow policies that can be configured at run time. Its fine-grained, decentralized information flow mechanisms allow controlled communication among mutually distrusting processes and system calls into different security domains. We address the significant challenges in designing such a processor architecture with contributions in both the hardware architecture and the security type system. The paper discusses the architecture decisions that make the processor secure and describes ChiselFlow, a new secure hardware description language supporting lightweight information-flow enforcement. The HyperFlow architecture is prototyped on a full-featured processor that offers a complete RISC-V instruction set, and is shown to add moderate overhead to area and performance.},
-booktitle = {Proceedings of the 2018 ACM SIGSAC Conference on Computer and Communications Security},
-pages = {1583–1600},
-numpages = {18},
-keywords = {information-flow security, hardware security, timing channels},
-location = {Toronto, Canada},
-series = {CCS '18}
-}
-
-%SDMP
-@INPROCEEDINGS{Sdmp,
-
-  author={Roessler, Nick and DeHon, André},
-
-  booktitle={2018 IEEE Symposium on Security and Privacy (SP)}, 
-
-  title={Protecting the Stack with Metadata Policies and Tagged Hardware}, 
-
-  year={2018},
-
-  volume={},
-
-  number={},
-
-  pages={478-495},
-
-  doi={10.1109/SP.2018.00066}}
-
-%TypedArchitecture
-@article{TypedArchitecture,
-author = {Kim, Channoh and Kim, Jaehyeok and Kim, Sungmin and Kim, Dooyoung and Kim, Namho and Na, Gitae and Oh, Young H. and Cho, Hyeon Gyu and Lee, Jae W.},
-title = {Typed Architectures: Architectural Support for Lightweight Scripting},
-year = {2017},
-issue_date = {March 2017},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-volume = {45},
-number = {1},
-issn = {0163-5964},
-url = {https://doi.org/10.1145/3093337.3037726},
-doi = {10.1145/3093337.3037726},
-abstract = {Dynamic scripting languages are becoming more and more widely adopted not only for fast prototyping but also for developing production-grade applications. They provide high-productivity programming environments featuring high levels of abstraction with powerful built-in functions, automatic memory management, object-oriented programming paradigm and dynamic typing. However, their flexible, dynamic type systems easily become the source of inefficiency in terms of instruction count, memory footprint, and energy consumption. This overhead makes it challenging to deploy these high-productivity programming technologies on emerging single-board computers for IoT applications. Addressing this challenge, this paper introduces Typed Architectures, a high-efficiency, low-cost execution substrate for dynamic scripting languages, where each data variable retains high-level type information at an ISA level. Typed Architectures calculate and check the dynamic type of each variable implicitly in hardware, rather than explicitly in software, hence significantly reducing instruction count for dynamic type checking. Besides, Typed Architectures introduce polymorphic instructions (e.g., xadd), which are bound to the correct native instruction at runtime within the pipeline (e.g., add or fadd) to efficiently implement polymorphic operators. Finally, Typed Architectures provide hardware support for flexible yet efficient type tag extraction and insertion, capturing common data layout patterns of tag-value pairs. Our evaluation using a fully synthesizable RISC-V RTL design on FPGA shows that Typed Architectures achieve geomean speedups of 11.2% and 9.9% with maximum speedups of 32.6% and 43.5% for two production-grade scripting engines for JavaScript and Lua, respectively. Moreover, Typed Architectures improve the energy-delay product (EDP) by 19.3% for JavaScript and 16.5% for Lua with an area overhead of 1.6% at a 40nm technology node.},
-journal = {SIGARCH Comput. Archit. News},
-month = {apr},
-pages = {77–90},
-numpages = {14},
-keywords = {type checking, microarchitecture, instruction set architecture, pipeline, javascript, scripting languages, lua, performance, internet of things (iot), interpreters}
-}
-
-%Dover
-@INPROCEEDINGS{Dover,
-
-  author={Sullivan, Gregory T. and DeHon, André and Milburn, Steven and Boling, Eli and Ciaffi, Marco and Rosenberg, Jothy and Sutherland, Andrew},
-
-  booktitle={2017 IEEE International Symposium on Technologies for Homeland Security (HST)}, 
-
-  title={The Dover inherently secure processor}, 
-
-  year={2017},
-
-  volume={},
-
-  number={},
-
-  pages={1-5},
-
-  doi={10.1109/THS.2017.7943502}}
-
-%CHERI
-@INPROCEEDINGS{CHERI,
-
-  author={Watson, Robert N.M. and Woodruff, Jonathan and Neumann, Peter G. and Moore, Simon W. and Anderson, Jonathan and Chisnall, David and Dave, Nirav and Davis, Brooks and Gudka, Khilan and Laurie, Ben and Murdoch, Steven J. and Norton, Robert and Roe, Michael and Son, Stacey and Vadera, Munraj},
-
-  booktitle={2015 IEEE Symposium on Security and Privacy}, 
-
-  title={CHERI: A Hybrid Capability-System Architecture for Scalable Software Compartmentalization}, 
-
-  year={2015},
-
-  volume={},
-
-  number={},
-
-  pages={20-37},
-
-  doi={10.1109/SP.2015.9}}
-
-  % CheriBSD
-  @misc{CHERIBSD,
-	title = {Department of {Computer} {Science} and {Technology}: {CheriBSD}},
-	url = {https://www.cl.cam.ac.uk/research/security/ctsrd/cheri/cheribsd.html},
-	urldate = {2023-01-04},
-	file = {Department of Computer Science and Technology\: CheriBSD:/Users/akilan/Zotero/storage/K5M3MUTZ/cheribsd.html:text/html},
-}
-
-  % Low fat pointer
-  @inproceedings{LowFatPointer,
-author = {Kwon, Albert and Dhawan, Udit and Smith, Jonathan M. and Knight, Thomas F. and DeHon, Andre},
-title = {Low-Fat Pointers: Compact Encoding and Efficient Gate-Level Implementation of Fat Pointers for Spatial Safety and Capability-Based Security},
-year = {2013},
-isbn = {9781450324779},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/2508859.2516713},
-doi = {10.1145/2508859.2516713},
-booktitle = {Proceedings of the 2013 ACM SIGSAC Conference on Computer and Communications Security},
-pages = {721–732},
-numpages = {12},
-keywords = {fat pointer, capabilities, memory safety, spatial confinement, processor, security},
-location = {Berlin, Germany},
-series = {CCS '13}
-}
-  % Hardbound
-  @article{HardBound,
-	title = {{HardBound}: {Architectural} {Support} for {Spatial} {Safety} of the {C} {Programming} {Language}},
-	abstract = {The C programming language is at least as well known for its absence of spatial memory safety guarantees (i.e., lack of bounds checking) as it is for its high performance. C’s unchecked pointer arithmetic and array indexing allow simple programming mistakes to lead to erroneous executions, silent data corruption, and security vulnerabilities. Many prior proposals have tackled enforcing spatial safety in C programs by checking pointer and array accesses. However, existing software-only proposals have signiﬁcant drawbacks that may prevent wide adoption, including: unacceptably high runtime overheads, lack of completeness, incompatible pointer representations, or need for non-trivial changes to existing C source code and compiler infrastructure.},
-	language = {en},
-	author = {Devietti, Joe and Blundell, Colin and Martin, Milo M K and Zdancewic, Steve},
-	pages = {12},
-	file = {Devietti et al. - HardBound Architectural Support for Spatial Safet.pdf:/Users/akilan/Zotero/storage/CBG4EXZL/Devietti et al. - HardBound Architectural Support for Spatial Safet.pdf:application/pdf},
-}
-
-
-% ---------------------------- Multi-kernel --------------------------
-
-
-@misc{Multi_kernel_wikipedia,
-	title = {Multikernel},
-	copyright = {Creative Commons Attribution-ShareAlike License},
-	url = {https://en.wikipedia.org/w/index.php?title=Multikernel&oldid=1109168202},
-	abstract = {A multikernel operating system treats a multi-core machine as a network of independent cores, as if it were a distributed system.  It does not assume shared memory but rather implements inter-process communications as message-passing. Barrelfish was the first operating system to be described as a multikernel.},
-	language = {en},
-	urldate = {2022-11-25},
-	journal = {Wikipedia},
-	month = sep,
-	year = {2022},
-	note = {Page Version ID: 1109168202},
-	file = {Snapshot:/Users/akilan/Zotero/storage/JRM4DGKA/Multikernel.html:text/html},
-}
-
-
-@inproceedings{multi_kernel_first_paper,
-	address = {Big Sky, Montana, USA},
-	title = {The multikernel: a new {OS} architecture for scalable multicore systems},
-	isbn = {978-1-60558-752-3},
-	shorttitle = {The multikernel},
-	url = {http://portal.acm.org/citation.cfm?doid=1629575.1629579},
-	doi = {10.1145/1629575.1629579},
-	abstract = {Commodity computer systems contain more and more processor cores and exhibit increasingly diverse architectural tradeoﬀs, including memory hierarchies, interconnects, instruction sets and variants, and IO conﬁgurations. Previous high-performance computing systems have scaled in speciﬁc cases, but the dynamic nature of modern client and server workloads, coupled with the impossibility of statically optimizing an OS for all workloads and hardware variants pose serious challenges for operating system structures.},
-	language = {en},
-	urldate = {2022-11-25},
-	booktitle = {Proceedings of the {ACM} {SIGOPS} 22nd symposium on {Operating} systems principles - {SOSP} '09},
-	publisher = {ACM Press},
-	author = {Baumann, Andrew and Barham, Paul and Dagand, Pierre-Evariste and Harris, Tim and Isaacs, Rebecca and Peter, Simon and Roscoe, Timothy and Schüpbach, Adrian and Singhania, Akhilesh},
-	year = {2009},
-	pages = {29},
-	file = {Baumann et al. - 2009 - The multikernel a new OS architecture for scalabl.pdf:/Users/akilan/Zotero/storage/UWMS9RII/Baumann et al. - 2009 - The multikernel a new OS architecture for scalabl.pdf:application/pdf},
-}
-
-@article{PopcornLinux,
-	title = {Popcorn: a replicated-kernel {OS} based on {Linux}},
-	abstract = {In recent years, the number of CPUs per platform has continuously increased, affecting almost all segments of the computer market. Because of this trend, many researchers have investigated the problem of how to scale operating systems better on high core-count machines. While many projects have used Linux as a vehicle for this investigation, others have proposed new OS designs. Among them, the replicated-kernel OS model, speciﬁcally the multikernel, has gained traction. In this paper, we present Popcorn: a replicated-kernel OS based on Linux. Popcorn boots multiple Linux kernel instances on multicore hardware, one per core or group of cores. Kernels communicate to give to applications the illusion that they are running on top of a single OS. Applications can freely migrate between kernels, exploiting all the hardware resources available on the platform, as in SMP Linux.},
-	language = {en},
-	author = {Barbalace, Antonio and Ravindran, Binoy and Katz, David},
-	pages = {16},
-	file = {Barbalace et al. - Popcorn a replicated-kernel OS based on Linux.pdf:/Users/akilan/Zotero/storage/NFQ78YDM/Barbalace et al. - Popcorn a replicated-kernel OS based on Linux.pdf:application/pdf},
-}
-
-% - Sub papers based on popcorn linux
-@inproceedings{HEXO,
-author = {Olivier, Pierre and Mehrab, A. K. M. Fazla and Lankes, Stefan and Karaoui, Mohamed Lamine and Lyerly, Robert and Ravindran, Binoy},
-title = {HEXO: Offloading HPC Compute-Intensive Workloads on Low-Cost, Low-Power Embedded Systems},
-year = {2019},
-isbn = {9781450366700},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3307681.3325408},
-doi = {10.1145/3307681.3325408},
-abstract = {OS-capable embedded systems exhibiting a very low power consumption are available at an extremely low price point. It makes them highly compelling in a datacenter context. In this paper we show that sharing long-running, compute-intensive datacenter HPC workloads between a server machine and one or a few connected embedded boards of negligible cost and power consumption can bring significant benefits in terms of consolidation. Our approach, named Heterogeneous EXecution Offloading (HEXO), selectively offloads Virtual Machines (VMs) from server class machines to embedded boards. Our design tackles several challenges. We address the Instruction Set Architecture (ISA) difference between typical servers (x86) and embedded systems (ARM) through hypervisor and guest OS-level support for heterogeneous-ISA runtime VM migration. We cope with the low amount of resources in embedded systems by using lightweight VMs: unikernels. VMs are offloaded based on an estimation of the slowdown expected from running on a given board. We build a prototype of HEXO and demonstrate significant increase in throughput (up to 67\%) and energy efficiency (up to 56\%) over a set of macro-benchmarks running datacenter compute-intensive jobs.},
-booktitle = {Proceedings of the 28th International Symposium on High-Performance Parallel and Distributed Computing},
-pages = {85–96},
-numpages = {12},
-keywords = {unikernels, heterogeneous isas, migration, offloading},
-location = {Phoenix, AZ, USA},
-series = {HPDC '19}}
-
-% - Sub paper based on popcorn linux for running java applications 
-@inproceedings{APARI,
-	address = {Cracow Poland},
-	title = {Applying source level auto-vectorization to {Aparapi} {Java}},
-	isbn = {978-1-4503-2926-2},
-	url = {https://dl.acm.org/doi/10.1145/2647508.2647519},
-	doi = {10.1145/2647508.2647519},
-	abstract = {Parallelism dominates modern hardware design, from multi-core CPUs to SIMD and GPGPU. This bring with it, however, a need to program this hardware in a programmer-friendly manner. Traditionally, managed languages like Java have struggled to take advantage of data-parallel hardware, but projects like Aparapi provide a programming model that lets the programmer easily express the parallelism within their code, while still programming in a highlevel language.},
-	language = {en},
-	urldate = {2023-01-08},
-	booktitle = {Proceedings of the 2014 {International} {Conference} on {Principles} and {Practices} of {Programming} on the {Java} platform: {Virtual} machines, {Languages}, and {Tools}},
-	publisher = {ACM},
-	author = {Albert, Curt and Murray, Alastair and Ravindran, Binoy},
-	month = sep,
-	year = {2014},
-	pages = {122--132},
-	file = {Albert et al. - 2014 - Applying source level auto-vectorization to Aparap.pdf:/Users/akilan/Zotero/storage/BQSBBHJJ/Albert et al. - 2014 - Applying source level auto-vectorization to Aparap.pdf:application/pdf},
-}
-
-% - sub paper based on popcorn linux (Offloading to the GPU)
-@ARTICLE{AIRA,
-  author={Lyerly, Robert and Murray, Alastair and Barbalace, Antonio and Ravindran, Binoy},
-  journal={IEEE Transactions on Parallel and Distributed Systems}, 
-  title={AIRA: A Framework for Flexible Compute Kernel Execution in Heterogeneous Platforms}, 
-  year={2018},
-  volume={29},
-  number={2},
-  pages={269-282},
-  doi={10.1109/TPDS.2017.2761748}}
-
-% - sub paper based on popcorn linux for the edge containers 
-@article{EdgeContainer,
-author = {Xing, Tong and Barbalace, Antonio and Olivier, Pierre and Karaoui, Mohamed L. and Wang, Wei and Ravindran, Binoy},
-title = {H-Container: Enabling Heterogeneous-ISA Container Migration in Edge Computing},
-year = {2022},
-issue_date = {November 2021},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-volume = {39},
-number = {1–4},
-issn = {0734-2071},
-url = {https://doi.org/10.1145/3524452},
-doi = {10.1145/3524452},
-abstract = {Edge computing is a recent computing paradigm that brings cloud services closer to the client. Among other features, edge computing offers extremely low client/server latencies. To consistently provide such low latencies, services should run on edge nodes that are physically as close as possible to their clients. Thus, when the physical location of a client changes, a service should migrate between edge nodes to maintain proximity. Differently from cloud nodes, edge nodes integrate CPUs of different Instruction Set Architectures (ISAs), hence a program natively compiled for a given ISA cannot migrate to a server equipped with a CPU of a different ISA. This hinders migration to the closest node.We introduce H-Container, a system that migrates natively compiled containerized applications across compute nodes featuring CPUs of different ISAs. H-Container advances over existing heterogeneous-ISA migration systems by being (a) highly compatible – no user’s source-code nor compiler toolchain modifications are needed; (b) easily deployable – fully implemented in user space, thus without any OS or hypervisor dependency, and (c) largely Linux-compliant – it can migrate most Linux software, including server applications and dynamically linked binaries. H-Container targets Linux and its already-compiled executables, adopts LLVM, extends CRIU, and integrates with Docker. Experiments demonstrate that H-Container adds no overheads during program execution, while 10–100 ms are added during migration. Furthermore, we show the benefits of H-Container in real-world scenarios, demonstrating, for example, up to 94% increase in Redis throughput when client/server proximity is maintained through heterogeneous container migration.},
-journal = {ACM Trans. Comput. Syst.},
-month = {jul},
-articleno = {5},
-numpages = {36},
-keywords = {containers, Edge, heterogeneous ISA, migration}
-}
-
-% - Sub paper based on popcorn linux hetergenious offloading
-@article{HeterSec,
-	title = {A {Framework} for {Software} {Diversiﬁcation} with {ISA} {Heterogeneity}},
-	abstract = {Software diversiﬁcation is one of the most effective ways to defeat memory corruption based attacks. Traditional software diversiﬁcation such as code randomization techniques diversiﬁes program memory layout and makes it difﬁcult for attackers to pinpoint the precise location of a target vulnerability. Some recent work in the architecture community use diverse ISA conﬁgurations to defeat code injection or code reuse attacks, showing that dynamically switching the ISA on which a program executes is a promising direction for future security systems. However, most of these work either remain in a simulation stage or require extra efforts to write program. In this paper, we propose HeterSec, a framework to secure applications utilizing a heterogeneous ISA setup composed of real world machines. HeterSec runs on top of commodity x86\_64 and ARM64 machines and gives the process the illusion that it runs on a multi-ISA chip multiprocessor (CMP) machine. With HeterSec, a process can dynamically select its underlying ISA environment. Therefore, a protected process would be capable of hiding the instruction set on which it executed or detecting abnormal program behavior by comparing execution results step-by-step from multiple ISA-diversiﬁed instances. To demonstrate the effectiveness of such a software framework, we implemented HeterSec on Linux and showcased its deployability by running it on a pair of x86\_64 and ARM64 servers, connected over InﬁniBand. We then conducted two case studies with HeterSec. In the ﬁrst case, we implemented a multi-ISA moving target defense (MTD) system, which introduces uncertainty at the instruction set level. In the second case, we implemented a multi-ISA-based multi-version execution (MVX) system. The evaluation results show that HeterSec brings security beneﬁts through ISA diversiﬁcation with a reasonable performance overhead.},
-	language = {en},
-	author = {Wang, Xiaoguang and Yeoh, SengMing and Kim, Sang-Hoon and Lyerly, Robert and Olivier, Pierre and Ravindran, Binoy},
-	file = {Wang et al. - A Framework for Software Diversiﬁcation with ISA H.pdf:/Users/akilan/Zotero/storage/EPIY7MZJ/Wang et al. - A Framework for Software Diversiﬁcation with ISA H.pdf:application/pdf},
-}
-
-% - Sub paper based on popcorn linux on Enclave offlaoding 
-@article{PopcornEnclave,
-	title = {Transparent, {Cross}-{ISA} {Enclave} {Offloading}},
-	abstract = {Hardware vendors constantly design new architecture extensions to improve software security. Due to intellectual property protection and architecture design issues, these hardware extensions are often CPU-specific. This creates an availability gap between different CPU types (security extensions) and software code that runs on top. This is particularly an issue for low-end, embedded devices as they often utilize wimpy CPU cores. This paper aims to bridge this availability gap for security-related CPU extensions, focusing on low-end embedded devices’ access to hardware trusted execution environments (TEEs). We present PopSGX, a framework to transparently offload security-sensitive workloads to a remote enclave of a centralized edge server. The low-end embedded devices act as clients, taking advantage of hardware security features provided by the edge server. We have built an early prototype of PopSGX on top of an open-sourced hardware-agnostic Open Enclave SDK [21]. Any application written using the Open Enclave SDK can leverage the framework without modifying source code. We evaluate our prototype on a simulated IoT/edge computing environment (a Raspberry Pi and an SGX-enabled laptop). The result shows that PopSGX has reasonable performance overhead but secures confidential computations running on the Raspberry Pi.},
-	language = {en},
-	author = {Wang, Xiaoguang and Bilbao, Carlos and Ravindran, Binoy},
-	file = {Wang et al. - Transparent, Cross-ISA Enclave Offloading.pdf:/Users/akilan/Zotero/storage/NP99NIW7/Wang et al. - Transparent, Cross-ISA Enclave Offloading.pdf:application/pdf},
-}
-
-@INPROCEEDINGS{FusedOS,
-  author={Park, Yoonho and Van Hensbergen, Eric and Hillenbrand, Marius and Inglett, Todd and Rosenburg, Bryan and Ryu, Kyung Dong and Wisniewski, Robert W.},
-  booktitle={2012 IEEE 24th International Symposium on Computer Architecture and High Performance Computing}, 
-  title={FusedOS: Fusing LWK Performance with FWK Functionality in a Heterogeneous Environment}, 
-  year={2012},
-  volume={},
-  number={},
-  pages={211-218},
-  doi={10.1109/SBAC-PAD.2012.14}}
-
-@INPROCEEDINGS{McKernel,
-  author={Gerofi, Balazs and Takagi, Masamichi and Hori, Atsushi and Nakamura, Gou and Shirasawa, Tomoki and Ishikawa, Yutaka},
-  booktitle={2016 IEEE International Parallel and Distributed Processing Symposium (IPDPS)}, 
-  title={On the Scalability, Performance Isolation and Device Driver Transparency of the IHK/McKernel Hybrid Lightweight Kernel}, 
-  year={2016},
-  volume={},
-  number={},
-  pages={1041-1050},
-  doi={10.1109/IPDPS.2016.80}}
-
-@InProceedings{FFMK,
-author="Weinhold, Carsten
-and Lackorzynski, Adam
-and Bierbaum, Jan
-and K{\"u}ttler, Martin
-and Planeta, Maksym
-and Weisbach, Hannes
-and Hille, Matthias
-and H{\"a}rtig, Hermann
-and Margolin, Alexander
-and Sharf, Dror
-and Levy, Ely
-and Gak, Pavel
-and Barak, Amnon
-and Gholami, Masoud
-and Schintke, Florian
-and Sch{\"u}tt, Thorsten
-and Reinefeld, Alexander
-and Lieber, Matthias
-and Nagel, Wolfgang E.",
-editor="Bungartz, Hans-Joachim
-and Reiz, Severin
-and Uekermann, Benjamin
-and Neumann, Philipp
-and Nagel, Wolfgang E.",
-title="FFMK: A Fast and Fault-Tolerant Microkernel-Based System for Exascale Computing",
-booktitle="Software for Exascale Computing - SPPEXA 2016-2019",
-year="2020",
-publisher="Springer International Publishing",
-address="Cham",
-pages="483--516",
-abstract="The FFMK project designs, builds and evaluates a system-software architecture to address the challenges expected in Exascale systems. In particular, these challenges include performance losses caused by the much larger impact of runtime variability within applications, hardware, and operating system (OS), as well as increased vulnerability to failures. The FFMK OS platform is built upon a multi-kernel architecture, which combines the L4Re microkernel and a virtualized Linux kernel into a noise-free, yet feature-rich execution environment. It further includes global, distributed platform management and system-level optimization services that transparently minimize checkpoint/restart overhead for applications. The project also researched algorithms to make collective operations fault tolerant in presence of failing nodes. In this paper, we describe the basic components, algorithms, and services we developed in Phase 2 of the project.",
-isbn="978-3-030-47956-5"
-}
-
-
-@article{NAS,
-	title = {{NAS} parallel benchmark results},
-	volume = {1},
-	issn = {1558-1861},
-	doi = {10.1109/88.219861},
-	abstract = {Benchmark results for the Numerical Aerodynamic Simulation (NAS) Program at NASA Ames Research Center, which is dedicated to advancing the science of computational aerodynamics are presented. The benchmark performance results are for the Y-MP, Y-MO EL, and C-90 systems from Cray Research; the TC2000 from Bolt Baranek and Newman; the Gamma iPSC/860 from Intel; the CM-2, CM-200, and CM-5 from Thinking Machines; the CS-1 from Meiko Scientific; the MP-1 and MP-2 from MasPar Computer; and the KSR-1 from Kendall Square Research. The results for the MP-1 and -2, the KSR-1, and the CM-5 have not been published before. Many of the other results are improved from previous listings, reflecting improvements both in compilers and in implementations.{\textless}{\textgreater}},
-	number = {1},
-	journal = {IEEE Parallel \& Distributed Technology: Systems \& Applications},
-	author = {Bailey, D.H. and Barszcz, E. and Dagum, L. and Simon, H.D.},
-	month = feb,
-	year = {1993},
-	note = {Conference Name: IEEE Parallel \& Distributed Technology: Systems \& Applications},
-	keywords = {Aerodynamics, Computational fluid dynamics, Computational modeling, Concurrent computing, Data structures, High performance computing, Kernel, NASA, Power system reliability, Supercomputers},
-	pages = {43--51},
-	file = {IEEE Xplore Abstract Record:/Users/akilan/Zotero/storage/X2BNLWG8/219861.html:text/html;IEEE Xplore Full Text PDF:/Users/akilan/Zotero/storage/4PXBIGNJ/Bailey et al. - 1993 - NAS parallel benchmark results.pdf:application/pdf},
-}
-
-@article{l4linux,
-	title = {{L4Linux} {Porting} {Optimizations}},
-	language = {en},
-	author = {Lackorzynski, Adam},
-	pages = {58},
-	file = {Lackorzynski - L4Linux Porting Optimizations.pdf:/Users/akilan/Zotero/storage/R2MRZ86X/Lackorzynski - L4Linux Porting Optimizations.pdf:application/pdf},
-}
-
-ˆ% -------------------------------- Research questions analysis ---------------------------
-@misc{IntelSGX,
-	title = {Intel {SGX} {Explained}},
-	url = {https://eprint.iacr.org/undefined/undefined},
-	abstract = {Intel's Software Guard Extensions (SGX) is a set of extensions to the Intel architecture that aims to provide integrity and privacy guarantees to security-sensitive computation performed on a computer where all the privileged software (kernel, hypervisor, etc) is potentially malicious. This paper analyzes Intel SGX, based on the 3 papers that introduced it, on the Intel Software Developer's Manual (which supersedes the SGX manuals), on an ISCA 2015 tutorial, and on two patents. We use the papers, reference manuals, and tutorial as primary data sources, and only draw on the patents to fill in missing information. This paper's contributions are a summary of the Intel-specific architectural and micro-architectural details needed to understand SGX, a detailed and structured presentation of the publicly available information on SGX, a series of intelligent guesses about some important but undocumented aspects of SGX, and an analysis of SGX's security properties.Fixed typos.},
-	urldate = {2023-01-10},
-	author = {Costan, Victor and Devadas, Srinivas},
-}
-
-@article{Enclave,
-	title = {Managing confidentiality leaks through private algorithms on {Software} {Guard} {eXtensions} ({SGX}) enclaves},
-	volume = {2019},
-	issn = {2510-523X},
-	url = {https://doi.org/10.1186/s13635-019-0091-5},
-	doi = {10.1186/s13635-019-0091-5},
-	abstract = {Many applications are built upon private algorithms, and executing them in untrusted, remote environments poses confidentiality issues. To some extent, these problems can be addressed by ensuring the use of secure hardware in the execution environment; however, an insecure software-stack can only provide limited algorithm secrecy.},
-	number = {1},
-	urldate = {2023-01-10},
-	journal = {EURASIP Journal on Information Security},
-	author = {Küçük, Kubilay Ahmet and Grawrock, David and Martin, Andrew},
-	month = sep,
-	year = {2019},
-	keywords = {Algorithm Owner (AO), Data Owner (DO), Early Private Mode (EPM), Enclave Developer’s (ED) Responsibilities, Hardware Owner (HO), Internal Enclave Functions (IEF), Private Algorithms, Public Internal Enclave Functions (PIEF), Secret-Code Execution (SCE), Serialised Secret Internal Enclave Functions (SSIEF), Side-Channels, Software Guard eXtensions (SGX) Enclave, Trusted Computing Base (TCB)},
-	pages = {14},
-	file = {Full Text PDF:/Users/akilan/Zotero/storage/7IP6NUSJ/Küçük et al. - 2019 - Managing confidentiality leaks through private alg.pdf:application/pdf;Snapshot:/Users/akilan/Zotero/storage/9NJP259K/s13635-019-0091-5.html:text/html},
-
-
-
-% -----------------------------------------------------------------------------------
-
-
-% -----------------------------------------------------------------------------------
-% --------------------------------- Year 1 Activity ---------------------------------
-
-@inproceedings{Europar2022Paper,
-	title = {Benchmarking {Parallelism} in {Unikernels}},
-	url = {https://github.com/Akilan1999/PhD-public/blob/9a9f3831d25c7b4e196ebf3edb23e1e5ce57b8ca/Conferences/Europar2022/paper.pdf},
-	abstract = {Virtualisation technologies are widely used in Cloud com- puting infrastructures, because they can be provisioned cheaply and quickly to meet demand. The common approaches are either to pack- age a Operating System (OS) as a Virtual Machine, or to container- ise software with an OS kernel. An emerging alternative are unikernels, which are customised kernels to support just one application. Unikernels are lightweight and an applications has sole use of the kernel, which of- fers potential for fast, resource efficient and secure execution. For these reasons, unikernels may be idea for parallel computing in the Cloud. However, the parallel performance of unikernel-based Cloud applications has not been extensively studied. This paper presents an evaluation of the OSv unikernel using a parallelised Mandelbrot benchmark, compar- ing with Docker and a monolithic VM for runtime, parallel speedups and boot-up time. OSv has the fastest boot-up time, and is comparable with the parallel speedups of Docker and the monolithic VM.},
-	urldate = {2022-12-14},
-	author = {Selvacoumar, Akilan},
-	month = dec,
-	year = {2022},
-	note = {original-date: 2022-12-14T20:31:10Z},
-}
-
-@misc{Europar2022Poster,
-	title = {Benchmarking {Parallelism} in {Unikernels}},
-	url = {https://github.com/Akilan1999/PhD-public/blob/9a9f3831d25c7b4e196ebf3edb23e1e5ce57b8ca/Conferences/Europar2022/poster.pdf},
-	urldate = {2022-12-14},
-	author = {Selvacoumar, Akilan},
-	month = dec,
-	year = {2022},
-	note = {original-date: 2022-12-14T20:31:10Z},
-}
-
-@misc{Sisca2022Poster,
-	title = {{PhD} {Activity}},
-	url = {https://github.com/Akilan1999/PhD-public/blob/9a9f3831d25c7b4e196ebf3edb23e1e5ce57b8ca/Conferences/Sisca2022/poster.pdf},
-	abstract = {Benchmarking Unikernels with distributed map reduce.},
-	urldate = {2022-12-14},
-	author = {Selvacoumar, Akilan},
-	month = dec,
-	year = {2022},
-	note = {original-date: 2022-12-14T20:31:10Z},
+@online{noauthor_getting_nodate,
+	title = {Getting Started with {CheriBSD} 23.11 - Getting Started with {CheriBSD} 23.11},
+	url = {https://ctsrd-cheri.github.io/cheribsd-getting-started/cover/index.html},
+	urldate = {2024-06-08},
+	file = {Getting Started with CheriBSD 23.11 - Getting Started with CheriBSD 23.11:/Users/akilan/Zotero/storage/4NSMMRDG/index.html:text/html},
 }

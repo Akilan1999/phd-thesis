@@ -1,9 +1,15 @@
 % ************************** Thesis Abstract *****************************
 % Use `abstract' as an option in the document class to print only the titlepage and the abstract.
 \begin{abstract}
-There has been a lot work done in the areas of slim down kernels, OS paradigms which treat a multi-core machine as network of independent cores 
-and specialized hardware which could provide certain security features. While they have been heavily independently worked on. The major aims for 
-the following research would be to combine all 3 of them to together and address the potential benefits from such an approach. The year 1 report 
-does a survey of implementations done in the areas Uni-kernels, Multi-kernels and TAG based architectures. Based on these surveys, comes up
-with the research aims for the following PhD. A timeline is provided with the detailed plan for the following research.
+The increasing disparity between application workloads and the capacity of Translation Lookaside Buffers (TLB) 
+has prompted researchers to explore innovative solutions to mitigate this gap. One such approach involves 
+leveraging physically contiguous memory to optimize TLB utilization. Concurrently, advancements in hardware-level 
+system security, exemplified by the Capability Hardware Enhanced RISC Instructions (CHERI) architecture, offer 
+additional opportunities for improving memory management and security.
+  
+CHERI introduces capability-based addressing, a novel approach that enhances system security by associating capabilities 
+with memory pointers. These capabilities restrict access to memory regions, thereby fortifying the system against various 
+security threats. Importantly, the mechanisms implemented in CHERI for enforcing memory protection can also serve as 
+accelerators for standard user-space memory allocators. By leveraging capability-based addressing, memory 
+allocators can efficiently manage memory resources while ensuring robust security measures are in place.
 \end{abstract}

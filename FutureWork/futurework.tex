@@ -1,0 +1,39 @@
+\chapter{Future work}
+% The future plan is to transition from the current experiment, which involves working on the ARM architecture on the ARM Morello board. 
+% The current limitation is that all memory reads must go through the TLB for translations. The future plan involves storing 
+% the offset directly on the pointer and using the bounds in CHERI to enable block-based allocator behavior. This phase of the 
+% experiment is intended to be conducted on the RISC-V implementation of CHERI, known as Tooba. 
+
+% In the RISC-V implementation, the hardware Verilog design will be modified to allow bypassing the TLB. Once this concept is 
+% integrated into the RISC-V Verilog implementation, the OS layer will be changed to a single-address-space operating system, 
+% where there is no distinction between user space and kernel space. In this implementation, the kernel allocator will be the 
+% same as the user space allocator since both can utilize a single contiguous chunk of memory.
+The current experimental setup on the ARM Morello board is constrained by the requirement that all memory reads must 
+pass through the Translation Lookaside Buffer (TLB) for address translation. This necessitates frequent TLB lookups, potentially 
+leading to performance bottlenecks. The planned future work aims to address this by leveraging CHERI 
+(Capability Hardware Enhanced RISC Instructions) extensions on the RISC-V architecture, specifically using the 
+Tooba implementation.
+
+\subsubsection{Storing Offsets Directly on Pointers}
+In the current ARM Morello setup, address translations rely on the TLB.
+The future approach on RISC-V Tooba involves storing the offset directly within the pointer. This is possible due to CHERI's capability model, which supports fine-grained memory protection and can encode bounds within pointers.
+Utilizing Bounds in CHERI for Block-Based Allocation:
+
+CHERI capabilities allow pointers to carry metadata about memory bounds, providing hardware-enforced memory safety.
+By encoding the offset and bounds within the pointer, the system can directly access memory without needing intermediate translations via the TLB.
+This enables the implementation of a block-based allocator that can efficiently manage memory allocations and deallocations within defined bounds.
+Bypassing the TLB in RISC-V Tooba.
+\subsubsection{Hardware Modifications}:
+The Verilog design of the RISC-V processor will be modified to allow certain memory operations to bypass the TLB. This means that when a pointer with encoded offset and bounds is used, the system can directly compute the physical address from the capability information.
+This modification reduces the dependency on the TLB, decreasing latency and improving performance, especially for frequent memory operations.
+Transition to a Single-Address-Space Operating System (SASOS).
+\subsubsection{Concept of SASOS}:
+In traditional operating systems, there is a clear separation between user space and kernel space. This separation is enforced by memory protection mechanisms and address translation through the TLB.
+In a Single-Address-Space Operating System, this distinction is removed. Both user applications and the kernel share the same contiguous address space.
+\subsubsection{Advantages of SASOS with CHERI}:
+\begin{itemize}
+  \item Simplified Memory Management : Without the need to switch between user and kernel spaces, memory management becomes simpler and more efficient.
+The kernel allocator can be the same as the user space allocator, operating on a single, contiguous chunk of memory.
+  \item Unified Allocator: The unified memory allocator can efficiently manage memory for both kernel and user applications, leveraging CHERI's capability-based protection to prevent unauthorized access.
+This reduces overhead and potential fragmentation issues associated with maintaining separate memory spaces.
+\end{itemize}

@@ -1,68 +1,94 @@
-%!TEX root = ../thesis.tex
-%*******************************************************************************
-%*********************************** Introduction *****************************
-%*******************************************************************************
+\chapter{Introduction}
+In the dynamic landscape of computing, the pursuit of optimal performance is a constant endeavor, 
+especially as applications evolve to handle increasingly complex workloads. 
+One critical aspect influencing performance is memory management, where efficient 
+utilization of resources is paramount. Translation Lookaside Buffers (TLBs) play a 
+pivotal role in this regard, expediting memory access by storing recently accessed memory translations.
+However, as applications grow in size and complexity, the capacity of TLBs often struggles to 
+keep pace, leading to performance bottlenecks. To address this challenge, researchers have 
+turned to innovative solutions, one of which involves harnessing the benefits of huge pages.
+Huge pages, also known as large pages, allow for the allocation of memory in significantly 
+larger chunks compared to traditional small pages. By reducing the number of TLB entries 
+needed to access a given amount of memory, huge pages offer a potential avenue for optimizing 
+TLB utilization and thereby enhancing overall system performance.
 
-\chapter{Introduction}  %Title of the Introduction
-Modern software practices aim for high performance and better security
-and scalability at the same time. There have been few areas of research 
-which have been of great interest in support 
-of providing a high performant system with better security as well.
-Few of ways this has been achieved is by trimming down the size of 
-the operating systems, by building a dedicated hardware to manage 
-help manage and execute security policies and the third approach 
-which is a paradigm to support running a single program across 
-various types of cores which could be completely different 
-architectures.
+Simultaneously, advancements in hardware-level security, such as the Capability Hardware 
+Enhanced RISC Instructions (CHERI) architecture, present additional opportunities for 
+performance enhancement. CHERI's capability-based addressing approach not only strengthens 
+system security by tightly controlling memory access but also provides avenues for 
+accelerating memory management operations.
 
-\subsubsection{Trimmed down OS}
-The approach of interest in context for a trimmed down OS for
-this research would be Uni-kernels. Uni-kernels is specialized single address 
-spaced OS image constructed by using the Library operating 
-system model. A library operating system\cite{LibraryOS} is a set of standard services 
-provided by a typical operating system such as networking provided 
-in the form of libraries which is then constructed with the application 
-either at compile time or as a separate process after compile time.
+In this context, the integration of huge pages into memory management 
+strategies alongside capability-based addressing in architectures like 
+CHERI offers a compelling synergy. By optimizing TLB utilization through the 
+utilization of huge pages and leveraging the security features of capability-based addressing, 
+significant performance improvements can be realized. This approach not only enhances 
+system security but also accelerates memory access.
 
-\subsubsection{Dedicated hardware to manage and execute security
-policies}
-In context of the following, TAG based architectures would be 
-of interest. A Tagged based architecture can be classified as 
-a hardware security primitives which consists of data and code with tags. 
-Tags function as security metadata mostly about memory. This is
-created before run-time. During run-time the hardware 
-would enforce the following policies which in return 
-provides security guarantees. 
+% TODO: 
+% - Add references for FlexPointer, Range Memory Mapping (RMM), Direct Segment and Huge Pages
+\subsection{TLB based approaches}
+Efficient memory management, particularly in the context of 
+Translation Lookaside Buffer (TLB) optimization, has been a focal point of 
+research and development within computer architecture. Various techniques have been 
+proposed to mitigate TLB-related bottlenecks and improve overall system performance.
 
-\subsubsection{Running a single program across cores of 
-various architectures}
-In context of the following, the Multi kernel approach would 
-be of interest. Multi-kernel approach treats a multi-core machine 
-as a network of independent cores. This means a program would interact
-with multiple cores the same way as it would interact with a distributed systems 
-using message passing as an example. 
+\subsubsection{Huge Pages:}
+This is used to map a very large region of memory to a 
+single entry. This small/large region of memory is physically
+contiguous. Most implementations of huge pages \cite{panwar_hawkeye_2019} are size
+aligned, For example for the x86 architecture the huge pages 
+size are 4KB, 2MB and 1GB pages. 
+% \subsection{Tailored page sizes}
+% TODO later
+% \subsection{TLB coalescing}
+% This leverages the default OS allocator behavior to pack
+% multiple PTEs into a single TLB entry.
 
-\subsection{Discussion}
-Based on the following 3 subsections the aim of the 
-following PhD would be to combine all the 3 approaches into a 
-single system which would allow programs to be more scalable, 
-provide the possibility to run certain parts of a program on secure 
-hardware and improve the performance by using a slim down kernel. 
-The literature review section covers the following in depth. 
+\subsubsection{Segment:}
+A segment\cite{basu_efficient_nodate} can be viewed as mapping between contiguous virtual
+memory and contiguous physical memory. The property of a 
+segment allows it to be larger than a page. Direct Segment allows the user to set a single segment
+for an application. Two registers are added to mark the start
+and end of the segment. Any virtual address within this region
+can be translated by adding the fixed offset between the virtual
+and physical address.
 
-\subsection{Organization of this report}
-The following report is organized into 6 sections:
-\begin{itemize}
-    \item Introduction: Covers the introduction of the following report.
-    \item Research Questions: Covers the identified research questions 
-    based on activities conducted in year 1.
-    \item Literature Review: Covers a full survey of implementations/ papers 
-    on Uni-kernels, Multi-kernels and TAG based architectures.
-    \item Year 1 Activity: Covers the activities conducted during the year 1 
-    of the following research.
-    \item Research Timeline: Provides a proposed timeline of activities to be conducted 
-    during the following research.
-    \item Conclusion: Provides a summary of the following report.
-\end{itemize}
+\subsubsection{Range Memory Mapping (RMM):}
+RMM\cite{karakostas_redundant_2015} introduces the concept of adding an additional range table.
+For large allocations RMM eagerly allocates contiguous physical pages.
+The following allocations creates large memory ranges that are
+both virtually and physically contiguous. RMM builds on the concept
+of Direct segment by adding offset to translate a virtual address 
+to physical address. RMM compares address with range boundaries 
+to decide which range it belongs to. RMM queries the range table 
+ofter an L1 TLB miss.
 
+\subsubsection{FlexPointer:}
+FlexPointer\cite{chen_flexpointer_2023} is based on the RMM\cite{karakostas_redundant_2015} paper. FlexPointer
+does eagerly allocate pages which are physically contiguous and stores the ID to translate a virtual address 
+to physical address on the remaining unused bits on the 64 bit virtual address. 
+The paper contribution mentions shifting the TLB lookup to an earlier stage to improve
+latency of accessing the TLB entries. FlexPointer immediate queries the 
+range TLB for translations rather than the RMM paper which waits for the L1 TLB miss.
 
+\subsection{CHERI}
+A capability functions as a token that provides the holder with the authority to 
+execute specific actions. By carefully managing who possesses these capabilities, 
+it is possible to enforce security measures, such as ensuring that a particular
+section of software can only read from a designated range of memory addresses.
+
+The concept of cap  abilities has a rich history in computer science, tracing 
+back to early systems designed to enhance security and manage resources effectively.
+For instance, foundational work discussed in sources like \cite{noauthor_capability-based_nodate} offers a comprehensive 
+narrative on the evolution of capability architectures. This historical perspective 
+can be further enriched by incorporating insights from more recent studies, 
+such as those found in \cite{miller_towards_nodate}.
+
+CHERI (Capability Hardware Enhanced RISC Instructions)\cite{woodruff_cheri_2019} represents a modern embodiment of this 
+long-standing idea. It introduces more granular control over permissions, allowing for finer 
+distinctions in what actions can be performed and by whom. Moreover, CHERI is designed to integrate 
+seamlessly with contemporary processor instruction sets, ensuring that these advanced security 
+features can be implemented on modern hardware platforms. This adaptation not only revitalizes 
+the capability concept but also significantly enhances its applicability and effectiveness 
+in current computing environments.

@@ -188,7 +188,7 @@ to contiguous physical pages, with uniform protection bits, such as read, write,
 a range is base-page-aligned and can have an arbitrary number of pages. Due to the contiguous nature of these pages, 
 all addresses within a range share a common DELTA, calculated as (physical\_address - virtual\_address). To translate a 
 virtual address within a range, the processor simply adds DELTA to it.
-
+\newline
 A system employing range translations has three main components: 
 (i) the creation of memory ranges, (ii) the management of range information, 
 and (iii) the hardware that efficiently utilizes range translations. FlexPointer 
@@ -199,7 +199,7 @@ than on first access. This involves modifying memory management functions,
 such as malloc() and mmap(), to support eager allocation. Additionally, 
 a kernel range table is used to record range translations, with mappings 
 also maintained in the page table to ensure compatibility with other memory subsystems.
-
+\newline
 Similar to RMM, FlexPointer uses a range TLB to facilitate range translations in hardware. 
 It can pass the range ID through the pointer tag, allowing the range TLB to operate in 
 parallel with address generation. During a memory access, the processor uses the 
@@ -249,7 +249,7 @@ DELTA, simplifying translation. The processor adds this DELTA to the virtual add
 against the BASE and LIMIT of the range. If the address falls within this range, the sum of DELTA and the 
 virtual address yields the correct physical address. Addresses failing the boundary check are directed to the 
 page TLB for translation.
-
+\newline
 A range TLB miss occurs under two conditions: either no matching ID exists in the range TLB, or the 
 address fails the boundary check of a dummy entry. In response to a range TLB miss, the processor 
 initiates a range table walk to retrieve the corresponding range translation. To optimize TLB lookup 
@@ -288,7 +288,7 @@ principals to both identify an object and grant authority over it, in contrast t
 naming and authority sharing. For instance, on UNIX, a file name is shared as a path, and the authority to open it is 
 granted by adjusting permissions separately. In a capability system, a 'path capability' would not just represent a 
 path but also the authority to open it in specific modes.
-
+\newline
 Every access to an object in a capability system requires authorization by a capability, making 
 it clear which authority should be used for each operation as it is part of the reference. 
 In some systems like the CAP architecture, dynamic capability lookup is performed. 
@@ -297,7 +297,7 @@ is explicitly stated if a set of authorities is available. Systems that lack exp
 identification of which capability to use or do not utilize capabilities at all are 
 vulnerable to confused-deputy attacks, unlike capability systems that follow the 
 intentional access principle, such as CHERI and CheriOS.
-
+\newline
 Capabilities also separate policy from enforcement, simplifying the parts of the 
 system that need to be trusted. They can be shared in a decentralized manner 
 based on principals, leading to a proliferation of capabilities throughout 
@@ -306,7 +306,7 @@ it and potentially any derived capabilities. The trade-off between the complexit
 of use and revocation exists in capability systems, with some schemes using 
 tracking structures for revocation maintenance. CHERI, however, does not require 
 such tracking and opts for a more intricate revocation process to enhance capability usage.
-
+\newline
 
 % Capability machines provide and enforce capabilities in hardware. This is advantageous 
 % not just for performance, but also for reducing the trusted computing base. 
@@ -323,15 +323,15 @@ such tracking and opts for a more intricate revocation process to enhance capabi
 Capability machines implement and enforce capabilities in hardware, 
 offering benefits such as improved performance and a reduced trusted 
 computing base. While currently not as popular, there have been many 
-capability machines in academia and industry. One example is the Burroughs B5000 
+capability machines in academia and industry. One example is the \textit{Burroughs B5000} 
 stack machine from the 1960s, which featured a descriptor table for each program segment. 
 When accessing an array, an index in the descriptor table was calculated first, 
 followed by an indirect operation through it. Descriptors in the table had bounds,
  and hardware was responsible for performing access checks. Although predating the 
- modern concept of a capability machine, the Burroughs B5000 was one of the first 
+ modern concept of a capability machine, the \textit{Burroughs B5000} was one of the first 
  to use tagged memory to differentiate segment descriptors (similar to capabilities) 
  from other memory types, enabling entries to be directly loaded onto the stack.
-
+ \newline
  % The 1970 Cambridge CAP computer[96] was another early register-based capability machine. 
 % The CAP computer used explicit capability registers, which it could load and store from 
 % dedicated capability segments. Dedicated capability segments obviated tags, but prevented 
@@ -357,18 +357,18 @@ followed by an indirect operation through it. Descriptors in the table had bound
 % although similar to M-Machine and CHERI constructs, not capabilities. They lack authority, 
 % unforgeability, and a facility for compartmentalisation.
 
-The 1970 Cambridge CAP computer was an early register-based capability machine that utilized explicit 
+The \textbf{1970 Cambridge CAP computer} was an early register-based capability machine that utilized explicit 
 capability registers. These registers could be loaded and stored from dedicated capability 
 segments, which did not require tags but limited the flexibility in mixing capabilities and data.
-
-On the commercial front, IBM's System/38 and its successor, the AS/400, were successful 
+\newline
+On the commercial front, \textbf{IBM's System/38} and its successor, the AS/400, were successful 
 systems that, like the Burroughs B5000, incorporated tagged memory to distinguish 
 capabilities from data. Intel's iAPX 432 faced challenges due to poor performance, 
 particularly attributed to its inefficient ADA compiler. The architecture supported 
 both hardware- and software-defined capabilities, dividing segments to differentiate 
 between data and capabilities, similar to the CAP computer.
-
-The M-Machine utilized guarded pointers for capabilities, with support for 
+\newline
+The \textbf{M-Machine} utilized guarded pointers for capabilities, with support for 
 power-of-two bounds and alignments. A fat pointer encoded bounds, permissions, 
 and an address for the capabilities. The M-Machine introduced two distinct 
 capability variants: a 'key' capability and an 'entry' capability, both 
@@ -376,12 +376,12 @@ unmodifiable and non-forgeable. Entry capabilities could be executed,
 transforming into executable capabilities, while key capabilities 
 functioned as identifiers. A supervisor mode bit in executable capabilities 
 facilitated secure transitions to privileged code using normal jumps at predefined entry points.
-
-In 2013, LowFat implemented hardware support for bounds checking fat pointers compressed into 
+\newline
+In 2013, \textbf{LowFat} implemented hardware support for bounds checking fat pointers compressed into 
 64 bits, with non-power-of-two alignment support. While similar to constructs seen in 
 M-Machine and CHERI, these pointers lack some essential capabilities such as authority, 
 unforgeability, and compartmentalization features.
-
+\newline
 % CHERI[136][135] was designed as part of the CTSRD project. It further refines hardware- enforced capabilities, 
 % but with a goal shift to run existing MMU-based OSs, and mostly unmodified legacy C/C++ code. 
 % Unlike M-Machine, CHERI avoids software-emulation for capability operations, 
@@ -395,19 +395,19 @@ emulation for capability operations while incorporating many of the M-Machine's 
 \subsubsection{Capability based operating systems}
 Capabilities are beneficial not only for controlling access at the hardware level but also 
 have applications in operating systems and software applications.
-
+\newline
 % An early system, Hydra,[137] was built atop the PDP-11. Hydra had capabilities for system- level objects and user-constructed objects. 
 % All capability operations required syscalls as only the kernel could be trusted not to forge capabilities. This limited the frequency 
 % of operations and which objects could practically be represented by capabilities. However, Hydra demonstrated implementation of the 
 % object-capability model via IPC. 
 
-The Hydra system, developed on the PDP-11, incorporated capabilities for both system-level 
+The \textbf{Hydra system}, developed on the PDP-11, incorporated capabilities for both system-level 
 and user-defined objects. Due to security concerns, all capability operations necessitated 
 syscalls as only the kernel was deemed trustworthy to handle capabilities reliably. While 
 this approach restricted the frequency of operations and the types of objects that 
 could be effectively represented by capabilities, Hydra successfully showcased the 
 practical implementation of the object-capability model through interprocess communication (IPC).
-
+\newline
 % KeyKOS (originally GNOSIS) was another early commercial capability OS, first developed for the IBM System/370, 
 % and could support (among others) a UNIX environment.[60][17] KeyKOS, like most of the capability OSs discussed 
 % here, was a message passing system, and used capabilities
@@ -417,7 +417,7 @@ practical implementation of the object-capability model through interprocess com
 % transparently swapped with backing storage by the kernel. KeyKOS was followed by Eros,[118] and later Coyotos,[34] which 
 % are both research focussed systems.
 
-KeyKOS, originally known as GNOSIS, was an early commercial capability operating system designed 
+\textbf{KeyKOS}, originally known as GNOSIS, was an early commercial capability operating system designed 
 for the IBM System/370 that could accommodate a UNIX environment. KeyKOS, similar to other 
 capability-based operating systems mentioned, operated as a message-passing system and 
 utilized capabilities termed as keys to represent various system resources. In KeyKOS, 
@@ -425,7 +425,7 @@ the system was divided into domains, with gate keys enabling message transfer be
 these domains. The OS featured a single-level persistent store that users could interact 
 with using capabilities, and the kernel could seamlessly swap this store with backing storage. 
 KeyKOS paved the way for subsequent research-oriented systems like Eros and Coyotos.
-
+\newline
 % The Mach microkernel[106][1] offered tasks, a collection of threads combined with a virtual address space. 
 % The Mach abstraction for IPC was a port, which was much like a KeyKOS gate key. The authority to 
 % communicate on a port was represented by a capability, and capabilities themselves could be 
@@ -436,7 +436,7 @@ KeyKOS paved the way for subsequent research-oriented systems like Eros and Coyo
 % functionality outside of the kernel as a set of servers. Multiple UNIX variants have been derived from Mach, 
 % or used Mach as a microkernel.
 
-The Mach microkernel introduced the concept of tasks, which encompassed collections of threads 
+The \textbf{Mach microkernel} introduced the concept of tasks, which encompassed collections of threads 
 combined with a virtual address space. In Mach, interprocess communication (IPC) was facilitated through 
 ports, resembling KeyKOS gate keys, where the capability to communicate on a port was represented by a 
 capability. Capabilities could be transmitted over ports for delegation, and messages, dynamically-sized 
@@ -445,7 +445,7 @@ model using IPC, as exemplified by the process of creating a thread, which invol
 port and delegating authority by transmitting the port capability. Mach aimed to offer a kernel compatible with a 
 UNIX environment while delegating maximum functionality outside of the kernel to a set of servers. Various 
 UNIX variants have emerged from Mach or utilized Mach as a microkernel.
-
+\newline
 % The L4 microkernel was designed after Mach: its goal was to further reduce complexity and overheads compared with 
 % past microkernels. It featured a simplified interface (an early version featured only 7 system calls[79]), offering 
 % only threads, address spaces, and IPC. Simplified IPC meant that across-address-space message send on the first 
@@ -454,7 +454,7 @@ UNIX variants have emerged from Mach or utilized Mach as a microkernel.
 % objects in the physical memory space, begin untyped, and are re-typed to construct objects, such as page-tables. 
 % Capabilities are only modifiable by the kernel, and are referenced from user-space via index.
 
-Following the Mach microkernel, the L4 microkernel was developed with the aim of reducing complexity and 
+Following the Mach microkernel, the \textbf{L4 microkernel} was developed with the aim of reducing complexity and 
 overhead compared to previous microkernels. L4 featured a simplified interface, with an early version 
 supporting only 7 system calls, providing functionality for threads, address spaces, and IPC. 
 The streamlined IPC mechanism in L4 resulted in significantly faster across-address-space message transfers 
@@ -463,7 +463,7 @@ implementation of L4 built from scratch, stores capabilities in a tree structure
 of an array of capabilities. Capabilities serve as fat-pointers to objects in physical memory, starting 
 as untyped and then being retyped to create objects like page-tables. These capabilities can only be modified 
 by the kernel and are accessed from user-space via an index.
-
+\newline
 % Barrelfish is an OS developed by ETH Zurich,[113] designed to better support large-scale heterogeneous systems. 
 % Barrelfish uses capabilities[119] similar to seL4’s, with extensions to deal with the increased complexity of 
 % deleting, copying, re-typing and revoking in a distributed fashion. Like other capability-based systems, 
@@ -481,16 +481,18 @@ by the kernel and are accessed from user-space via an index.
 % via a load or store, will not check a capability. Also, because systems like seL4 use the MMU for enforcement, sizes and alignments of 
 % objects capabilities refer to are necessarily quite coarse.
 
-Barrelfish is an operating system developed by ETH Zurich specifically tailored to support large-scale heterogeneous systems. Utilizing capabilities 
+\textbf{Barrelfish} is an operating system developed by ETH Zurich specifically tailored to support large-scale heterogeneous systems. Utilizing capabilities 
 similar to those in seL4, Barrelfish has extensions to manage the increased complexity of operations such as deletion, copying, re-typing, 
 and revoking in a distributed manner. Capabilities in Barrelfish represent physical memory, kernel objects, and communication 
 endpoints, adhering to the principles of capability-based systems.
+\newline
 
-Capsicum extends the POSIX API with file capabilities and was initially demonstrated on FreeBSD, where capability operations still require 
+\textbf{Capsicum} extends the POSIX API with file capabilities and was initially demonstrated on FreeBSD, where capability operations still require 
 system calls due to the conventional hardware environment of FreeBSD. While files in UNIX systems can encompass various entities, 
 Capsicum does not provide memory capabilities, allowing fabricated pointers to be exchanged between the operating system and user space.
+\newline
 
-CheriBSD enhances FreeBSD to utilize CHERI hardware-enforced capabilities for protecting memory accesses in both user space compartments 
+\textbf{CheriBSD} enhances FreeBSD to utilize CHERI hardware-enforced capabilities for protecting memory accesses in both user space compartments 
 and the kernel. Although CheriBSD operates on a FreeBSD base, many aspects of the system interface remain non-capability based. For instance, 
 basic operations like spawning threads in FreeBSD require syscalls, granting ambient authority to do so, while Mach, in a capability-based system, 
 would utilize a capability for such privileges. In comparison to other capability-based operating systems, CheriBSD's use of memory capabilities 
@@ -517,7 +519,7 @@ capabilities and introduces instructions for examining and modifying these capab
 enhancement to the MIPS ISA, CHERI has gained significant traction within the technology community, 
 with notable implementations such as the Arm's Morello experimental prototype integrating CHERI into a 
 commercial Arm processor.
-
+\newline
 % CHERI protects the integrity of pointers with a one-bit out-of-band tag. The hardware guarantees that every tagged capability must have been derived 
 % from an initial root capability by a sequence of permissible operations, each of which can only monotonically decrease the rights granted by that capability. 
 % This ensures all tagged capabilities have strict provenance. The tags prevent corruption of pointers, immediately mitigating a large class of attacks that 
@@ -532,37 +534,89 @@ CHERI enhances pointer protection by incorporating a one-bit out-of-band tag to 
 operations, with each operation reducing the granted rights in a strictly decreasing manner. This strict provenance of tagged capabilities minimizes the 
 risk of pointer corruption and effectively counters attacks that 
 involve manipulating pointers by substituting them with non-capability data, such as Return-Oriented Programming.
-
+\newline
 The tags associated with capabilities in CHERI prevent pointer corruption and bolster security by necessitating that every memory access is 
 associated with a quoted tagged capability that encompasses the intended boundaries and permissions. This measure serves to safeguard data 
 from both accidental and malicious tampering, effectively mitigating common attacks like buffer overflows. A report by Microsoft highlighted that 
 approximately 75\% of their security vulnerabilities are related to bounds overflows or temporal safety issues, indicating that CHERI's support for temporal safety 
 could significantly address such issues and provide substantial benefits to the industry and users.
-
+\newline
 Furthermore, the monotonicity of the CHERI ISA has been formally verified, demonstrating that the architecture, if correctly implemented, upholds the 
 intended invariants, offering a high level of security assurance.
+\newline
+\textit{The bit pattern of a capability consists of:}
+\begin{itemize}
 
-\subsubsection{CHERI micro-architecture}
-
-The bit pattern of a capability consists of:
-
-A capability tag A one-bit out-of-band field that records whether the capability is valid, i.e. whether it has been derived only 
+\item \textbf{Capability tag:} A one-bit out-of-band field that records whether the capability is valid, i.e. whether it has been derived only 
 via legal monotonic operations.
 
-A cursor A field giving the current address referred to by the capability. This is all 
+\item \textbf{Cursor:} A field giving the current address referred to by the capability. This is all 
 that is present in a traditional C pointer and the natural integer interpretation of the capability.
 
-Bounds information The capability only grants access to a single contiguous region of memory, specified by the bounds field. Changes to the capability can only ever grant access 
+\item \textbf{Bounds information:} The capability only grants access to a single contiguous region of memory, specified by the bounds field. Changes to the capability can only ever grant access 
 to a subset of the bounds without triggering an exception or clearing the tag.
 
-Permissions Permissions are required to access memory in different ways: most obviously read, write, and execute, but also the permissions to read and write capabilities, and more
+\item \textbf{Permissions:} Permissions are required to access memory in different ways: most obviously read, write, and execute, but also the permissions to read and write capabilities, and more
 experimental uses. These can only be modified by a bitwise AND operation, inherently guaranteeing monotonicity.
 
-Object type (otype) CHERI provides a compartmentalisation mechanism for granting protected access to objects, represented as a 
+\item \textbf{Object type (otype):} CHERI provides a compartmentalisation mechanism for granting protected access to objects, represented as a 
 pair of code and data. Code and data can be sealed with an otype, and primarily only unsealed by the CInvoke instruction, which atomically jumps to the code pointer and installs 
 the unsealed data capability. Sealed capabilities cannot be mutated other than via a legal CInvoke or CUnseal instruction without 
 raising an exception or clearing the tag.
 
+\end{itemize}
+
+\begin{figure}[h]
+  \includegraphics[width=0.8\textwidth]{chericapability.png}
+  \caption{CHERI capability.}
+  \label{fig:FlexPointer}
+\end{figure}
+
+\subsubsection{CHERI compression}
+% One of the major performance overheads of CHERI comes from the increased widths of capabilities compared to 
+% traditional pointers. This uses hardware resources, as the register file is bigger, but also adds cache pressure, as pointers 
+% in memory must be accompanied by metadata. These effects can be somewhat mitigated by capability compression [135], which 
+% reduces the bounds metadata to as little as 39 bits for a 64-bit pointer at the expense of alignment constraints on 
+% representable positions for large objects. The compression and decompression is performed directly by the hardware, 
+% allowing software to be largely unaffected.
+
+% Capability compression, described in detail in our CHERI-Concentrate paper [135], stores the bounds as a base (B) of b bits, a top (T) of (b−2) bits, 
+% and an exponent (E) of e bits. The described bounds are relative to the cursor of the capability (C). The actual base is determined by shifting B left by E, 
+% filling any remaining upper bits with the corresponding most significant bits of C. The top is similar, except the top two bits of T are determined in the 
+% common case by adding 1 to those of B. As a result, bounds are zero-filled in the least significant E bits, imposing the requirements on bound-alignment 
+% mentioned above. To save some space, E is only stored when non-zero, in which case (called the internal exponent case) it takes the place of the least 
+% significant bits of B and T (which are then implicitly zero). This means smaller objects can be represented more precisely than larger ones. The scheme 
+% is currently implemented with b = 14, e = 6 for a 64-bit address space and b = 8, e = 6 for a 32-bit address space.
+
+% Bounds with insufficient alignment to be represented as above are said to be unrepresentable. 
+% CHERI offers two variants of the CSetBounds instruction: one triggers an exception when 
+% unrepresentable bounds are requested, the other just returns the closest larger 
+% representable bounds. In order to guarantee spatial safety, software must add padding 
+% (at most 0.2\% or 12.5\% of the size of the object for 64-bit and 32-bit address spaces respectively) 
+% at the beginning or end of large objects to ensure no other objects use the memory that is within the 
+% bounds due to the rounding. Instructions that modify a capability cursor may also change the 
+% interpretation of the bounds if they modify bits of the cursor that are used to determine the 
+% base and top. Care is taken in the ISA and implementations that such cases clear the tag of the resulting 
+% capability or raise an exception.
+
+One of the significant performance challenges of CHERI stems from the larger size of capabilities compared to traditional pointers, leading to 
+increased hardware resource usage and cache pressure. 
+An approach to mitigate this impact is capability compression, as outlined in the CHERI-Concentrate paper. This method reduces bounds metadata 
+to as few as 39 bits for a 64-bit pointer, albeit with alignment constraints on representable positions for larger objects. Hardware handles 
+compression and decompression, ensuring minimal software impact.
+
+In capability compression, bounds consist of a base (B) with b bits, a top (T) bits, and 
+an exponent (E) with e bits relative to the cursor of the capability (C). The base is calculated by shifting B 
+left by E and filling remaining upper bits with the corresponding most significant bits of C. The top follows a 
+similar process, with the top two bits of T determined by adding 1 to those of B in the standard case. Bounds 
+are zero-filled in the least significant E bits, enforcing bound-alignment requirements. The internal exponent case stores E only 
+when non-zero, serving as the least significant bits of B and T, thereby allowing more precise representation of smaller objects.
+
+The CSetBounds instruction in CHERI offers two variations: one triggers an exception for unrepresentable bounds, while the other returns 
+the closest larger representable bounds. To ensure spatial safety, software must include padding (up to 0.2\% or 12.5\% of the object size 
+for 64-bit and 32-bit address spaces, respectively) at the beginning or end of large objects to prevent memory usage conflicts resulting 
+from rounding. Instructions altering a capability cursor may impact bounds interpretation if they modify cursor bits determining the 
+base and top. Careful design in the ISA and implementations ensures these cases clear the capability tag or raise exceptions where necessary.
 
 
 
@@ -573,23 +627,26 @@ raising an exception or clearing the tag.
 
 
 
-\subsection{CHERI}
-A capability functions as a token that provides the holder with the authority to 
-execute specific actions. By carefully managing who possesses these capabilities, 
-it is possible to enforce security measures, such as ensuring that a particular
-section of software can only read from a designated range of memory addresses.
 
-The concept of cap  abilities has a rich history in computer science, tracing 
-back to early systems designed to enhance security and manage resources effectively.
-For instance, foundational work discussed in sources like \cite{noauthor_capability-based_nodate} offers a comprehensive 
-narrative on the evolution of capability architectures. This historical perspective 
-can be further enriched by incorporating insights from more recent studies, 
-such as those found in \cite{miller_towards_nodate}.
 
-CHERI (Capability Hardware Enhanced RISC Instructions)\cite{woodruff_cheri_2019} represents a modern embodiment of this 
-long-standing idea. It introduces more granular control over permissions, allowing for finer 
-distinctions in what actions can be performed and by whom. Moreover, CHERI is designed to integrate 
-seamlessly with contemporary processor instruction sets, ensuring that these advanced security 
-features can be implemented on modern hardware platforms. This adaptation not only revitalizes 
-the capability concept but also significantly enhances its applicability and effectiveness 
-in current computing environments.
+
+% \subsection{CHERI}
+% A capability functions as a token that provides the holder with the authority to 
+% execute specific actions. By carefully managing who possesses these capabilities, 
+% it is possible to enforce security measures, such as ensuring that a particular
+% section of software can only read from a designated range of memory addresses.
+
+% The concept of cap  abilities has a rich history in computer science, tracing 
+% back to early systems designed to enhance security and manage resources effectively.
+% For instance, foundational work discussed in sources like \cite{noauthor_capability-based_nodate} offers a comprehensive 
+% narrative on the evolution of capability architectures. This historical perspective 
+% can be further enriched by incorporating insights from more recent studies, 
+% such as those found in \cite{miller_towards_nodate}.
+
+% CHERI (Capability Hardware Enhanced RISC Instructions)\cite{woodruff_cheri_2019} represents a modern embodiment of this 
+% long-standing idea. It introduces more granular control over permissions, allowing for finer 
+% distinctions in what actions can be performed and by whom. Moreover, CHERI is designed to integrate 
+% seamlessly with contemporary processor instruction sets, ensuring that these advanced security 
+% features can be implemented on modern hardware platforms. This adaptation not only revitalizes 
+% the capability concept but also significantly enhances its applicability and effectiveness 
+% in current computing environments.

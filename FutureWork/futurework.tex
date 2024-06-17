@@ -12,7 +12,7 @@ The current experimental setup on the ARM Morello board is constrained by the re
 pass through the Translation Lookaside Buffer (TLB) for address translation. This necessitates frequent TLB lookups, potentially 
 leading to performance bottlenecks. The planned future work aims to address this by leveraging CHERI 
 (Capability Hardware Enhanced RISC Instructions) extensions on the RISC-V architecture, specifically using the 
-Tooba implementation.
+Tooba implementation\cite{noauthor_ctsrd-cheride10pro-cheri-bgas_2024}.
 
 \subsubsection{Storing Offsets Directly on Pointers}
 In the current ARM Morello setup, address translations rely on the TLB.
@@ -23,14 +23,15 @@ CHERI capabilities allow pointers to carry metadata about memory bounds, providi
 By encoding the offset and bounds within the pointer, the system can directly access memory without needing intermediate translations via the TLB.
 This enables the implementation of a block-based allocator that can efficiently manage memory allocations and deallocations within defined bounds.
 Bypassing the TLB in RISC-V Tooba.
-\subsubsection{Hardware Modifications}:
-The Verilog design of the RISC-V processor will be modified to allow certain memory operations to bypass the TLB. This means that when a pointer with encoded offset and bounds is used, the system can directly compute the physical address from the capability information.
+\subsubsection{Hardware Modifications:}
+The Bluespec design of the RISC-V processor will be modified to allow certain memory operations to bypass the TLB. This means that when a pointer with encoded offset and bounds is used, the system can directly compute the physical address from the capability information.
 This modification reduces the dependency on the TLB, decreasing latency and improving performance, especially for frequent memory operations.
-Transition to a Single-Address-Space Operating System (SASOS).
-\subsubsection{Concept of SASOS}:
+Transition to a Single-Address-Space Operating System (SASOS)\cite{esswood_cherios_nodate}.
+\subsubsection{Concept of SASOS:}
 In traditional operating systems, there is a clear separation between user space and kernel space. This separation is enforced by memory protection mechanisms and address translation through the TLB.
 In a Single-Address-Space Operating System, this distinction is removed. Both user applications and the kernel share the same contiguous address space.
-\subsubsection{Advantages of SASOS with CHERI}:
+\subsubsection{Advantages of SASOS with CHERI:}
+% Rewrite this bit
 \begin{itemize}
   \item Simplified Memory Management : Without the need to switch between user and kernel spaces, memory management becomes simpler and more efficient.
 The kernel allocator can be the same as the user space allocator, operating on a single, contiguous chunk of memory.

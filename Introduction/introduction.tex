@@ -20,12 +20,14 @@ Huge pages, also known as large pages, allow for the allocation of memory in sig
 larger chunks compared to traditional small pages. By reducing the number of TLB entries 
 needed to access a given amount of memory, huge pages offer a potential avenue for optimizing 
 TLB utilization and thereby enhancing overall system performance.
+\newline
 
 Simultaneously, advancements in hardware-level security, such as the Capability Hardware 
 Enhanced RISC Instructions (CHERI) architecture, present additional opportunities for 
 performance enhancement. CHERI's capability-based addressing approach not only strengthens 
 system security by tightly controlling memory access but also provides avenues for 
 accelerating memory management operations.
+\newline
 
 In this context, the integration of huge pages into memory management 
 strategies alongside capability-based addressing in architectures like 
@@ -34,6 +36,8 @@ utilization of huge pages and leveraging the security features of capability-bas
 significant performance improvements can be realized. This approach not only enhances 
 system security but also accelerates memory access. The following below are research questions 
 we are addressing:
+\newline
+
 \begin{enumerate}
     \item Is there faster run times and lesser TLB misses when bounds are used not just for security but
     also to track memory allocations ? 
@@ -43,13 +47,13 @@ we are addressing:
 
 % TODO: 
 % - Add references for FlexPointer, Range Memory Mapping (RMM), Direct Segment and Huge Pages
-\subsection{TLB based approaches}
+\section{TLB based approaches}
 Efficient memory management, particularly in the context of 
 Translation Lookaside Buffer (TLB) optimization, has been a focal point of 
 research and development within computer architecture. Various techniques have been 
 proposed to mitigate TLB-related bottlenecks and improve overall system performance.
 
-\subsubsection{Huge Pages:}
+\subsection{Huge Pages:}
 % This is used to map a very large region of memory to a 
 % single entry. This small/large region of memory is physically
 % contiguous. Most implementations of huge pages \cite{panwar_hawkeye_2019} are size
@@ -77,7 +81,7 @@ resulting in additional latency for memory accesses.
 % - [14] Jonathan Corbet. 2009. Transparent Hugepages. (2009). Retrieved from https://lwn.net/Articles/359158/.
 % - [15] Jonathan Corbet. 2011. Transparent huge pages in 2.6.38. (2011). Retrieved from https://lwn.net/Articles/423584/.
 
-\subsubsection{Segment:}
+\subsection{Segment:}
 % A segment\cite{basu_efficient_nodate} can be viewed as mapping between contiguous virtual
 % memory and contiguous physical memory. The property of a 
 % segment allows it to be larger than a page. Direct Segment allows the user to set a single segment
@@ -90,6 +94,8 @@ virtual memory to contiguous physical memory. Unlike pages, which are relatively
 larger, offering the potential for more efficient memory management in certain scenarios. 
 This concept of segmentation has seen a resurgence in some modern approaches that aim to enhance 
 translation coverage by designating specific areas in the virtual address space.
+\newline
+
 % Alternate segment technique
 % - JayneelGandhi,ArkapravaBasu,MarkD.Hill,andMichaelM.Swift.2014.Efficientmemoryvirtualization:Reducing
 dimensionality of nested page walks. In Proceedings of the MICRO’14. 178–189.
@@ -101,6 +107,8 @@ the offset from the virtual start address and applying this offset to the
 physical start address. This straightforward method simplifies the translation 
 process for large memory areas but requires significant modifications to the 
 source code of applications.
+\newline
+
 % Do-it-yourself Virtual Memory
 % - Hanna Alam, Tianhao Zhang, Mattan Erez, and Yoav Etsion. 2017. Do-It-Yourself virtual memory translation. In Pro- ceedings of the 44th Annual International Symposium on Computer Architecture (ISCA’17). Association for Computing Machinery, New York, NY, 457–468.
 Another approach, Do-it-yourself Virtual Memory Translation (DVMT), similarly 
@@ -113,6 +121,7 @@ it necessitates extensive changes to the application's source code.
 Additionally, both Direct Segment and DVMT bypass the conventional page table 
 for the special virtual area, operating independently of the standard 
 paging mechanism.
+\newline
 
 \begin{figure}[h]
   \includegraphics[width=0.9\textwidth]{segment.png}
@@ -126,7 +135,7 @@ V falls within the specified range defined by the direct segment's base and limi
 V+OFFSET. This translation process bypasses the D-TLB, meaning that addresses handled by the direct-segment hardware do not experience TLB misses. 
 It's important to note that the direct-segment hardware only allows read-write access.
 
-\subsubsection{Range Memory Mapping (RMM):}
+\subsection{Range Memory Mapping (RMM):}
 % RMM\cite{karakostas_redundant_2015} introduces the concept of adding an additional range table.
 % For large allocations RMM eagerly allocates contiguous physical pages.
 % The following allocations creates large memory ranges that are
@@ -157,6 +166,7 @@ loads the range into the RTLB in the background, avoiding delays in memory opera
 The RTLB, functioning as a fully associative search structure, ensures 
 that most last level TLB misses are handled efficiently by range mapping, 
 reducing the need for costly page table walks.
+\newline
 
 \begin{figure}[h]
   \includegraphics[width=0.8\textwidth]{rmm.png}
@@ -176,7 +186,7 @@ the corresponding range translation if it exists from the range table.
 
 
 
-\subsubsection{FlexPointer:}
+\subsection{FlexPointer:}
 % FlexPointer\cite{chen_flexpointer_2023} is based on the RMM\cite{karakostas_redundant_2015} paper. FlexPointer
 % does eagerly allocate pages which are physically contiguous and stores the ID to translate a virtual address 
 % to physical address on the remaining unused bits on the 64 bit virtual address. 
@@ -189,6 +199,7 @@ a range is base-page-aligned and can have an arbitrary number of pages. Due to t
 all addresses within a range share a common DELTA, calculated as (physical\_address - virtual\_address). To translate a 
 virtual address within a range, the processor simply adds DELTA to it.
 \newline
+
 A system employing range translations has three main components: 
 (i) the creation of memory ranges, (ii) the management of range information, 
 and (iii) the hardware that efficiently utilizes range translations. FlexPointer 
@@ -200,11 +211,13 @@ such as malloc() and mmap(), to support eager allocation. Additionally,
 a kernel range table is used to record range translations, with mappings 
 also maintained in the page table to ensure compatibility with other memory subsystems.
 \newline
+
 Similar to RMM, FlexPointer uses a range TLB to facilitate range translations in hardware. 
 It can pass the range ID through the pointer tag, allowing the range TLB to operate in 
 parallel with address generation. During a memory access, the processor uses the 
 pointer tag to determine whether to search the range TLB or the page TLB, and the 
 tag also guides which table to consult in the event of a TLB miss.
+\newline
 
 \begin{figure}[h]
   \includegraphics[width=0.8\textwidth]{flexpointer.png}
@@ -250,6 +263,7 @@ against the BASE and LIMIT of the range. If the address falls within this range,
 virtual address yields the correct physical address. Addresses failing the boundary check are directed to the 
 page TLB for translation.
 \newline
+
 A range TLB miss occurs under two conditions: either no matching ID exists in the range TLB, or the 
 address fails the boundary check of a dummy entry. In response to a range TLB miss, the processor 
 initiates a range table walk to retrieve the corresponding range translation. To optimize TLB lookup 
@@ -263,7 +277,7 @@ into the page TLB. If the address falls outside the (BASE, LIMIT) range and the 
 retrieves the next sub-range entry with the NRID and repeats the process. However, if it is the last sub-range and a violation occurs, it 
 indicates a safety breach.
 
-\subsection{Capability machines}
+\section{Capability machines}
 % CheriOS (https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-961.pdf)
 % A capability[39][89] is an unforgeable token that both names an object and confers the authority to the bearer 
 % to act upon it. Capabilities can be delegated between principals to both identify an object, and simultaneously 
@@ -283,12 +297,14 @@ indicates a safety breach.
 % such tracking, favouring a more complex revocation procedure to accelerate capability usage.
 % Despite many notable examples,[78] most commercial systems today are not capability-based. 
 % Modern filesystems, program permissions, and memory protection features all, for the most part, use ambient authority.
+% Capability referenece: https://dl.acm.org/doi/pdf/10.1145/365230.365252
 A capability is an unforgeable token that names an object and grants the bearer the authority to act upon it. Capabilities can be delegated between 
 principals to both identify an object and grant authority over it, in contrast to other methods that use separate channels for 
 naming and authority sharing. For instance, on UNIX, a file name is shared as a path, and the authority to open it is 
 granted by adjusting permissions separately. In a capability system, a 'path capability' would not just represent a 
 path but also the authority to open it in specific modes.
 \newline
+
 Every access to an object in a capability system requires authorization by a capability, making 
 it clear which authority should be used for each operation as it is part of the reference. 
 In some systems like the CAP architecture, dynamic capability lookup is performed. 
@@ -296,8 +312,9 @@ The CHERI work introduces the concept of intentional access, where the invoked a
 is explicitly stated if a set of authorities is available. Systems that lack explicit 
 identification of which capability to use or do not utilize capabilities at all are 
 vulnerable to confused-deputy attacks, unlike capability systems that follow the 
-intentional access principle, such as CHERI and CheriOS.
+intentional access principle, such as CHERI.
 \newline
+
 Capabilities also separate policy from enforcement, simplifying the parts of the 
 system that need to be trusted. They can be shared in a decentralized manner 
 based on principals, leading to a proliferation of capabilities throughout 
@@ -311,7 +328,7 @@ such tracking and opts for a more intricate revocation process to enhance capabi
 % Capability machines provide and enforce capabilities in hardware. This is advantageous 
 % not just for performance, but also for reducing the trusted computing base. 
 % Although currently unpopular, there have existed numerous capability machines, 
-% both academically and industrially. The 1960s Burroughs B5000[88] stack machine 
+% both academically and industrially. The [88] stack machine 
 % had a descriptor table for every program segment. An array access would first 
 % calculate an index in the descriptor table and then indirect through it. 
 % Descriptors had bounds, and hardware performed access checks. Although this 
@@ -320,10 +337,11 @@ such tracking and opts for a more intricate revocation process to enhance capabi
 % (notionally capabilities) and other memory types. 
 % This allowed entries to be loaded directly onto the stack.
 
+% Add reference for Burroughs B5000
 Capability machines implement and enforce capabilities in hardware, 
 offering benefits such as improved performance and a reduced trusted 
 computing base. While currently not as popular, there have been many 
-capability machines in academia and industry. One example is the \textit{Burroughs B5000} 
+capability machines in academia and industry. One example is the \textit{Burroughs B5000}\cite{noauthor_architecture_nodate} 
 stack machine from the 1960s, which featured a descriptor table for each program segment. 
 When accessing an array, an index in the descriptor table was calculated first, 
 followed by an indirect operation through it. Descriptors in the table had bounds,
@@ -357,10 +375,13 @@ followed by an indirect operation through it. Descriptors in the table had bound
 % although similar to M-Machine and CHERI constructs, not capabilities. They lack authority, 
 % unforgeability, and a facility for compartmentalisation.
 
-The \textbf{1970 Cambridge CAP computer} was an early register-based capability machine that utilized explicit 
+\subsection{1970 Cambridge CAP compute}
+The \textbf{1970 Cambridge CAP computer}\cite{wilkes_cambridge_1979} was an early register-based capability machine that utilized explicit 
 capability registers. These registers could be loaded and stored from dedicated capability 
 segments, which did not require tags but limited the flexibility in mixing capabilities and data.
 \newline
+
+\subsection{IBM's System/38}
 On the commercial front, \textbf{IBM's System/38} and its successor, the AS/400, were successful 
 systems that, like the Burroughs B5000, incorporated tagged memory to distinguish 
 capabilities from data. Intel's iAPX 432 faced challenges due to poor performance, 
@@ -368,7 +389,9 @@ particularly attributed to its inefficient ADA compiler. The architecture suppor
 both hardware- and software-defined capabilities, dividing segments to differentiate 
 between data and capabilities, similar to the CAP computer.
 \newline
-The \textbf{M-Machine} utilized guarded pointers for capabilities, with support for 
+
+\subsection{M-Machine}
+The \textbf{M-Machine}\cite{fillo_mmachine_nodate} utilized guarded pointers for capabilities, with support for 
 power-of-two bounds and alignments. A fat pointer encoded bounds, permissions, 
 and an address for the capabilities. The M-Machine introduced two distinct 
 capability variants: a 'key' capability and an 'entry' capability, both 
@@ -377,7 +400,9 @@ transforming into executable capabilities, while key capabilities
 functioned as identifiers. A supervisor mode bit in executable capabilities 
 facilitated secure transitions to privileged code using normal jumps at predefined entry points.
 \newline
-In 2013, \textbf{LowFat} implemented hardware support for bounds checking fat pointers compressed into 
+
+\subsection{Low-fat pointers}
+In 2013, \textbf{Low-fat pointers}\cite{kwon_low-fat_2013} implemented hardware support for bounds checking fat pointers compressed into 
 64 bits, with non-power-of-two alignment support. While similar to constructs seen in 
 M-Machine and CHERI, these pointers lack some essential capabilities such as authority, 
 unforgeability, and compartmentalization features.
@@ -387,12 +412,13 @@ unforgeability, and compartmentalization features.
 % Unlike M-Machine, CHERI avoids software-emulation for capability operations, 
 % but still incorporates many of its ideas. 
 
-CHERI, developed as part of the CTSRD project, enhances hardware-enforced capabilities 
-with a focus on running existing MMU-based operating systems and mostly unchanged 
-legacy C/C++ code. In contrast to the M-Machine, CHERI aims to avoid software 
-emulation for capability operations while incorporating many of the M-Machine's concepts.
+% \subsection{CHERI}
+% CHERI\cite{woodruff_cheri_2019}, developed as part of the CTSRD project, enhances hardware-enforced capabilities 
+% with a focus on running existing MMU-based operating systems and mostly unchanged 
+% legacy C/C++ code. In contrast to the M-Machine, CHERI aims to avoid software 
+% emulation for capability operations while incorporating many of the M-Machine's concepts.
 
-\subsubsection{Capability based operating systems}
+\section{Capability based operating systems}
 Capabilities are beneficial not only for controlling access at the hardware level but also 
 have applications in operating systems and software applications.
 \newline
@@ -401,7 +427,8 @@ have applications in operating systems and software applications.
 % of operations and which objects could practically be represented by capabilities. However, Hydra demonstrated implementation of the 
 % object-capability model via IPC. 
 
-The \textbf{Hydra system}, developed on the PDP-11, incorporated capabilities for both system-level 
+\subsection{Hydra system}
+The \textbf{Hydra system}\cite{wulf_hydra_1974}, developed on the PDP-11, incorporated capabilities for both system-level 
 and user-defined objects. Due to security concerns, all capability operations necessitated 
 syscalls as only the kernel was deemed trustworthy to handle capabilities reliably. While 
 this approach restricted the frequency of operations and the types of objects that 
@@ -417,7 +444,8 @@ practical implementation of the object-capability model through interprocess com
 % transparently swapped with backing storage by the kernel. KeyKOS was followed by Eros,[118] and later Coyotos,[34] which 
 % are both research focussed systems.
 
-\textbf{KeyKOS}, originally known as GNOSIS, was an early commercial capability operating system designed 
+\subsection{KeyKOS}
+\textbf{KeyKOS}\cite{hardy_keykos_1985}, originally known as GNOSIS, was an early commercial capability operating system designed 
 for the IBM System/370 that could accommodate a UNIX environment. KeyKOS, similar to other 
 capability-based operating systems mentioned, operated as a message-passing system and 
 utilized capabilities termed as keys to represent various system resources. In KeyKOS, 
@@ -436,7 +464,8 @@ KeyKOS paved the way for subsequent research-oriented systems like Eros and Coyo
 % functionality outside of the kernel as a set of servers. Multiple UNIX variants have been derived from Mach, 
 % or used Mach as a microkernel.
 
-The \textbf{Mach microkernel} introduced the concept of tasks, which encompassed collections of threads 
+\subsection{Mach microkernel}
+The \textbf{Mach microkernel}\cite{rashid_mach_nodate} introduced the concept of tasks, which encompassed collections of threads 
 combined with a virtual address space. In Mach, interprocess communication (IPC) was facilitated through 
 ports, resembling KeyKOS gate keys, where the capability to communicate on a port was represented by a 
 capability. Capabilities could be transmitted over ports for delegation, and messages, dynamically-sized 
@@ -453,6 +482,7 @@ UNIX variants have emerged from Mach or utilized Mach as a microkernel.
 % SeL4 stores capabilities in a tree, where each node is an array of capabilities. Capabilities are fat-pointers to 
 % objects in the physical memory space, begin untyped, and are re-typed to construct objects, such as page-tables. 
 % Capabilities are only modifiable by the kernel, and are referenced from user-space via index.
+% TODO: reference
 
 Following the Mach microkernel, the \textbf{L4 microkernel} was developed with the aim of reducing complexity and 
 overhead compared to previous microkernels. L4 featured a simplified interface, with an early version 
@@ -481,18 +511,21 @@ by the kernel and are accessed from user-space via an index.
 % via a load or store, will not check a capability. Also, because systems like seL4 use the MMU for enforcement, sizes and alignments of 
 % objects capabilities refer to are necessarily quite coarse.
 
-\textbf{Barrelfish} is an operating system developed by ETH Zurich specifically tailored to support large-scale heterogeneous systems. Utilizing capabilities 
+\subsection{Barrelfish}
+\textbf{Barrelfish}\cite{baumann_multikernel_2009} is an operating system developed by ETH Zurich specifically tailored to support large-scale heterogeneous systems. Utilizing capabilities 
 similar to those in seL4, Barrelfish has extensions to manage the increased complexity of operations such as deletion, copying, re-typing, 
 and revoking in a distributed manner. Capabilities in Barrelfish represent physical memory, kernel objects, and communication 
 endpoints, adhering to the principles of capability-based systems.
 \newline
 
-\textbf{Capsicum} extends the POSIX API with file capabilities and was initially demonstrated on FreeBSD, where capability operations still require 
+\subsection{Capsicumh}
+\textbf{Capsicum}\cite{watson_capsicum_nodate} extends the POSIX API with file capabilities and was initially demonstrated on FreeBSD, where capability operations still require 
 system calls due to the conventional hardware environment of FreeBSD. While files in UNIX systems can encompass various entities, 
 Capsicum does not provide memory capabilities, allowing fabricated pointers to be exchanged between the operating system and user space.
 \newline
 
-\textbf{CheriBSD} enhances FreeBSD to utilize CHERI hardware-enforced capabilities for protecting memory accesses in both user space compartments 
+\subsection{CheriBSD}
+\textbf{CheriBSD}\cite{noauthor_getting_nodate} enhances FreeBSD to utilize CHERI hardware-enforced capabilities for protecting memory accesses in both user space compartments 
 and the kernel. Although CheriBSD operates on a FreeBSD base, many aspects of the system interface remain non-capability based. For instance, 
 basic operations like spawning threads in FreeBSD require syscalls, granting ambient authority to do so, while Mach, in a capability-based system, 
 would utilize a capability for such privileges. In comparison to other capability-based operating systems, CheriBSD's use of memory capabilities 
@@ -500,7 +533,7 @@ is more fine-grained, enabling precise control over memory accesses and operatio
 like creating page mappings, although the actual use of these mappings during load or store operations may not involve capability checks. Additionally, 
 since enforcement in systems like seL4 relies on the MMU, capabilities in these systems may refer to objects with coarse sizes and alignments.
 
-\subsection{CHERI}
+\section{CHERI}
 % source: https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-984.pdf
 % Capability Hardware Enhanced RISC Instructions (CHERI) extends existing ISAs with hardware-defined 
 % capabilities. CHERI aids adoption by being backwards compatible with existing software. 
@@ -514,10 +547,12 @@ since enforcement in systems like seL4 relies on the MMU, capabilities in these 
 % instructions for inspecting and manipulating capabilities [136]. Starting as an extension to the MIPS ISA [136, 137], CHERI has seen increasing 
 % interest throughout this project, for example in Arm’s Morello experimental prototype, adding CHERI to a commercial Arm processor [54].
 
-CHERI is an instruction set extension that modifies an existing ISA by mandating memory accesses to be conducted via tagged 
+% Add reference
+% Instruction set extension
+CHERI\cite{woodruff_cheri_2019} is an instruction set extension that modifies an existing ISA by mandating memory accesses to be conducted via tagged 
 capabilities and introduces instructions for examining and modifying these capabilities. Initially developed as an 
 enhancement to the MIPS ISA, CHERI has gained significant traction within the technology community, 
-with notable implementations such as the Arm's Morello experimental prototype integrating CHERI into a 
+with notable implementations such as the Arm's Morello\cite{noauthor_arm_nodate} experimental prototype integrating CHERI into a 
 commercial Arm processor.
 \newline
 % CHERI protects the integrity of pointers with a one-bit out-of-band tag. The hardware guarantees that every tagged capability must have been derived 
@@ -535,16 +570,22 @@ operations, with each operation reducing the granted rights in a strictly decrea
 risk of pointer corruption and effectively counters attacks that 
 involve manipulating pointers by substituting them with non-capability data, such as Return-Oriented Programming.
 \newline
+
+% Add microsoft paper for 75% attacks
 The tags associated with capabilities in CHERI prevent pointer corruption and bolster security by necessitating that every memory access is 
 associated with a quoted tagged capability that encompasses the intended boundaries and permissions. This measure serves to safeguard data 
-from both accidental and malicious tampering, effectively mitigating common attacks like buffer overflows. A report by Microsoft highlighted that 
+from both accidental and malicious tampering, effectively mitigating common attacks like buffer overflows. A report by Microsoft\cite{noauthor_msrc-security-researchpapers2020security_nodate} highlighted that 
 approximately 75\% of their security vulnerabilities are related to bounds overflows or temporal safety issues, indicating that CHERI's support for temporal safety 
 could significantly address such issues and provide substantial benefits to the industry and users.
 \newline
-Furthermore, the monotonicity of the CHERI ISA has been formally verified, demonstrating that the architecture, if correctly implemented, upholds the 
+
+% Add formal verficaton paper
+Furthermore, the monotonicity of the CHERI ISA\cite{} has been formally verified\cite{zaliva_formal_2024}, demonstrating that the architecture, if correctly implemented, upholds the 
 intended invariants, offering a high level of security assurance.
 \newline
-\textit{The bit pattern of a capability consists of:}
+
+% Cheri C programming guide
+\textit{The bit pattern\cite{watson_cheri_nodate} of a capability consists of:}
 \begin{itemize}
 
 \item \textbf{Capability tag:} A one-bit out-of-band field that records whether the capability is valid, i.e. whether it has been derived only 
@@ -566,13 +607,14 @@ raising an exception or clearing the tag.
 
 \end{itemize}
 
+% Refer CheriOS
 \begin{figure}[h]
   \includegraphics[width=0.8\textwidth]{chericapability.png}
-  \caption{CHERI capability.}
+  \caption{CHERI capability\cite{esswood_cherios_nodate-1}.}
   \label{fig:FlexPointer}
 \end{figure}
 
-\subsubsection{CHERI compression}
+\subsection{CHERI compression}
 % One of the major performance overheads of CHERI comes from the increased widths of capabilities compared to 
 % traditional pointers. This uses hardware resources, as the register file is bigger, but also adds cache pressure, as pointers 
 % in memory must be accompanied by metadata. These effects can be somewhat mitigated by capability compression [135], which 
@@ -601,9 +643,10 @@ raising an exception or clearing the tag.
 
 One of the significant performance challenges of CHERI stems from the larger size of capabilities compared to traditional pointers, leading to 
 increased hardware resource usage and cache pressure. 
-An approach to mitigate this impact is capability compression, as outlined in the CHERI-Concentrate paper. This method reduces bounds metadata 
+An approach to mitigate this impact is capability compression, as outlined in the CHERI-Concentrate paper\cite{woodruff_cheri_2019}. This method reduces bounds metadata 
 to as few as 39 bits for a 64-bit pointer, albeit with alignment constraints on representable positions for larger objects. Hardware handles 
 compression and decompression, ensuring minimal software impact.
+\newline
 
 In capability compression, bounds consist of a base (B) with b bits, a top (T) bits, and 
 an exponent (E) with e bits relative to the cursor of the capability (C). The base is calculated by shifting B 
@@ -611,6 +654,7 @@ left by E and filling remaining upper bits with the corresponding most significa
 similar process, with the top two bits of T determined by adding 1 to those of B in the standard case. Bounds 
 are zero-filled in the least significant E bits, enforcing bound-alignment requirements. The internal exponent case stores E only 
 when non-zero, serving as the least significant bits of B and T, thereby allowing more precise representation of smaller objects.
+\newline
 
 The CSetBounds instruction in CHERI offers two variations: one triggers an exception for unrepresentable bounds, while the other returns 
 the closest larger representable bounds. To ensure spatial safety, software must include padding (up to 0.2\% or 12.5\% of the object size 

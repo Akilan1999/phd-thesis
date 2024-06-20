@@ -58,29 +58,11 @@ Each access to a TLB entry is counted including multiple accesses caused by sing
 % L1 TLB graphs
 \begin{figure}
   \begin{subfigure}{\linewidth}
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/l1_tlb_kmeans_3_dimentions.png}\hfill
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/l1_tlb_6_dimentions.png}\hfill
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/l1_tlb_40_dimentions.png}
-  \caption{Kmeans DTLB L1 reads}
+  \includegraphics[width=.5\linewidth]{l1-tlb-kmeans.png}\hfill
+  \includegraphics[width=.5\linewidth]{l1-tlb-matrixmultiply.png}\hfill
+  \includegraphics[width=.5\linewidth]{l1-tlb-histogram.png}
+  \caption{DTLB L1 reads}
 \end{subfigure}
-\end{figure}
-
-\begin{figure}
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/MatrixMultiply/l1_1000_MatrixMultiply.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/MatrixMultiply/l1_tlb_200_MatrixMultiply.png}
-  \caption{Matrix Multiply DTLB L1 reads}
-  \end{subfigure}\par\medskip
-\end{figure}
-
-\begin{figure}
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/l1d_tlb_walk_histogram_small.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/l1_data_histogram_medium.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/tlb_l1_data_histogram_large.png}
-  \caption{}
-  \end{subfigure}
-  \caption{Histogram DTLB L1 reads}
 \end{figure}
 
 \subsection{DTLB L2 reads:}
@@ -91,29 +73,11 @@ it is counted by the DTLB L2.
 % L2 TLB graphs
 \begin{figure}
   \begin{subfigure}{\linewidth}
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/l2_tlb_kmeans_3_dimentions.png}\hfill
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/l2_tlb_6_dimentions.png}\hfill
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/l2_tlb_40_dimentions.png}
-  \caption{Kmeans DTLB L2 reads}
+    \includegraphics[width=.5\linewidth]{l2-tlb-kmeans.png}\hfill
+    \includegraphics[width=.5\linewidth]{l2-tlb-matrixmultiply.png}\hfill
+    \includegraphics[width=.5\linewidth]{l2-tlb-histogram.png}
+  \caption{DTLB L2 reads}
 \end{subfigure}
-\end{figure}
-
-\begin{figure}
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/MatrixMultiply/l2_tlb_200_MatrixMultiply.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/MatrixMultiply/l2_tlb_1000_MatrixMultiply.png}
-  \caption{Matrix Multiply DTLB L2 reads}
-  \end{subfigure}\par\medskip
-\end{figure}
-
-\begin{figure}
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/l2d_tlb_walk_histogram_small.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/tlb_l2_histogram_medium.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/tlb_l2_data_histogram_large.png}
-  \caption{}
-  \end{subfigure}
-  \caption{Histogram DTLB L2 reads}
 \end{figure}
 
 % DTLB walks
@@ -128,29 +92,11 @@ of Level 1 TLBs.
 
 \begin{figure}
   \begin{subfigure}{\linewidth}
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/dtlb_walk_kmeans_3_dimentions.png}\hfill
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/dtlb_walk_kmeans_6_dimentions.png}\hfill
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/d_tlb_walk_40_dimentions.png}
-  \caption{Kmeans DTLB Walks}
+    \includegraphics[width=.5\linewidth]{tlb-walk-kmeans.png}\hfill
+    \includegraphics[width=.5\linewidth]{tlb-walk-matrixmultiply.png}\hfill
+    \includegraphics[width=.5\linewidth]{tlb-walk-histogram.png}
+  \caption{DTLB Walks}
 \end{subfigure}
-\end{figure}
-
-\begin{figure}
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/MatrixMultiply/dtlb_walk_200_MatrixMultiply.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/MatrixMultiply/dtlb_walk_1000_MatrixMultiply.png}
-  \caption{Matrix Multiply DTLB Walks}
-  \end{subfigure}\par\medskip
-\end{figure}
-
-\begin{figure}
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/dtlb_walk_histogram_small.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/dtlb_walk_histogram_medium.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/dtlb_walk_histogram_large.png}
-  \caption{}
-  \end{subfigure}
-  \caption{Histogram DTLB Walks}
 \end{figure}
 
 % L1 cache miss
@@ -162,27 +108,9 @@ The event indicates to software that the access missed in the Level 1 data or un
 
 \begin{figure}
   \begin{subfigure}{\linewidth}
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/ll_kmeans_3_dimentions.png}\hfill
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/ll_kmeans_6_dimentions.png}\hfill
-  \includegraphics[width=.5\linewidth]{BenchmarkRuns/Kmeans/ll_tlb_40_dimentions.png}
-  \caption{Kmeans L1 cache miss}
+    \includegraphics[width=.5\linewidth]{l1-miss-kmeans.png}\hfill
+    \includegraphics[width=.5\linewidth]{l1-miss-matrixmultiply.png}\hfill
+    \includegraphics[width=.5\linewidth]{l1-miss-histogram.png}
+  \caption{Cache misses}
 \end{subfigure}
-\end{figure}
-
-\begin{figure}
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/MatrixMultiply/ll_200_MatrixMultiply.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/MatrixMultiply/l1_1000_MatrixMultiply.png}
-  \caption{Matrix Multiply L1 cache miss}
-  \end{subfigure}\par\medskip
-\end{figure}
-
-\begin{figure}
-  \begin{subfigure}{\linewidth}
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/ll_histogram_small.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/ll_data_histogram_medium.png}\hfill
-    \includegraphics[width=.5\linewidth]{BenchmarkRuns/histogram/ll_cache_histogram_large.png}
-  \caption{}
-  \end{subfigure}
-  \caption{Histogram L1 cache miss}
 \end{figure}

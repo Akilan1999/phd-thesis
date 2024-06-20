@@ -53,15 +53,15 @@ Translation Lookaside Buffer (TLB) optimization, has been a focal point of
 research and development within computer architecture. Various techniques have been 
 proposed to mitigate TLB-related bottlenecks and improve overall system performance.
 
-\subsection{Huge Pages:}
+\subsection{Huge Pages}
 % This is used to map a very large region of memory to a 
 % single entry. This small/large region of memory is physically
 % contiguous. Most implementations of huge pages \cite{panwar_hawkeye_2019} are size
 % aligned, For example for the x86 architecture the huge pages 
 % size are 4KB, 2MB and 1GB pages. 
-Increasing TLB reach can be achieved by using larger page sizes, such as huge pages, which are common in modern computer systems. 
+Increasing TLB reach can be achieved by using larger page sizes, such as huge pages\cite{panwar_hawkeye_2019}, which are common in modern computer systems. 
 The x86-64 architecture supports huge pages of 2 MB and 1 GB, backed by OS mechanisms like Transparent Huge Pages (THP) 
-and HugeTLBFS in Linux. However, available page sizes in x86-64 are limited, leading to internal fragmentation issues. 
+and HugeTLBFS\cite{noauthor_hugetlbfs_nodate} in Linux. However, available page sizes in x86-64 are limited, leading to internal fragmentation issues. 
 For instance, allocating 1 MB with 4 KB base pages requires 256 PTEs, but using a 2 MB huge page would waste 
 half of the memory space. Some architectures offer more page size choices, such as Intel Itanium, which 
 allows different areas of the address space to have their own page sizes. Itanium uses a hash page table to organize huge 
@@ -81,7 +81,7 @@ resulting in additional latency for memory accesses.
 % - [14] Jonathan Corbet. 2009. Transparent Hugepages. (2009). Retrieved from https://lwn.net/Articles/359158/.
 % - [15] Jonathan Corbet. 2011. Transparent huge pages in 2.6.38. (2011). Retrieved from https://lwn.net/Articles/423584/.
 
-\subsection{Segment:}
+\subsection{Segment}
 % A segment\cite{basu_efficient_nodate} can be viewed as mapping between contiguous virtual
 % memory and contiguous physical memory. The property of a 
 % segment allows it to be larger than a page. Direct Segment allows the user to set a single segment
@@ -89,7 +89,7 @@ resulting in additional latency for memory accesses.
 % and end of the segment. Any virtual address within this region
 % can be translated by adding the fixed offset between the virtual
 % and physical address.
-Early processors often used segments to manage virtual memory, where a segment essentially mapped contiguous 
+Early processors often used segments\cite{basu_efficient_nodate} to manage virtual memory, where a segment essentially mapped contiguous 
 virtual memory to contiguous physical memory. Unlike pages, which are relatively small, segments can be much 
 larger, offering the potential for more efficient memory management in certain scenarios. 
 This concept of segmentation has seen a resurgence in some modern approaches that aim to enhance 
@@ -98,8 +98,7 @@ translation coverage by designating specific areas in the virtual address space.
 
 % Alternate segment technique
 % - JayneelGandhi,ArkapravaBasu,MarkD.Hill,andMichaelM.Swift.2014.Efficientmemoryvirtualization:Reducing
-dimensionality of nested page walks. In Proceedings of the MICRO’14. 178–189.
-One such approach is Direct Segment. This method allows programmers to explicitly define 
+This method allows programmers to explicitly define 
 a single segment for applications requiring significant memory. It introduces two new 
 registers to the system, which indicate the start and end of this segment. 
 Virtual addresses within this segment are translated by calculating 
@@ -111,7 +110,7 @@ source code of applications.
 
 % Do-it-yourself Virtual Memory
 % - Hanna Alam, Tianhao Zhang, Mattan Erez, and Yoav Etsion. 2017. Do-It-Yourself virtual memory translation. In Pro- ceedings of the 44th Annual International Symposium on Computer Architecture (ISCA’17). Association for Computing Machinery, New York, NY, 457–468.
-Another approach, Do-it-yourself Virtual Memory Translation (DVMT), similarly 
+Another approach, Do-it-yourself Virtual Memory Translation (DVMT)\cite{noauthor_-it-yourself_nodate}, similarly 
 introduces two registers to define a special area within the virtual address space. 
 However, DVMT supports more complex translation mechanisms. When an address 
 within this designated area is accessed, DVMT initiates a dedicated 
@@ -277,7 +276,7 @@ into the page TLB. If the address falls outside the (BASE, LIMIT) range and the 
 retrieves the next sub-range entry with the NRID and repeats the process. However, if it is the last sub-range and a violation occurs, it 
 indicates a safety breach.
 
-\section{Capability machines}
+\section{Capability}
 % CheriOS (https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-961.pdf)
 % A capability[39][89] is an unforgeable token that both names an object and confers the authority to the bearer 
 % to act upon it. Capabilities can be delegated between principals to both identify an object, and simultaneously 
@@ -298,7 +297,7 @@ indicates a safety breach.
 % Despite many notable examples,[78] most commercial systems today are not capability-based. 
 % Modern filesystems, program permissions, and memory protection features all, for the most part, use ambient authority.
 % Capability referenece: https://dl.acm.org/doi/pdf/10.1145/365230.365252
-A capability is an unforgeable token that names an object and grants the bearer the authority to act upon it. Capabilities can be delegated between 
+A capability\cite{noauthor_capability-based_nodate} is an unforgeable token that names an object and grants the bearer the authority to act upon it. Capabilities can be delegated between 
 principals to both identify an object and grant authority over it, in contrast to other methods that use separate channels for 
 naming and authority sharing. For instance, on UNIX, a file name is shared as a path, and the authority to open it is 
 granted by adjusting permissions separately. In a capability system, a 'path capability' would not just represent a 
@@ -376,13 +375,13 @@ followed by an indirect operation through it. Descriptors in the table had bound
 % unforgeability, and a facility for compartmentalisation.
 
 \subsection{1970 Cambridge CAP compute}
-The \textbf{1970 Cambridge CAP computer}\cite{wilkes_cambridge_1979} was an early register-based capability machine that utilized explicit 
+The 1970 Cambridge CAP computer\cite{wilkes_cambridge_1979} was an early register-based capability machine that utilized explicit 
 capability registers. These registers could be loaded and stored from dedicated capability 
 segments, which did not require tags but limited the flexibility in mixing capabilities and data.
 \newline
 
 \subsection{IBM's System/38}
-On the commercial front, \textbf{IBM's System/38} and its successor, the AS/400, were successful 
+On the commercial front, IBM's System/38 and its successor, the AS/400, were successful 
 systems that, like the Burroughs B5000, incorporated tagged memory to distinguish 
 capabilities from data. Intel's iAPX 432 faced challenges due to poor performance, 
 particularly attributed to its inefficient ADA compiler. The architecture supported 
@@ -391,7 +390,7 @@ between data and capabilities, similar to the CAP computer.
 \newline
 
 \subsection{M-Machine}
-The \textbf{M-Machine}\cite{fillo_mmachine_nodate} utilized guarded pointers for capabilities, with support for 
+The M-Machine\cite{fillo_mmachine_nodate} utilized guarded pointers for capabilities, with support for 
 power-of-two bounds and alignments. A fat pointer encoded bounds, permissions, 
 and an address for the capabilities. The M-Machine introduced two distinct 
 capability variants: a 'key' capability and an 'entry' capability, both 
@@ -402,7 +401,7 @@ facilitated secure transitions to privileged code using normal jumps at predefin
 \newline
 
 \subsection{Low-fat pointers}
-In 2013, \textbf{Low-fat pointers}\cite{kwon_low-fat_2013} implemented hardware support for bounds checking fat pointers compressed into 
+In 2013, Low-fat pointers\cite{kwon_low-fat_2013} implemented hardware support for bounds checking fat pointers compressed into 
 64 bits, with non-power-of-two alignment support. While similar to constructs seen in 
 M-Machine and CHERI, these pointers lack some essential capabilities such as authority, 
 unforgeability, and compartmentalization features.
@@ -428,7 +427,7 @@ have applications in operating systems and software applications.
 % object-capability model via IPC. 
 
 \subsection{Hydra system}
-The \textbf{Hydra system}\cite{wulf_hydra_1974}, developed on the PDP-11, incorporated capabilities for both system-level 
+The Hydra system\cite{wulf_hydra_1974}, developed on the PDP-11, incorporated capabilities for both system-level 
 and user-defined objects. Due to security concerns, all capability operations necessitated 
 syscalls as only the kernel was deemed trustworthy to handle capabilities reliably. While 
 this approach restricted the frequency of operations and the types of objects that 
@@ -445,7 +444,7 @@ practical implementation of the object-capability model through interprocess com
 % are both research focussed systems.
 
 \subsection{KeyKOS}
-\textbf{KeyKOS}\cite{hardy_keykos_1985}, originally known as GNOSIS, was an early commercial capability operating system designed 
+KeyKOS\cite{hardy_keykos_1985}, originally known as GNOSIS, was an early commercial capability operating system designed 
 for the IBM System/370 that could accommodate a UNIX environment. KeyKOS, similar to other 
 capability-based operating systems mentioned, operated as a message-passing system and 
 utilized capabilities termed as keys to represent various system resources. In KeyKOS, 
@@ -465,7 +464,7 @@ KeyKOS paved the way for subsequent research-oriented systems like Eros and Coyo
 % or used Mach as a microkernel.
 
 \subsection{Mach microkernel}
-The \textbf{Mach microkernel}\cite{rashid_mach_nodate} introduced the concept of tasks, which encompassed collections of threads 
+The Mach microkernel\cite{rashid_mach_nodate} introduced the concept of tasks, which encompassed collections of threads 
 combined with a virtual address space. In Mach, interprocess communication (IPC) was facilitated through 
 ports, resembling KeyKOS gate keys, where the capability to communicate on a port was represented by a 
 capability. Capabilities could be transmitted over ports for delegation, and messages, dynamically-sized 
@@ -484,7 +483,7 @@ UNIX variants have emerged from Mach or utilized Mach as a microkernel.
 % Capabilities are only modifiable by the kernel, and are referenced from user-space via index.
 % TODO: reference
 
-Following the Mach microkernel, the \textbf{L4 microkernel} was developed with the aim of reducing complexity and 
+Following the Mach microkernel, the L4 microkernel was developed with the aim of reducing complexity and 
 overhead compared to previous microkernels. L4 featured a simplified interface, with an early version 
 supporting only 7 system calls, providing functionality for threads, address spaces, and IPC. 
 The streamlined IPC mechanism in L4 resulted in significantly faster across-address-space message transfers 
@@ -512,20 +511,20 @@ by the kernel and are accessed from user-space via an index.
 % objects capabilities refer to are necessarily quite coarse.
 
 \subsection{Barrelfish}
-\textbf{Barrelfish}\cite{baumann_multikernel_2009} is an operating system developed by ETH Zurich specifically tailored to support large-scale heterogeneous systems. Utilizing capabilities 
+Barrelfish\cite{baumann_multikernel_2009} is an operating system developed by ETH Zurich specifically tailored to support large-scale heterogeneous systems. Utilizing capabilities 
 similar to those in seL4, Barrelfish has extensions to manage the increased complexity of operations such as deletion, copying, re-typing, 
 and revoking in a distributed manner. Capabilities in Barrelfish represent physical memory, kernel objects, and communication 
 endpoints, adhering to the principles of capability-based systems.
 \newline
 
 \subsection{Capsicumh}
-\textbf{Capsicum}\cite{watson_capsicum_nodate} extends the POSIX API with file capabilities and was initially demonstrated on FreeBSD, where capability operations still require 
+Capsicum\cite{watson_capsicum_nodate} extends the POSIX API with file capabilities and was initially demonstrated on FreeBSD, where capability operations still require 
 system calls due to the conventional hardware environment of FreeBSD. While files in UNIX systems can encompass various entities, 
 Capsicum does not provide memory capabilities, allowing fabricated pointers to be exchanged between the operating system and user space.
 \newline
 
 \subsection{CheriBSD}
-\textbf{CheriBSD}\cite{noauthor_getting_nodate} enhances FreeBSD to utilize CHERI hardware-enforced capabilities for protecting memory accesses in both user space compartments 
+CheriBSD\cite{noauthor_getting_nodate} enhances FreeBSD to utilize CHERI hardware-enforced capabilities for protecting memory accesses in both user space compartments 
 and the kernel. Although CheriBSD operates on a FreeBSD base, many aspects of the system interface remain non-capability based. For instance, 
 basic operations like spawning threads in FreeBSD require syscalls, granting ambient authority to do so, while Mach, in a capability-based system, 
 would utilize a capability for such privileges. In comparison to other capability-based operating systems, CheriBSD's use of memory capabilities 
@@ -549,7 +548,7 @@ since enforcement in systems like seL4 relies on the MMU, capabilities in these 
 
 % Add reference
 % Instruction set extension
-CHERI\cite{woodruff_cheri_2019} is an instruction set extension that modifies an existing ISA by mandating memory accesses to be conducted via tagged 
+CHERI\cite{woodruff_cheri_2019} is an instruction set extension that modifies an existing ISA\cite{watson_capability_nodate} by mandating memory accesses to be conducted via tagged 
 capabilities and introduces instructions for examining and modifying these capabilities. Initially developed as an 
 enhancement to the MIPS ISA, CHERI has gained significant traction within the technology community, 
 with notable implementations such as the Arm's Morello\cite{noauthor_arm_nodate} experimental prototype integrating CHERI into a 
@@ -580,7 +579,7 @@ could significantly address such issues and provide substantial benefits to the 
 \newline
 
 % Add formal verficaton paper
-Furthermore, the monotonicity of the CHERI ISA\cite{} has been formally verified\cite{zaliva_formal_2024}, demonstrating that the architecture, if correctly implemented, upholds the 
+Furthermore, the monotonicity of the CHERI ISA\cite{watson_capability_nodate} has been formally verified\cite{zaliva_formal_2024}, demonstrating that the architecture, if correctly implemented, upholds the 
 intended invariants, offering a high level of security assurance.
 \newline
 
@@ -656,7 +655,7 @@ are zero-filled in the least significant E bits, enforcing bound-alignment requi
 when non-zero, serving as the least significant bits of B and T, thereby allowing more precise representation of smaller objects.
 \newline
 
-The CSetBounds instruction in CHERI offers two variations: one triggers an exception for unrepresentable bounds, while the other returns 
+The \textit{CSetBounds} instruction in CHERI offers two variations: one triggers an exception for unrepresentable bounds, while the other returns 
 the closest larger representable bounds. To ensure spatial safety, software must include padding (up to 0.2\% or 12.5\% of the object size 
 for 64-bit and 32-bit address spaces, respectively) at the beginning or end of large objects to prevent memory usage conflicts resulting 
 from rounding. Instructions altering a capability cursor may impact bounds interpretation if they modify cursor bits determining the 

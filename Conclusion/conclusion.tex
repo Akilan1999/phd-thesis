@@ -4,15 +4,31 @@
 %*******************************************************************************
 
 \chapter{Conclusion}  %Title of the Conclusion
-This report provides a proposal for the potential research 
-activities for the following PhD. The main focus would be 
-the literature review section which covers most of important 
-bits of the following report. Based on the surveyed implementations 
-in the literature review which is for Uni-kernels, Multi-kernels 
-and TAG based architecture the identified mappings are as follows.
-For Uni-kernels the best implementation of among the surveyed would be Hermit-Core, for Multi-kernels 
-Popcorn linux would be a suitable choice and for TAG based architecture
-CHERI would be a suitable choice. The literature review section
-provides the exact reasons. The research timeline section helped
-to create a focused depth of the initial milestones for the research 
-activities to be conducted.
+The report addresses the growing disparity between application workloads and the capacity of Translation Lookaside Buffers (TLBs). 
+To mitigate this gap, it proposes leveraging physically contiguous memory to optimize TLB utilization. Additionally, 
+the report explores advancements in system security, particularly through the Capability Hardware Enhanced RISC Instructions (CHERI) 
+architecture. CHERI's capability-based addressing enhances system security by associating capabilities with memory pointers, 
+restricting access to memory regions, and thus protecting against various security threats. Importantly, these mechanisms 
+can also improve the efficiency of memory allocators by managing memory resources while ensuring robust security measures.
+\newline
+
+The report highlights the constant pursuit of optimal performance in computing, emphasizing the importance of 
+efficient memory management. TLBs are crucial in expediting memory access by storing recently accessed memory translations. 
+However, as applications grow in size and complexity, TLB capacity often becomes a bottleneck. One innovative solution 
+is the use of huge pages, which allocate memory in larger chunks, thereby reducing the number of TLB entries required 
+and potentially enhancing overall system performance. Advancements in hardware-level security, such as CHERI's 
+capability-based addressing, offer additional performance enhancement opportunities by tightly controlling memory 
+access and accelerating memory management operations. Integrating huge pages into memory management strategies 
+alongside CHERI's capability-based addressing can optimize TLB utilization and leverage security features for 
+significant performance improvements.
+\newline
+% The future work section outlines the planned research timeline, focusing on the development and evaluation of FAT-pointer-based 
+% range addresses. Key milestones include the initial development phase in July 2024, followed by integration with the RISC-V architecture 
+% from August to September 2024. Detailed testing and evaluation are scheduled from October 2024 to February 2025, with an extension 
+% of the implementation to uni-kernels planned from March to May 2025. Finalization and optimization of the approach are expected 
+% from June to September 2025, culminating in a comprehensive evaluation and documentation of the results from January to September 2026.
+% \newline
+
+This report aims to demonstrate how leveraging physically contiguous memory and advanced security architectures like CHERI can 
+enhance memory management efficiency while ensuring robust security measures. These advancements ultimately contribute to 
+improved system performance, addressing the challenges posed by the increasing complexity and size of modern application workloads.

@@ -39,10 +39,12 @@ we are addressing:
 \newline
 
 \begin{enumerate}
-    \item Is there faster run times and lesser TLB misses when bounds are used not just for security but
-    also to track memory allocations ? 
-    \item Does using bounds to seek through physically contiguous memory reduce the complexity in standard 
-    memory allocators that have features like transparent huge pages ?
+    \item How does the utilization of bounds for tracking memory allocations, in addition to security purposes, affect the 
+    run times and Translation Lookaside Buffer (TLB) miss rates in modern computing systems?
+    \item How does the implementation of bounds for seeking through physically contiguous memory influence the complexity and 
+    efficiency of standard memory allocators, particularly those with advanced features such as transparent 
+    huge pages, and what are the implications for system performance in terms of execution speed, memory access 
+    latency, and resource utilization?
   \end{enumerate}
 
 % TODO: 
@@ -517,7 +519,7 @@ and revoking in a distributed manner. Capabilities in Barrelfish represent physi
 endpoints, adhering to the principles of capability-based systems.
 \newline
 
-\subsection{Capsicumh}
+\subsection{Capsicum}
 Capsicum\cite{watson_capsicum_nodate} extends the POSIX API with file capabilities and was initially demonstrated on FreeBSD, where capability operations still require 
 system calls due to the conventional hardware environment of FreeBSD. While files in UNIX systems can encompass various entities, 
 Capsicum does not provide memory capabilities, allowing fabricated pointers to be exchanged between the operating system and user space.

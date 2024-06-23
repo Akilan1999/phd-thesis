@@ -62,7 +62,7 @@ Here we explore how this additional metadata storage could be used to further op
 % By employing the CHERI 128-bit FAT-pointer scheme, the approach depicted aims to streamline the management of memory blocks, ensuring they are physically contiguous. This is in contrast to the traditional mmap approach, which typically does not guarantee physical contiguity of allocated memory regions.
 
 
-\subsection{Range creation and huge pages}
+\section{Range creation and huge pages}
 % \begin{minipage}[t]{0.4\linewidth}
 \begin{figure}[h]
   \includegraphics[width=0.8\textwidth]{diagrams/AllocationOverview24.png}
@@ -116,7 +116,7 @@ integrity and contiguity of the allocated blocks within the huge page.
 % Bounds are used to seek through Physically contigous 
 % \subsection{Allocation with huge pages}
 
-\subsection{Software Stack}
+\section{Software Stack}
 \begin{figure}[h]
 % \begin{minipage}[t]{0.4\linewidth}
 \includegraphics[width=0.8\textwidth]{diagrams/SoftwareStack24.png}
@@ -137,16 +137,17 @@ integrity and contiguity of the allocated blocks within the huge page.
 The software stack is based on CHERIBSD\cite{noauthor_getting_nodate}, selected because ARM officially supports Morello's performance 
 counters\cite{noauthor_arm_nodate} on this operating system. As illustrated in the figure \ref{fig:SoftwareStack}, the setup includes a C program that 
 is linked to the prototype memory allocator or to various memory allocators being benchmarked, as described 
-in section~\ref{chap:evaluation}(Link to evaluation section once added). This linkage can occur in two ways: either as a shared object file during compile time 
+in section~\ref{chap:evaluation}. This linkage can occur in two ways: either as a shared object file during compile time 
 for larger allocators, or as a header file for smaller allocators, ensuring flexibility and efficiency 
 in memory management.
+\newline
 
 This integration ensures that the memory allocation process is optimized for performance, leveraging the contiguity 
 of memory blocks and the capabilities provided by the CHERI architecture and the Morello platform. By using the 
 contigmem driver and the custom mmap function, the system achieves efficient memory allocation and tracking, 
 crucial for the high-performance needs of the application.
 
-\subsubsection{Contigmem driver from DPDK}
+\subsection{Contigmem driver from DPDK}
 The custom mmap function, tailored to ensure physically contiguous memory allocation, is a key component 
 of this system. This function is linked to the contigmem driver, which has been modified from the DPDK\cite{bi_dpdk-based_2016} library 
 to meet the specific needs of this implementation. The contigmem driver is essential for managing large contiguous 
@@ -234,6 +235,7 @@ which allocates physically contiguous memory initialized to zero. The cdevsw str
 calls which would be overwritten on loading the driver. In the code snippet~\ref{ContigInit} above
 the mmap function would be overwritten with contigmem\_mmap\_single if the following driver is opened and truncated
 as shown in Code snippet ~\ref{MallocSample}. 
+\newline
 
 In the code snippet ~\ref{ContigMmap} the cdev\_pager\_ops refers to the operations which will be overwritten 
 when called with mmap such as overwriting page faults.
@@ -272,7 +274,7 @@ contigmem_mmap_single(struct cdev *cdev, vm_ooffset_t
 
 
 
-\subsubsection{Sample memory allocator design}
+\subsection{Sample memory allocator design}
 
 \begin{lstlisting}[language=C, caption=Contigmem driver mmap , label=MallocSample]
    #define FILENAME "/dev/contigmem"

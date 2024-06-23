@@ -1,0 +1,13 @@
+- TLB bottleneck reference
+  (https://doi.org/10.1002/cpe.4061)
+- Refeence contigmalloc
+(https://man.freebsd.org/cgi/man.cgi?query=contigmalloc&sektion=9&manpath=FreeBSD)
+- Reference SnMalloc
+(https://dl.acm.org/doi/10.1145/3315573.3329980)
+
+- Paraphrasing DTLB sub headings.
+- Fix sub heading towards end of the expirement. (Done)
+- Name diagrams. (Done)
+
+- Paraphrase questions (done)
+

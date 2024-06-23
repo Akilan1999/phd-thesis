@@ -1,0 +1,8 @@
+- Name the figures
+- Describe each performance counter including how the run is cinduced.
+
+(End para)
+- Write a descriptive paragraph show casing that this is a work in progress expirement and the changes to be conduced.
+- Explain why are numbers wrong.
+- Explain the kernel module contigmalloc potentially behaving like a slab alloctor which is a implementation on progress to be fixed.
+

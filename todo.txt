@@ -5,7 +5,7 @@
 - Reference SnMalloc
 (https://dl.acm.org/doi/10.1145/3315573.3329980)
 
-- Paraphrasing DTLB sub headings.
+- Paraphrasing DTLB sub headings (Done).
 - Fix sub heading towards end of the expirement. (Done)
 - Name diagrams. (Done)
 

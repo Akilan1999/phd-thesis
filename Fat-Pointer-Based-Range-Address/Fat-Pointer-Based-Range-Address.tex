@@ -230,7 +230,7 @@ error:
 
 When the contigmem\_load~\ref{ContigInit} function is called, either during boot or when the Kernel module is loaded, it pre-allocates 
 a segment of physically contiguous memory. This approach differs from FlexPointer\cite{chen_flexpointer_2023}, 
-which allocates physically contiguous memory eagerly. The contigmem\_load function allocates memory using contigmalloc, 
+which allocates physically contiguous memory eagerly. The contigmem\_load function allocates memory using contigmalloc\cite{noauthor_contigmalloc9_nodate}, 
 which allocates physically contiguous memory initialized to zero. The cdevsw struct refers to function 
 calls which would be overwritten on loading the driver. In the code snippet~\ref{ContigInit} above
 the mmap function would be overwritten with contigmem\_mmap\_single if the following driver is opened and truncated

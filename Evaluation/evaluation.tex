@@ -7,7 +7,7 @@
 
 To evaluate the performance of FAT-Pointer based range addresses a sample implementation we used
 the morello board with CheriBSD's Benchmark ABI\cite{noauthor_benchmark_nodate} compilation mode for accurate performance recordings. 
-The evaluation is to identify CheriBSD's default memory allocator SnMalloc against the prototype memory 
+The evaluation is to identify CheriBSD's default memory allocator SnMalloc\cite{lietar_snmalloc_2019} against the prototype memory 
 allocator using the contribution of this paper in terms of: 
 To assess the performance of FAT-Pointer-based range addressing in the sample implementation, we utilized the 
 Morello board running CheriBSD in Benchmark ABI compilation mode to ensure precise performance measurements. 
@@ -59,9 +59,9 @@ This allowed us to effectively use the COZ benchmark suite to analyze the perfor
   \includegraphics[width=.5\linewidth]{l1-tlb-histogram.png}
 \end{subfigure}
 \caption{DTLB L1 reads}
-\label{TLBl1}
+\label{fig:TLBl1}
 \end{figure}
-The Graphs above\ref{fig:TLBl1} represent the DTLB L1 reads which is a Performance counter from the ARM specs. 
+The Graphs above represent the DTLB L1 reads which is a Performance counter from the ARM specs. 
 The counter increments for every Memory-read or Memory-write operation that necessitates an 
 access to the Level 1 data or unified Translation Lookaside Buffer (TLB). 
 Each access to a TLB entry is counted including multiple accesses caused by single instructions.
@@ -75,9 +75,9 @@ Each access to a TLB entry is counted including multiple accesses caused by sing
     \includegraphics[width=.5\linewidth]{l2-tlb-histogram.png}
 \end{subfigure}
 \caption{DTLB L2 reads}
-\label{TLBl2}
+\label{fig:TLBl2}
 \end{figure}
-Similar to how L1 TLB reads are counted, DTLB L2\ref{fig:TLBl2} counts every read operation that accesses the 
+Similar to how L1 TLB reads are counted, DTLB L2 counts every read operation that accesses the 
 Level 2 data or unified TLB. Each time there is a read to an entry in the Level 2 TLB, 
 it is counted by the ARM performance counter. 
 
@@ -93,10 +93,10 @@ it is counted by the ARM performance counter.
     \includegraphics[width=.5\linewidth]{tlb-walk-histogram.png}
 \end{subfigure}
 \caption{DTLB Walks}
-\label{TLBWalk}
+\label{fig:TLBWalk}
 \end{figure}
 
-The DTLB walk\ref{fig:TLBWalk} counter counts each Memory-read operation or Memory-write operation that causes a 
+The DTLB walk counter counts each Memory-read operation or Memory-write operation that causes a 
 TLB access to at least the Level 2 data or unified TLB.
 Each access to a TLB entry is counted including refills 
 of Level 1 TLBs.
@@ -110,9 +110,9 @@ of Level 1 TLBs.
     \includegraphics[width=.5\linewidth]{l1-miss-histogram.png}
 \end{subfigure}
 \caption{L1 Cache misses}
-\label{L1CacheMiss}
+\label{fig:L1CacheMiss}
 \end{figure}
-L1 cache miss\ref{fig:L1CacheMiss} counter counts each Memory-read operation to the Level 1 data or unified cache counted by L1 cache miss counter that incurs additional latency because it returns data from outside of the Level 1 data or unified cache of this PE.
+L1 cache miss counter counts each Memory-read operation to the Level 1 data or unified cache counted by L1 cache miss counter that incurs additional latency because it returns data from outside of the Level 1 data or unified cache of this PE.
 The event indicates to software that the access missed in the Level 1 data or unified cache and might have a significant performance impact due to the additional latency compared to the latency of an access that hits in the Level 1 data or unified cache.
 \newline
 % • Accesses where the additional latency is unlikely to be significantly performance-impacting. For example, if the access hits in another cache in the same local cluster, and the additional latency is small when compared to a miss in all Level 1 caches that the access looks up in and results in an access being made to a Level 2 cache or elsewhere beyond the Level 1 data or unified cache.
@@ -127,7 +127,7 @@ The event indicates to software that the access missed in the Level 1 data or un
 \section{Analysis}
 
 The benchmark results indicate the presence of bugs in the sample FAT-Pointer based range address prototype memory allocator. This evaluation is ongoing, and the 
-results provided here\ref{fig:TLBl1}\ref{fig:TLBl2}\ref{fig:TLBWalk}\ref{fig:L1CacheMiss} represent a snapshot of the latest findings. Specifically, for the use case of Level 2 Translation Lookaside Buffer (L2 TLB) reads, 
+results provided in figures \ref{fig:TLBl1}, \ref{fig:TLBl2}, \ref{fig:TLBWalk} and \ref{fig:L1CacheMiss} represent a snapshot of the latest findings. Specifically, for the use case of Level 2 Translation Lookaside Buffer (L2 TLB) reads, 
 the FAT-Pointer based range address prototype shows occurrences of reads from the L2 TLB. This indicates the presence of implementation bugs, 
 as all reads should be managed through the Level 1 Translation Lookaside Buffer (L1 TLB), given that the program memory is pre-allocated as a single 
 physically contiguous page.
